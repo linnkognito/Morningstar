@@ -54,7 +54,7 @@ function ProductCard({ product }) {
       {/* Size/Color selection menu */}
       {showMenu && (
         <div
-          className="absolute flex w-full flex-col bg-pearl/70 backdrop-blur-sm"
+          className="absolute flex w-full flex-col"
           style={{ bottom: `${productBar.current.offsetHeight}px` }}
         >
           <RefineDropdown className="rounded-b-none">
