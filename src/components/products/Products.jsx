@@ -1,16 +1,27 @@
-// import { useParams } from "react-router";
-// import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useParams } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
 
-import { useLoaderData } from "react-router";
 import RefineMenu from "./menus/RefineMenu";
 import ProductCard from "./ProductCard";
+import {
+  fetchAllProducts,
+  fetchProductsByCategory,
+  getProducts,
+} from "./productSlice";
 
 function Products() {
-  const products = useLoaderData();
-  console.log(products);
-  // const { category } = useParams();
-  // const dispatch = useDispatch();
-  // const { products, status } = useSelector((state) => state.products);
+  const { categoryName } = useParams();
+  const dispatch = useDispatch();
+  const products = useSelector(getProducts);
+
+  useEffect(() => {
+    if (categoryName) {
+      dispatch(fetchProductsByCategory(categoryName));
+    } else {
+      dispatch(fetchAllProducts());
+    }
+  }, [categoryName, dispatch]);
 
   return (
     <div className="flex w-full flex-col gap-3">
@@ -23,11 +34,19 @@ function Products() {
 
         {/* Product cards */}
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
-          <ProductCard />
+          {products.map((product) => (
+            <ProductCard key={product._id} product={product} />
+          ))}
         </div>
       </div>
     </div>
   );
 }
+
+// export async function loader({ params }) {
+//   const productCategory = await fetchProductsByCategory(params.categoryName);
+
+//   return productCategory;
+// }
 
 export default Products;

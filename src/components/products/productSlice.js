@@ -106,4 +106,9 @@ const productsSlice = createSlice({
   },
 });
 
+export const getProducts = (state) => {
+  console.log(state);
+  return state.products.products;
+};
+
 export default productsSlice.reducer;

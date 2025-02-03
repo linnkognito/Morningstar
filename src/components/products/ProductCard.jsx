@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 import SizeSelector from "../ui/inputs/SizeSelector";
 import ColorSelector from "../ui/inputs/ColorSelector";
@@ -8,21 +8,56 @@ import RefineDropdown from "./menus/RefineDropdown";
 
 const testColors = ["bg-aura", "bg-ember", "bg-zest"];
 
-function ProductCard() {
+function ProductCard({ product }) {
+  const productBar = useRef(null);
   const [showMenu, setShowMenu] = useState(false);
+  const [saveButtonHover, setSaveButtonHover] = useState(false);
 
   return (
     <div className="relative flex min-h-[200px] max-w-[250px] flex-col rounded bg-pearl">
+      {/* Heart (save product) */}
       <Icon
-        name="favorite"
-        className="border-red absolute right-0 pr-1 pt-0.5 text-aura"
+        name={saveButtonHover ? "heart_plus" : "favorite"}
+        onMouseEnter={() => setSaveButtonHover(true)}
+        onMouseLeave={() => setSaveButtonHover(false)}
+        className="border-red absolute right-0 cursor-pointer pr-1 pt-0.5 text-aura"
       />
 
-      <div className="h-[280px]">IMG</div>
+      {/* Image will be inserted as a background */}
+      <img
+        src={product.image}
+        alt={product.alt || product.name}
+        className="h-[280px]"
+      />
 
+      {/* Product bar */}
+      <div
+        ref={productBar}
+        className="flex w-full grow items-center justify-between overflow-hidden rounded-b bg-aura pl-2"
+      >
+        <div className="flex h-full flex-col pt-2">
+          <h2 className="font-bebas text-xl tracking-widest lg:text-2xl">
+            {product.name}
+          </h2>
+          <h3 className="font-bebas text-lg tracking-widest">
+            ${product.price}
+          </h3>
+        </div>
+        <button
+          className="font-base flex h-full w-[30%] items-center justify-center pt-1 font-bebas text-6xl transition-transform duration-300 ease-out will-change-transform hover:scale-110 hover:bg-pearl/50"
+          onClick={() => setShowMenu((show) => !show)}
+        >
+          <span>{showMenu ? "-" : "+"}</span>
+        </button>
+      </div>
+
+      {/* Size/Color selection menu */}
       {showMenu && (
-        <div className="absolute bottom-[68px] flex w-full flex-col">
-          <RefineDropdown>
+        <div
+          className="absolute flex w-full flex-col bg-pearl/70 backdrop-blur-sm"
+          style={{ bottom: `${productBar.current.offsetHeight}px` }}
+        >
+          <RefineDropdown className="rounded-b-none">
             <SizeSelector />
             <ColorSelector colors={testColors} height="h-[1.5em]" />
             <ActionButton className="gap-2 pt-0" fontSize="text-xl">
@@ -32,20 +67,6 @@ function ProductCard() {
           </RefineDropdown>
         </div>
       )}
-
-      {/* Product bar */}
-      <div className="flex w-full items-center justify-between overflow-hidden rounded-b bg-aura pl-2">
-        <div className="flex h-full flex-col pt-2">
-          <h2 className="font-bebas text-2xl tracking-widest">Title</h2>
-          <h3 className="font-bebas text-lg tracking-widest">$120</h3>
-        </div>
-        <button
-          className="font-base flex h-full w-[30%] items-center justify-center pt-1 font-bebas text-6xl transition-transform duration-300 ease-out will-change-transform hover:scale-110 hover:bg-pearl/50"
-          onClick={() => setShowMenu((show) => !show)}
-        >
-          <span>{showMenu ? "-" : "+"}</span>
-        </button>
-      </div>
     </div>
   );
 }
