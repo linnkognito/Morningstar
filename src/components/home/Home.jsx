@@ -1,13 +1,7 @@
-import New from "../sections/New";
 import Categories from "./Categories";
 
 function Home() {
-  return (
-    <>
-      <Categories />
-      <New />
-    </>
-  );
+  return <Categories />;
 }
 
 export default Home;
