@@ -1,7 +1,17 @@
+// import { useParams } from "react-router";
+// import { useDispatch, useSelector } from "react-redux";
+
+import { useLoaderData } from "react-router";
 import RefineMenu from "./menus/RefineMenu";
 import ProductCard from "./ProductCard";
 
 function Products() {
+  const products = useLoaderData();
+  console.log(products);
+  // const { category } = useParams();
+  // const dispatch = useDispatch();
+  // const { products, status } = useSelector((state) => state.products);
+
   return (
     <div className="flex w-full flex-col gap-3">
       {/* Image */}

@@ -3,10 +3,12 @@ import NavItem from "./NavItem";
 import Icon from "../../common/Icon";
 
 const navItems = [
-  { id: "nav-new", text: "Home", path: "/" },
-  { id: "nav-products", text: "Fashion", path: "/fashion" },
-  { id: "nav-decor", text: "Decor", path: "/decor" },
-  { id: "nav-new", text: "New In", path: "/new" },
+  { id: "home", text: "Home", path: "/" },
+  { id: "womens", text: "Her", path: "/products/category/womens" },
+  { id: "mens", text: "Him", path: "/products/category/mens" },
+  { id: "unisex", text: "Uni", path: "/products/category/unisex" },
+  { id: "new", text: "New", path: "/products/category/new-in" },
+  { id: "all", text: "All", path: "/products" },
 ];
 
 function Nav({ onToggle, activeItem }) {
