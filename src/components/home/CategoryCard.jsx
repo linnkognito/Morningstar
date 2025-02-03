@@ -15,7 +15,7 @@ function CategoryCard({
 
   return (
     <div
-      className={`${color} h-full max-h-screen w-full bg-cover bg-center shadow-sm shadow-offwhite/20 md:my-2 md:w-1/4 ${className}`}
+      className={`${color} h-full w-full bg-cover bg-center shadow-sm shadow-offwhite/20 md:my-2 md:w-1/4 ${className}`}
       style={{ backgroundImage: `url(${bgImage})` }}
       onMouseEnter={toggleHover}
       onMouseLeave={toggleHover}
