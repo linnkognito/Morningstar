@@ -12,6 +12,14 @@ const navItems = [
   { id: "all", text: "All", path: "/products" },
 ];
 
+const dropdownNavItems = [
+  { id: "womens", text: "Womens", path: "/products/category/womens" },
+  { id: "mens", text: "Mens", path: "/products/category/mens" },
+  { id: "unisex", text: "Unisex", path: "/products/category/unisex" },
+  { id: "new", text: "New in", path: "/products/category/new" },
+  { id: "all", text: "Show all", path: "/products" },
+];
+
 function Nav({ onToggle, activeItem }) {
   const navigate = useNavigate();
   const [showDropdownNav, setShowDropdownNav] = useState(false);
@@ -21,7 +29,7 @@ function Nav({ onToggle, activeItem }) {
       {/* Smaller screens (dropdown menu) */}
       <NavItem
         id="dropdown"
-        className={`xl:hidden`}
+        className={`xl:hidden ${showDropdownNav && "bg-zest text-offblack"}`}
         isActive={activeItem === "dropdown"}
         onToggle={onToggle}
         onClick={() => setShowDropdownNav((show) => !show)}
@@ -31,17 +39,21 @@ function Nav({ onToggle, activeItem }) {
 
       {/* Dropdown menu */}
       {showDropdownNav && (
-        <div className="absolute w-[20vw] rounded rounded-tl-none border bg-offblack">
-          {navItems.map((li) => (
+        <div className="absolute w-[20vw] rounded rounded-tl-none border-2 border-zest bg-offblack bg-pearl/70 text-offblack backdrop-blur-sm">
+          {dropdownNavItems.map((li) => (
             <NavItem
               key={li.id}
               id={li.id}
               onToggle={onToggle}
               isActive={activeItem === li.id}
               onClick={() => navigate(li.path)}
-              className="w-full text-xl tracking-wider"
+              className="will-change group flex w-full items-center justify-between text-[1.4em] tracking-wider transition-all duration-300 ease-out hover:pl-6 group-hover:inline"
             >
-              {li.text}
+              <span>{li.text}</span>
+              <Icon
+                name="arrow_forward"
+                className="hidden pl-2 text-[1.4em] text-offblack group-hover:inline"
+              />
             </NavItem>
           ))}
         </div>
