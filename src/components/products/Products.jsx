@@ -26,9 +26,16 @@ function Products() {
   return (
     <div className="flex w-full flex-col gap-3">
       {/* Image */}
-      <div className="h-[15vh] w-full bg-aura sm:h-[25vh]"></div>
+      <div className="mx-auto mt-2 flex h-[7vh] w-full max-w-[1320px] items-center justify-center rounded-lg bg-gradient-to-r from-aura via-mint to-zest text-pearl">
+        <h2
+          className="text-shad w-full pl-16 font-bebas text-6xl uppercase tracking-widest"
+          style={{ textShadow: "2px 2px 4px rgba(0, 0, 0, 0.3)" }}
+        >
+          {categoryName}
+        </h2>
+      </div>
 
-      <div className="mx-auto flex w-full min-w-fit max-w-[1284px] flex-col space-y-3 border px-2">
+      <div className="mx-auto flex w-full min-w-fit max-w-[1284px] flex-col space-y-3 px-2">
         {/* Filter & Sort menu */}
         <RefineMenu />
 
