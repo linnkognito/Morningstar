@@ -2,13 +2,14 @@ import { useEffect } from "react";
 import { useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 
-import RefineMenu from "./menus/RefineMenu";
-import ProductCard from "./ProductCard";
 import {
   fetchAllProducts,
   fetchProductsByCategory,
   getProducts,
 } from "./productSlice";
+
+import RefineMenu from "./menus/RefineMenu";
+import ProductCard from "./ProductCard";
 
 function Products() {
   const { categoryName } = useParams();
