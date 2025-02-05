@@ -2,7 +2,7 @@ import Icon from "../../common/Icon";
 
 function Searchbar() {
   return (
-    <div className="relative flex w-full items-center justify-end px-2">
+    <div className="relative flex items-center justify-end px-2">
       <input
         type="text"
         placeholder="Search..."
