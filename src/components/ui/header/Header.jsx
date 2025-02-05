@@ -27,7 +27,7 @@ export default function Header() {
         {/* </div> */}
 
         <UserAction activeItem={activeItem} onToggle={handleToggle} />
-      </header>{" "}
+      </header>
     </div>
   );
 }
