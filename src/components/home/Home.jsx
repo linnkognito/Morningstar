@@ -18,7 +18,7 @@ function Categories() {
         hoverColor="bg-aura/50"
         hoverClass="md:rounded-none rounded-r-xl rounded-b-none"
         title="her"
-        className="rounded-t-xl md:rounded-xl md:rounded-r-none"
+        className="rounded-t-xl bg-[0_40%] md:rounded-xl md:rounded-r-none"
         onClick={() => navigate("products/category/womens")}
       />
 
@@ -27,6 +27,7 @@ function Categories() {
         color="bg-aura"
         hoverColor="bg-ember/50"
         title="him"
+        className="bg-[0_37%]"
         onClick={() => navigate("products/category/mens")}
       />
 
@@ -35,6 +36,7 @@ function Categories() {
         color="bg-zest"
         hoverColor="bg-moss/50"
         title="uni"
+        className="bg-[0_27%]"
         onClick={() => navigate("products/category/unisex")}
       />
 
@@ -44,7 +46,7 @@ function Categories() {
         hoverColor="bg-zest/50"
         hoverClass="md:rounded-none rounded-r-xl rounded-l-none rounded-t-none"
         title="new"
-        className="rounded-b-xl md:rounded-xl md:rounded-l-none"
+        className="rounded-b-xl bg-[0_35%] md:rounded-xl md:rounded-l-none"
         onClick={() => navigate("products/category/new")}
       />
     </section>
