@@ -69,6 +69,16 @@ module.exports = {
       textShadow: {
         sm: "0 1px 2px #0F0F0F",
       },
+      animation: {
+        gradient: "gradient-animation 2s ease infinite",
+      },
+      keyframes: {
+        "gradient-animation": {
+          "0%": { backgroundPosition: "0% 50%" },
+          "50%": { backgroundPosition: "100% 50%" },
+          "100%": { backgroundPosition: "0% 50%" },
+        },
+      },
     },
   },
   plugins: [],

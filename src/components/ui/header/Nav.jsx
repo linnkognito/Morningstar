@@ -39,7 +39,7 @@ function Nav({ onToggle, activeItem }) {
 
       {/* Dropdown menu */}
       {showDropdownNav && (
-        <div className="absolute z-[9999] w-[20vw] rounded rounded-tl-none border-2 border-zest bg-offblack bg-pearl/70 text-offblack backdrop-blur-sm xl:hidden">
+        <div className="absolute z-[9999] w-[250px] rounded rounded-tl-none border-2 border-zest bg-offblack bg-pearl/70 text-offblack backdrop-blur-sm xl:hidden">
           {dropdownNavItems.map((li) => (
             <NavItem
               key={li.id}

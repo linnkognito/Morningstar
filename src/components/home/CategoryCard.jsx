@@ -19,13 +19,11 @@ function CategoryCard({
       style={{ backgroundImage: `url(${bgImage})` }}
       onMouseEnter={toggleHover}
       onMouseLeave={toggleHover}
+      onClick={onClick}
     >
       <div className="relative flex h-full min-w-full cursor-pointer items-end justify-start">
         {hovered && (
-          <div
-            className="absolute end-0 flex h-full w-fit cursor-pointer items-center md:w-full md:justify-center"
-            onClick={onClick}
-          >
+          <div className="absolute end-0 flex h-full w-fit cursor-pointer items-center md:w-full md:justify-center">
             <div
               className={`${hoverColor} ${hoverClass} flex h-full min-h-[15vh] w-full items-center justify-center py-6 md:h-fit`}
             >
@@ -34,7 +32,10 @@ function CategoryCard({
           </div>
         )}
 
-        <h2 className="text-shadow-sm ml-2 h-fit p-0 font-bebas text-[10vw] uppercase leading-none text-pearl">
+        <h2
+          className="text-shadow-sm ml-2 h-fit p-0 font-bebas text-[10vw] uppercase leading-none text-pearl"
+          style={{ textShadow: "2px 2px 4px rgba(0, 0, 0, 0.3)" }}
+        >
           {title}
         </h2>
       </div>

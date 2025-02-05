@@ -13,22 +13,44 @@ function UserAction({ activeItem, onToggle }) {
   const navigate = useNavigate();
 
   return (
-    <div className="flex h-full w-full cursor-pointer">
-      <Searchbar />
+    <>
+      <div className="sm:hidden">
+        <Searchbar />
+      </div>
 
-      <ul className="hidden h-full items-center text-2xl md:flex">
-        {icons.map((icon) => (
-          <NavItem
-            key={icon.id}
-            isActive={activeItem === icon.id}
-            onToggle={() => onToggle(icon.id)}
-            onClick={() => navigate(icon.path)}
-          >
-            <Icon name={icon.name} al={icon.name} />
-          </NavItem>
-        ))}
-      </ul>
-    </div>
+      <nav className="hidden h-full w-full cursor-pointer justify-end sm:flex">
+        <Searchbar />
+
+        <ul className="hidden h-full items-center text-2xl sm:flex">
+          {icons.map((icon) => (
+            <NavItem
+              key={icon.id}
+              isActive={activeItem === icon.id}
+              onToggle={() => onToggle(icon.id)}
+              onClick={() => navigate(icon.path)}
+            >
+              <Icon name={icon.name} al={icon.name} />
+            </NavItem>
+          ))}
+        </ul>
+      </nav>
+
+      <nav className="fixed bottom-0 z-[9999] w-full cursor-pointer border-t border-zest/20 bg-offblack sm:hidden">
+        <ul className="flex h-full items-center text-2xl">
+          {icons.map((icon) => (
+            <NavItem
+              key={icon.id}
+              isActive={activeItem === icon.id}
+              onToggle={() => onToggle(icon.id)}
+              onClick={() => navigate(icon.path)}
+              className="w-full justify-center"
+            >
+              <Icon name={icon.name} al={icon.name} />
+            </NavItem>
+          ))}
+        </ul>
+      </nav>
+    </>
   );
 }
 export default UserAction;

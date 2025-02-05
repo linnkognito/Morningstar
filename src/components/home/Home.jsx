@@ -11,7 +11,7 @@ function Categories() {
   const navigate = useNavigate();
 
   return (
-    <section className="mx-auto flex size-full h-full flex-col gap-1 px-1 pb-4 md:flex-row">
+    <section className="mx-auto flex size-full h-full flex-col gap-1 px-1 pt-1 md:flex-row md:pt-0">
       <CategoryCard
         bgImage={imageHer}
         color="bg-ember"

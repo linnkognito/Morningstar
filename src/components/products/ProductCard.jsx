@@ -13,6 +13,11 @@ function ProductCard({ product }) {
   const [showMenu, setShowMenu] = useState(false);
   const [saveButtonHover, setSaveButtonHover] = useState(false);
 
+  const optimizedImage = product.image.replace(
+    "/upload/",
+    "/upload/h_280,f_auto,q_auto/",
+  );
+
   return (
     <div className="relative flex min-h-[200px] max-w-[250px] flex-col rounded bg-pearl">
       {/* Heart (save product) */}
@@ -25,9 +30,9 @@ function ProductCard({ product }) {
 
       {/* Image will be inserted as a background */}
       <img
-        src={product.image}
+        src={optimizedImage}
         alt={product.alt || product.name}
-        className="h-[280px]"
+        className="h-[280px] rounded-t object-cover object-center"
       />
 
       {/* Product bar */}
@@ -36,7 +41,7 @@ function ProductCard({ product }) {
         className="flex w-full grow items-center justify-between overflow-hidden rounded-b bg-aura pl-2"
       >
         <div className="flex h-full flex-col pt-2">
-          <h2 className="font-bebas text-xl tracking-widest lg:text-2xl">
+          <h2 className="font-bebas text-xl tracking-widest xl:text-2xl">
             {product.name}
           </h2>
           <h3 className="font-bebas text-lg tracking-widest">
@@ -44,7 +49,7 @@ function ProductCard({ product }) {
           </h3>
         </div>
         <button
-          className="font-base flex h-full w-[30%] items-center justify-center pt-1 font-bebas text-6xl transition-transform duration-300 ease-out will-change-transform hover:scale-110 hover:bg-pearl/50"
+          className="font-base flex h-full w-[30%] min-w-[50px] items-center justify-center pt-1 font-bebas text-6xl transition-transform duration-300 ease-out will-change-transform hover:scale-110 hover:bg-pearl/50"
           onClick={() => setShowMenu((show) => !show)}
         >
           <span>{showMenu ? "-" : "+"}</span>
