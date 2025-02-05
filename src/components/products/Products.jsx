@@ -26,7 +26,7 @@ function Products() {
   return (
     <div className="flex w-full flex-col gap-3">
       {/* Image */}
-      <div className="mx-auto mt-2 flex h-[7vh] w-full max-w-[1320px] items-center justify-center rounded-lg bg-gradient-to-r from-aura via-mint to-zest text-pearl">
+      <div className="mx-auto mt-2 flex h-[7vh] min-h-fit w-full max-w-[1320px] items-center justify-center rounded-lg bg-gradient-to-r from-aura via-mint to-zest py-2 text-pearl">
         <h2
           className="text-shad w-full pl-16 font-bebas text-6xl uppercase tracking-widest"
           style={{ textShadow: "2px 2px 4px rgba(0, 0, 0, 0.3)" }}
