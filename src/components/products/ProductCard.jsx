@@ -5,18 +5,39 @@ import ColorSelector from "../ui/inputs/ColorSelector";
 import ActionButton from "../ui/buttons/ActionButton";
 import Icon from "../common/Icon";
 import RefineDropdown from "./menus/RefineDropdown";
-
-const testColors = ["bg-aura", "bg-ember", "bg-zest"];
+import { addItem } from "../cart/cartSlice";
 
 function ProductCard({ product }) {
   const productBar = useRef(null);
   const [showMenu, setShowMenu] = useState(false);
   const [saveButtonHover, setSaveButtonHover] = useState(false);
+  const [sizeSelection, setSizeSelection] = useState(null);
+  const [colorSelection, setColorSelection] = useState(null);
 
   const optimizedImage = product.image.replace(
     "/upload/",
     "/upload/h_500,f_auto,q_auto/",
   );
+  console.log("ProductCard re-rendered. Current size:", sizeSelection);
+
+  function addToCart() {
+    if (!sizeSelection || !colorSelection)
+      return alert("Please select a size & color before adding to cart.");
+
+    const { name, image, price, _id: id } = { product };
+
+    const newCartItem = {
+      id,
+      name,
+      image,
+      price,
+      size: sizeSelection,
+      color: colorSelection,
+      quantity: 1,
+    };
+
+    addItem(newCartItem);
+  }
 
   return (
     <div className="relative flex min-h-[200px] max-w-[250px] flex-col rounded bg-pearl">
@@ -63,9 +84,21 @@ function ProductCard({ product }) {
           style={{ bottom: `${productBar.current.offsetHeight}px` }}
         >
           <RefineDropdown className="rounded-b-none">
-            <SizeSelector />
-            <ColorSelector colors={testColors} height="h-[1.5em]" />
-            <ActionButton className="gap-2 pt-0" fontSize="text-xl">
+            <SizeSelector
+              sizeSelection={sizeSelection}
+              setSizeSelection={setSizeSelection}
+            />
+            <ColorSelector
+              colors={product.colors}
+              colorSelection={colorSelection}
+              setColorSelection={setColorSelection}
+              height="h-[1.5em]"
+            />
+            <ActionButton
+              className="gap-2 pt-0"
+              fontSize="text-xl"
+              onClick={addToCart}
+            >
               <Icon name="shopping_basket" />
               Add to cart
             </ActionButton>
