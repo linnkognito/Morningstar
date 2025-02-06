@@ -41,7 +41,7 @@ function ProductCard({ product }) {
         className="flex w-full grow items-center justify-between overflow-hidden rounded-b bg-aura pl-2"
       >
         <div className="flex h-full flex-col pt-2">
-          <h2 className="font-bebas text-xl tracking-widest xl:text-2xl">
+          <h2 className="font-bebas text-xl tracking-widest xl:text-[1.35rem]">
             {product.name}
           </h2>
           <h3 className="font-bebas text-lg tracking-widest">
@@ -49,7 +49,7 @@ function ProductCard({ product }) {
           </h3>
         </div>
         <button
-          className="font-base flex h-full w-[30%] min-w-[50px] items-center justify-center pt-1 font-bebas text-6xl transition-transform duration-300 ease-out will-change-transform hover:scale-110 hover:bg-pearl/50"
+          className="font-base flex h-full w-[50px] min-w-[50px] items-center justify-center font-bebas text-6xl transition-transform duration-300 ease-out will-change-transform hover:scale-110 hover:bg-pearl/50"
           onClick={() => setShowMenu((show) => !show)}
         >
           <span>{showMenu ? "-" : "+"}</span>
