@@ -15,7 +15,7 @@ function ProductCard({ product }) {
 
   const optimizedImage = product.image.replace(
     "/upload/",
-    "/upload/h_280,f_auto,q_auto/",
+    "/upload/h_500,f_auto,q_auto/",
   );
 
   return (
