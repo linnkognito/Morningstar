@@ -6,9 +6,14 @@ import ActionButton from "../ui/buttons/ActionButton";
 import Icon from "../common/Icon";
 import RefineDropdown from "./menus/RefineDropdown";
 import { addItem } from "../cart/cartSlice";
+import { useDispatch } from "react-redux";
 
 function ProductCard({ product }) {
+  const { name, image, price, sizes, colors, _id: id } = product;
+  const dispatch = useDispatch();
+
   const productBar = useRef(null);
+
   const [showMenu, setShowMenu] = useState(false);
   const [saveButtonHover, setSaveButtonHover] = useState(false);
   const [sizeSelection, setSizeSelection] = useState(null);
@@ -18,25 +23,29 @@ function ProductCard({ product }) {
     "/upload/",
     "/upload/h_500,f_auto,q_auto/",
   );
-  console.log("ProductCard re-rendered. Current size:", sizeSelection);
 
   function addToCart() {
-    if (!sizeSelection || !colorSelection)
-      return alert("Please select a size & color before adding to cart.");
+    // Size/color selected automatically if there's only one option
+    const size = sizeSelection || (sizes.length === 1 ? sizes[0] : null);
+    if (!size) return alert("Please select a size before adding to cart.");
 
-    const { name, image, price, _id: id } = { product };
+    const color = sizeSelection || (colors.length === 1 ? colors[0] : null);
+    if (!color) return alert("Please select a color before adding to cart.");
 
     const newCartItem = {
-      id,
-      name,
-      image,
-      price,
-      size: sizeSelection,
-      color: colorSelection,
+      id: id,
+      name: name,
+      image: image,
+      price: price,
+      size,
+      color,
       quantity: 1,
     };
 
-    addItem(newCartItem);
+    dispatch(addItem(newCartItem));
+
+    setSizeSelection(null);
+    setColorSelection(null);
   }
 
   return (
@@ -94,6 +103,7 @@ function ProductCard({ product }) {
               setColorSelection={setColorSelection}
               height="h-[1.5em]"
             />
+
             <ActionButton
               className="gap-2 pt-0"
               fontSize="text-xl"

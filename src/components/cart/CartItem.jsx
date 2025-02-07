@@ -3,11 +3,17 @@ import { useState } from "react";
 import Icon from "../common/Icon";
 import QuantitySelector from "../ui/inputs/QuantitySelector";
 import ColorSelector from "../ui/inputs/ColorSelector";
+import { useDispatch } from "react-redux";
+import { deleteItem } from "./cartSlice";
 
-function CartItem({ name, color, image, alt, quantity, size, price }) {
+function CartItem({ item }) {
+  const dispatch = useDispatch();
   const [deleteIsHovered, setDeleteIsHovered] = useState(false);
 
-  console.log(color);
+  const optimizedImage = item.image.replace(
+    "/upload/",
+    "/upload/w_150,f_auto,q_auto/",
+  );
 
   return (
     <div
@@ -20,8 +26,8 @@ function CartItem({ name, color, image, alt, quantity, size, price }) {
       {/* Image */}
       <div className="flex h-full max-h-[7em] min-h-[7em] min-w-[7em] max-w-[7em] rounded-l-md">
         <img
-          src={image}
-          alt={alt}
+          src={optimizedImage}
+          alt=""
           className="cursor-pointer rounded object-cover"
         />
       </div>
@@ -29,12 +35,12 @@ function CartItem({ name, color, image, alt, quantity, size, price }) {
       {/* Product Name */}
       <div className="flex flex-col justify-center font-bebas">
         <h2 className="w-fit cursor-pointer text-xl transition-all duration-200 ease-out hover:bg-zest/70 sm:text-2xl lg:text-3xl">
-          {name}
+          {item.name}
         </h2>
 
         {/* Product Price */}
         <p className="text-md pl-1 text-grey-600 sm:text-xl lg:text-2xl">
-          ${price}
+          ${item.price}
         </p>
       </div>
 
@@ -43,20 +49,20 @@ function CartItem({ name, color, image, alt, quantity, size, price }) {
         {/* Size & Color*/}
         <div className="flex gap-2">
           <div className="text-md flex w-full cursor-pointer place-content-center rounded-xl bg-zest/80 p-1 tracking-wide md:text-xl">
-            Size: {size}
+            Size: {item.size}
           </div>
 
           <ColorSelector
-            colors={[color]}
-            // height="h-full"
-            className="rounded-xl"
+            colors={[item.color]}
+            className="rounded-xl hover:scale-100"
+            disabled={true}
           />
         </div>
 
         <QuantitySelector
-          quantity={quantity}
+          quantity={item.quantity}
           text="Quantity:"
-          className="bg-mint/80 w-full rounded-xl px-3 py-1 tracking-wide"
+          className="w-full rounded-xl bg-mint/80 px-3 py-1 tracking-wide"
         />
       </div>
 
@@ -66,6 +72,7 @@ function CartItem({ name, color, image, alt, quantity, size, price }) {
         className="h-fit origin-center cursor-pointer rounded duration-300 ease-out will-change-[scale,color] hover:scale-[1.2] hover:text-ember"
         onMouseEnter={() => setDeleteIsHovered(true)}
         onMouseLeave={() => setDeleteIsHovered(false)}
+        onClick={() => dispatch(deleteItem(item.id))}
       />
     </div>
   );

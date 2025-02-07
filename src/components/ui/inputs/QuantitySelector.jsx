@@ -7,11 +7,11 @@ function QuantitySelector({ text = "", className = "", quantity = 1 }) {
     >
       <p>{text}</p>
       <div className="flex gap-2">
-        <ButtonTiny width="w-6" height="h-6">
+        <ButtonTiny width="w-6" height="h-6" className="bg-pearl">
           -
         </ButtonTiny>
         <span>{quantity}</span>
-        <ButtonTiny width="w-6" height="h-6">
+        <ButtonTiny width="w-6" height="h-6" className="bg-pearl">
           +
         </ButtonTiny>
       </div>

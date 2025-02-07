@@ -2,6 +2,7 @@ function ColorSelector({
   colors = [],
   height = "h-[2em]",
   className = "",
+  disabled = false,
   colorSelection,
   setColorSelection,
 }) {
@@ -14,7 +15,7 @@ function ColorSelector({
   return (
     <div className="flex w-full gap-2">
       {colors.map((color) => (
-        <div
+        <button
           key={color}
           onClick={() => {
             colorSelection === color
@@ -22,7 +23,8 @@ function ColorSelector({
               : setColorSelection(color);
           }}
           className={`${height} ${className} grow rounded shadow-sm shadow-offblack transition-transform duration-300 ease-out will-change-transform hover:scale-105 ${colorSelection ? checkColorSelection(color) : color}`}
-        ></div>
+          disabled={disabled}
+        ></button>
       ))}
     </div>
   );
