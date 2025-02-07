@@ -11,6 +11,7 @@ import cartBgImage from "../../images/HER_buttonup_2.jpg";
 
 function Cart() {
   const navigate = useNavigate();
+
   const cart = useSelector(getCartItems);
 
   return (

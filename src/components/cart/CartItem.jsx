@@ -4,7 +4,7 @@ import Icon from "../common/Icon";
 import QuantitySelector from "../ui/inputs/QuantitySelector";
 import ColorSelector from "../ui/inputs/ColorSelector";
 import { useDispatch } from "react-redux";
-import { deleteItem } from "./cartSlice";
+import { decQuantity, deleteItem, incQuantity } from "./cartSlice";
 
 function CartItem({ item }) {
   const dispatch = useDispatch();
@@ -63,6 +63,8 @@ function CartItem({ item }) {
           quantity={item.quantity}
           text="Quantity:"
           className="w-full rounded-xl bg-mint/80 px-3 py-1 tracking-wide"
+          increase={() => dispatch(incQuantity(item.id))}
+          decrease={() => dispatch(decQuantity(item.id))}
         />
       </div>
 

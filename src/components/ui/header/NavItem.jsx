@@ -1,8 +1,8 @@
 function NavItem({
   children,
   id,
-  onToggle,
-  isActive,
+  onToggle = null,
+  isActive = null,
   onClick = () => {},
   className = "",
 }) {

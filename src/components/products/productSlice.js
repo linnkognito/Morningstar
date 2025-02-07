@@ -54,6 +54,7 @@ export const fetchProductById = createAsyncThunk(
 
 const initialState = {
   products: [],
+  currentCategory: null,
   currentProduct: null,
   status: "idle",
 };
@@ -64,6 +65,12 @@ const productsSlice = createSlice({
   reducers: {
     clearCurrentProduct: (state) => {
       state.currentProduct = null;
+    },
+    sortLowestPriceFirst: (state) => {
+      state.products.sort((a, b) => a.price - b.price);
+    },
+    sortHighestPriceFirst: (state) => {
+      state.products.sort((a, b) => b.price - a.price);
     },
   },
   extraReducers: (builder) => {
@@ -86,6 +93,7 @@ const productsSlice = createSlice({
       })
       .addCase(fetchProductsByCategory.fulfilled, (state, action) => {
         state.products = action.payload;
+        state.currentCategory = action.meta.arg;
         state.status = "idle";
       })
       .addCase(fetchProductsByCategory.rejected, (state, action) => {
@@ -106,10 +114,13 @@ const productsSlice = createSlice({
   },
 });
 
-export const getProducts = (state) => {
-  const products = state.products.products;
+export const getProducts = (state) => state.products.products;
+export const getCurrentCategory = (state) => state.products.currentCategory;
 
-  return products;
-};
+export const {
+  sortLowestPriceFirst,
+  sortHighestPriceFirst,
+  clearCurrentProduct,
+} = productsSlice.actions;
 
 export default productsSlice.reducer;

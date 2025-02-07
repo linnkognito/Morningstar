@@ -15,7 +15,6 @@ export default function Header() {
   return (
     <div className="flex w-full justify-center border-b border-zest/20">
       <header className="flex w-full max-w-[1324px] items-center justify-between gap-2 font-bebas leading-normal text-pearl">
-        {/* <div className="flex w-full items-center gap-2 lg:justify-between"> */}
         <Nav activeItem={activeItem} onToggle={handleToggle} />
 
         <h1
@@ -24,7 +23,6 @@ export default function Header() {
         >
           Morning Star
         </h1>
-        {/* </div> */}
 
         <UserAction activeItem={activeItem} onToggle={handleToggle} />
       </header>

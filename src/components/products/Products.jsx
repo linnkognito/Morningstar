@@ -13,6 +13,7 @@ import ProductCard from "./ProductCard";
 
 function Products() {
   const { categoryName } = useParams();
+
   const dispatch = useDispatch();
   const products = useSelector(getProducts);
 
@@ -52,11 +53,5 @@ function Products() {
     </div>
   );
 }
-
-// export async function loader({ params }) {
-//   const productCategory = await fetchProductsByCategory(params.categoryName);
-
-//   return productCategory;
-// }
 
 export default Products;

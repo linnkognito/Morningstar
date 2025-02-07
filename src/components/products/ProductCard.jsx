@@ -1,15 +1,17 @@
 import { useRef, useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
+
+import { useDispatch } from "react-redux";
+import { addItem } from "../cart/cartSlice";
 
 import SizeSelector from "../ui/inputs/SizeSelector";
 import ColorSelector from "../ui/inputs/ColorSelector";
 import ActionButton from "../ui/buttons/ActionButton";
 import Icon from "../common/Icon";
 import RefineDropdown from "./menus/RefineDropdown";
-import { addItem } from "../cart/cartSlice";
-import { useDispatch } from "react-redux";
 
 function ProductCard({ product }) {
-  const { name, image, price, sizes, colors, _id: id } = product;
+  const { name, image, price, _id: id } = product;
   const dispatch = useDispatch();
 
   const productBar = useRef(null);
@@ -25,20 +27,16 @@ function ProductCard({ product }) {
   );
 
   function addToCart() {
-    // Size/color selected automatically if there's only one option
-    const size = sizeSelection || (sizes.length === 1 ? sizes[0] : null);
-    if (!size) return alert("Please select a size before adding to cart.");
-
-    const color = sizeSelection || (colors.length === 1 ? colors[0] : null);
-    if (!color) return alert("Please select a color before adding to cart.");
+    if (!sizeSelection || !colorSelection)
+      return toast.error("Please select a size & color before adding to cart.");
 
     const newCartItem = {
       id: id,
       name: name,
       image: image,
       price: price,
-      size,
-      color,
+      size: sizeSelection,
+      color: colorSelection,
       quantity: 1,
     };
 
@@ -46,6 +44,8 @@ function ProductCard({ product }) {
 
     setSizeSelection(null);
     setColorSelection(null);
+
+    toast.success(`${name} added to cart!`);
   }
 
   return (
@@ -115,6 +115,27 @@ function ProductCard({ product }) {
           </RefineDropdown>
         </div>
       )}
+
+      <Toaster
+        toastOptions={{
+          success: {
+            duration: 3000,
+          },
+          error: {
+            duration: 5000,
+          },
+          style: {
+            fontSize: "1.2rem",
+            fontFamily: "Bebas Neue, sans-serif",
+            color: "#0F0F0F",
+            backgroundColor: "rgba(244, 244, 242, 0.8)",
+            backdropFilter: "blur(2px)",
+            border: "2px solid #DCEB59",
+            borderRadius: "1em",
+            boxShadow: "0 0 10px  #0F0F0F",
+          },
+        }}
+      />
     </div>
   );
 }
