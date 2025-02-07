@@ -5,7 +5,7 @@ function RefineMenuButton({ children, isOpen, onClick = () => {} }) {
     <Button
       type="filter"
       className={
-        isOpen ? "border-transparent bg-zest text-offblack" : "text-pearl"
+        isOpen ? "border-transparent bg-zest text-offblack" : "bg-aura/30"
       }
       onClick={onClick}
     >

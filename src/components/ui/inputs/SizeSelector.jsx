@@ -1,26 +1,66 @@
 import ButtonTiny from "../buttons/ButtonTiny";
 
-const sizes = ["xs", "s", "m", "l", "xl", "xxl"];
+const defaultSizes = [
+  { size: "xs" },
+  { size: "s" },
+  { size: "m" },
+  { size: "l" },
+  { size: "xl" },
+  { size: "xxl" },
+  { size: "onesize" },
+];
 
-function SizeSelector({ sizeSelection, setSizeSelection }) {
+function SizeSelector({
+  sizes = defaultSizes,
+  multiSelect = false,
+  sizeSelection,
+  setSizeSelection,
+}) {
   function checkSizeSelection(size) {
-    if (sizeSelection === size) return "scale-105 bg-aura";
-    return "opacity-50 bg-pearl hover:opacity-100";
+    if (multiSelect) {
+      // No selection
+      if (!Array.isArray(sizeSelection) || !sizeSelection.length)
+        return "bg-pearl";
+
+      // At least one size selected
+      return Array.isArray(sizeSelection) &&
+        sizeSelection.length &&
+        sizeSelection.includes(size)
+        ? "scale-105 bg-aura"
+        : "opacity-50 bg-pearl hover:opacity-100";
+    }
+
+    // Multiselect not allowed
+    return sizeSelection === size
+      ? "scale-105 bg-aura"
+      : "opacity-50 bg-pearl hover:opacity-100";
+  }
+
+  function handleClick(size) {
+    setSizeSelection((prev) => {
+      // Multi selection toggle
+      if (multiSelect) {
+        const selectedSizes = Array.isArray(prev) ? prev : [];
+
+        return selectedSizes.includes(size)
+          ? selectedSizes.filter((s) => s !== size)
+          : [...selectedSizes, size];
+      }
+
+      // Single selection toggle
+      return prev === size ? null : size;
+    });
   }
 
   return (
     <div className="flex items-center justify-evenly gap-2">
       {sizes.map((size) => (
         <ButtonTiny
-          key={size}
-          onClick={() => {
-            sizeSelection === size
-              ? setSizeSelection(null)
-              : setSizeSelection(size);
-          }}
-          className={sizeSelection ? checkSizeSelection(size) : "bg-pearl"}
+          key={size.size}
+          onClick={() => handleClick(size.size)}
+          className={sizeSelection ? checkSizeSelection(size.size) : "bg-pearl"}
         >
-          {size}
+          {size.size}
         </ButtonTiny>
       ))}
     </div>

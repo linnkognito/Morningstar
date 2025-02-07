@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
 
-import { getCartItems } from "./cartSlice";
+import { getCartItems, getTotalPrice } from "./cartSlice";
 
 import CartItem from "./CartItem";
 import Icon from "../common/Icon";
@@ -13,6 +13,8 @@ function Cart() {
   const navigate = useNavigate();
 
   const cart = useSelector(getCartItems);
+  const total = useSelector(getTotalPrice);
+  const cartIsEmpty = total === 0;
 
   return (
     <div
@@ -49,7 +51,9 @@ function Cart() {
         </div>
 
         {/* Checkout */}
-        <div className="flex h-full flex-col gap-1">
+        <div
+          className={`flex h-full flex-col gap-1 ${total === 0 ? "opacity-50" : "opacity-100"}`}
+        >
           <div className="flex flex-col justify-between rounded bg-aura/15 p-4 shadow-sm shadow-offblack backdrop-blur-md">
             {/* Promo code */}
             <div className="flex h-fit w-full flex-col">
@@ -62,18 +66,20 @@ function Cart() {
               <input
                 type="text"
                 placeholder="123PROMO"
+                disabled={cartIsEmpty}
                 className="h-7 max-w-[400px] rounded-md px-2 font-primary text-base tracking-wide shadow-sm shadow-offblack"
               />
             </div>
 
             {/* Total */}
-            <h2 className="mt-4 pl-1 font-bebas text-4xl">Total: ${}</h2>
+            <h2 className="mt-4 pl-1 font-bebas text-4xl">Total: ${total}</h2>
           </div>
 
           <ActionButton
             color="bg-aura/80"
             width="w-full"
             className="place-self-end"
+            disabled={cartIsEmpty}
           >
             Go to checkout
           </ActionButton>

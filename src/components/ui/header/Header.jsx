@@ -13,8 +13,8 @@ export default function Header() {
   };
 
   return (
-    <div className="flex w-full justify-center border-b border-aura/50 bg-pearl">
-      <header className="flex w-full max-w-[1324px] items-center justify-between gap-2 bg-pearl font-bebas leading-normal text-pearl">
+    <div className="z-[9999] flex w-full justify-center border-b border-aura/40 bg-pearl shadow-[-2px_2px_4px_rgba(15,15,15,0.3)]">
+      <header className="flex w-full max-w-[1324px] items-center justify-between gap-2 font-bebas leading-normal text-pearl">
         <Nav activeItem={activeItem} onToggle={handleToggle} />
 
         <h1

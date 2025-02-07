@@ -15,7 +15,7 @@ function Button({
     error:
       "w-full bg-offblack border border-pearl h-10 text-pearl font-bebas font-extralight uppercase tracking-widest mt-2 hover:bg-cherry transition-all duration-200",
     filter:
-      "h-full min-h-[40px] w-full border border-pearl  font-bebas text-[1.4rem] font-medium uppercase tracking-widest transition-all duration-200 hover:text-offblack hover:border-zest hover:bg-zest rounded",
+      "h-full min-h-[40px] w-full shadow-sm shadow-offblack font-bebas text-[1.4rem] font-medium uppercase tracking-widest transition-all duration-300 will-change hover:scale-105 ease-out text-offblack hover:border-zest rounded active:bg-pearl",
   };
 
   return (

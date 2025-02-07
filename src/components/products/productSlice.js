@@ -54,6 +54,11 @@ export const fetchProductById = createAsyncThunk(
 
 const initialState = {
   products: [],
+  filters: {
+    sizes: [],
+    maxPrice: 120,
+    colors: [],
+  },
   currentCategory: null,
   currentProduct: null,
   status: "idle",
@@ -63,6 +68,12 @@ const productsSlice = createSlice({
   name: "products",
   initialState,
   reducers: {
+    setFilters: (state, action) => {
+      state.filters = action.payload;
+    },
+    clearFilters: (state) => {
+      state.filters = initialState.filters;
+    },
     clearCurrentProduct: (state) => {
       state.currentProduct = null;
     },
@@ -115,9 +126,25 @@ const productsSlice = createSlice({
 });
 
 export const getProducts = (state) => state.products.products;
+
 export const getCurrentCategory = (state) => state.products.currentCategory;
 
+export const getFilteredProducts = (state) => {
+  const { products, filters } = state.products;
+  const { sizes: filterSizes, maxPrice, colors: filterColors } = filters;
+
+  return products.filter((product) => {
+    if (filterSizes.length) return filterSizes.includes(product.size);
+    if (filterColors.length) return filterColors.includes(product.color);
+    if (maxPrice) return product.price < maxPrice;
+
+    return true;
+  });
+};
+
 export const {
+  setFilters,
+  clearFilters,
   sortLowestPriceFirst,
   sortHighestPriceFirst,
   clearCurrentProduct,

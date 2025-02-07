@@ -12,7 +12,7 @@ import RefineDropdown from "./menus/RefineDropdown";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
 function ProductCard({ product }) {
-  const { name, image, price, _id: id } = product;
+  const { name, image, price, sizes, colors, _id: id } = product;
   const dispatch = useDispatch();
 
   const productBar = useRef(null);
@@ -50,13 +50,13 @@ function ProductCard({ product }) {
   }
 
   return (
-    <div className="relative flex min-h-[200px] max-w-[250px] flex-col rounded bg-pearl">
+    <div className="relative flex min-h-[200px] max-w-[250px] cursor-pointer flex-col rounded bg-pearl shadow-sm shadow-offblack">
       {/* Heart (save product) */}
       <Icon
         name={saveButtonHover ? "heart_plus" : "favorite"}
         onMouseEnter={() => setSaveButtonHover(true)}
         onMouseLeave={() => setSaveButtonHover(false)}
-        className="border-red absolute right-0 cursor-pointer pr-1 pt-0.5 text-aura"
+        className="border-red absolute right-0 pr-1 pt-0.5 text-aura"
       />
 
       {/* Image */}
@@ -71,7 +71,7 @@ function ProductCard({ product }) {
       {/* Product bar */}
       <div
         ref={productBar}
-        className="flex w-full grow items-center justify-between overflow-hidden rounded-b bg-aura pl-2"
+        className="flex w-full grow items-center justify-between overflow-hidden rounded-b bg-aura/80 pl-2"
       >
         <div className="flex h-full flex-col pt-2">
           <h2 className="font-bebas text-xl tracking-widest xl:text-[1.35rem]">
@@ -97,11 +97,12 @@ function ProductCard({ product }) {
         >
           <RefineDropdown className="rounded-b-none">
             <SizeSelector
+              sizes={sizes}
               sizeSelection={sizeSelection}
               setSizeSelection={setSizeSelection}
             />
             <ColorSelector
-              colors={product.colors}
+              colors={colors}
               colorSelection={colorSelection}
               setColorSelection={setColorSelection}
               height="h-[1.5em]"
@@ -133,9 +134,9 @@ function ProductCard({ product }) {
             color: "#0F0F0F",
             backgroundColor: "rgba(244, 244, 242, 0.8)",
             backdropFilter: "blur(2px)",
-            border: "2px solid #DCEB59",
+            border: "2px solid #D19BF3",
             borderRadius: "1em",
-            boxShadow: "0 0 10px  #0F0F0F",
+            boxShadow: "0 0 15px rgba(15,15,15,0.1)",
           },
         }}
       />
