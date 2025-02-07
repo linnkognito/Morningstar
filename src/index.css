@@ -5,7 +5,7 @@
 @tailwind utilities;
 
 body {
-  @apply bg-offblack font-primary;
+  @apply font-primary;
 }
 
 .material-symbols-outlined {

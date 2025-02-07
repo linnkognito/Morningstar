@@ -15,7 +15,7 @@ function CategoryCard({
 
   return (
     <div
-      className={`${color} ${className} w-full grow bg-cover shadow-sm shadow-offwhite/20 md:mt-2 md:w-1/4 md:bg-center`}
+      className={`${color} ${className} w-full grow bg-cover shadow-sm shadow-offblack md:mt-2 md:w-1/4 md:bg-center`}
       style={{
         backgroundImage: `url(${bgImage})`,
       }}

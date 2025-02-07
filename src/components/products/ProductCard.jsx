@@ -9,6 +9,7 @@ import ColorSelector from "../ui/inputs/ColorSelector";
 import ActionButton from "../ui/buttons/ActionButton";
 import Icon from "../common/Icon";
 import RefineDropdown from "./menus/RefineDropdown";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 function ProductCard({ product }) {
   const { name, image, price, _id: id } = product;
@@ -23,7 +24,7 @@ function ProductCard({ product }) {
 
   const optimizedImage = product.image.replace(
     "/upload/",
-    "/upload/h_500,f_auto,q_auto/",
+    "/upload/h_380,f_auto,q_auto/",
   );
 
   function addToCart() {
@@ -58,11 +59,13 @@ function ProductCard({ product }) {
         className="border-red absolute right-0 cursor-pointer pr-1 pt-0.5 text-aura"
       />
 
-      {/* Image will be inserted as a background */}
-      <img
+      {/* Image */}
+      <LazyLoadImage
         src={optimizedImage}
         alt={product.alt || product.name}
-        className="h-[280px] rounded-t object-cover object-center"
+        effect="opacity"
+        wrapperProps={{ style: { transitionDelay: "1.5s" } }}
+        className="h-[280px] w-full rounded-t object-cover object-center"
       />
 
       {/* Product bar */}
