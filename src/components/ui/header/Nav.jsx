@@ -46,7 +46,10 @@ function Nav({ onToggle, activeItem }) {
               id={li.id}
               onToggle={onToggle}
               isActive={activeItem === li.id}
-              onClick={() => navigate(li.path)}
+              onClick={() => {
+                navigate(li.path);
+                setShowDropdownNav(false);
+              }}
               className="will-change group flex w-full items-center justify-between text-[1.4em] tracking-wider transition-all duration-300 ease-out hover:pl-6 group-hover:inline"
             >
               <span>{li.text}</span>

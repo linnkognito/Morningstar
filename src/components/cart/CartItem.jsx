@@ -17,7 +17,7 @@ function CartItem({ item }) {
 
   return (
     <div
-      className={`relative grid grid-cols-[auto_2fr_1fr_auto] gap-3 rounded-md bg-pearl/60 pr-1 shadow-sm shadow-offblack backdrop-blur-md duration-300 ease-out will-change-[scale] ${deleteIsHovered ? "scale-[1.005]" : ""}`}
+      className={`relative grid grid-cols-[auto_3fr_1fr_auto] gap-3 rounded-md bg-pearl/60 pr-1 shadow-sm shadow-offblack backdrop-blur-md duration-300 ease-out will-change-[scale] sm:grid-cols-[auto_2fr_1fr_auto] ${deleteIsHovered ? "scale-[1.005]" : ""}`}
     >
       {deleteIsHovered && (
         <div className="z-100 absolute h-full w-full bg-offblack/20"></div>
@@ -33,7 +33,7 @@ function CartItem({ item }) {
       </div>
 
       {/* Product Name */}
-      <div className="flex flex-col justify-center font-bebas">
+      <div className="flex min-w-[4em] flex-col justify-center font-bebas">
         <h2 className="w-fit cursor-pointer text-xl transition-all duration-200 ease-out hover:bg-zest/70 sm:text-2xl lg:text-3xl">
           {item.name}
         </h2>
@@ -45,7 +45,7 @@ function CartItem({ item }) {
       </div>
 
       {/* Actions */}
-      <div className="mr-4 flex h-full flex-col justify-center gap-1 py-2 font-bebas">
+      <div className="mr-4 flex h-full flex-col justify-center gap-2 py-2 font-bebas">
         {/* Size & Color*/}
         <div className="flex gap-2">
           <div className="text-md flex w-full cursor-pointer place-content-center rounded-xl bg-zest/80 p-1 tracking-wide md:text-xl">
@@ -54,6 +54,7 @@ function CartItem({ item }) {
 
           <ColorSelector
             colors={[item.color]}
+            height="h-full"
             className="rounded-xl hover:scale-100"
             disabled={true}
           />

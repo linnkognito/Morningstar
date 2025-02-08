@@ -5,14 +5,10 @@ import RangeSelector from "../../ui/inputs/RangeSelector";
 import ColorSelector from "../../ui/inputs/ColorSelector";
 import Button from "../../ui/buttons/Button";
 import RefineDropdown from "./RefineDropdown";
-import { useDispatch } from "react-redux";
-import { clearFilters } from "../productSlice";
 
 const colorsArr = ["bg-ember", "bg-zest", "bg-aura", "bg-pearl", "bg-offblack"];
 
 function FilterDropdown({ handleClick }) {
-  const dispatch = useDispatch();
-
   const defaultPrice = 120;
   const [maxPrice, setMaxPrice] = useState(defaultPrice);
 
@@ -41,17 +37,17 @@ function FilterDropdown({ handleClick }) {
       <div className="flex gap-4 px-2 pt-2">
         <Button
           type="filter"
-          className="bg-sea"
+          className="will-change bg-sea duration-300 ease-out hover:scale-105"
           onClick={() => setSizeSelection(null)}
         >
-          Clear filters
+          Clear
         </Button>
         <Button
           type="filter"
-          className="bg-pearl"
+          className="will-change bg-pearl duration-300 ease-out hover:scale-105"
           onClick={() => handleClick("filter")}
         >
-          Apply filters
+          Apply
         </Button>
       </div>
     </RefineDropdown>

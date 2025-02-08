@@ -26,12 +26,12 @@ function Products() {
   }, [categoryName, dispatch]);
 
   return (
-    <div className="flex w-full justify-center">
+    <div className="flex w-full justify-center pb-[75px] sm:pb-4">
       <div className="flex w-full max-w-[1284px] flex-col gap-3 px-2">
         {/* Banner */}
         <div className="mt-4 h-[7vh] min-h-fit w-full rounded-lg bg-gradient-to-r from-aura via-mint to-zest py-2 text-pearl shadow-sm shadow-offblack/40">
           <h2
-            className="w-full pl-16 font-bebas text-6xl uppercase tracking-widest"
+            className="w-full pl-8 font-bebas text-6xl uppercase tracking-widest sm:pl-16"
             style={{ textShadow: "2px 2px 4px rgba(0, 0, 0, 0.3)" }}
           >
             {categoryName}
@@ -43,7 +43,7 @@ function Products() {
           <RefineMenu />
 
           {/* Product cards */}
-          <div className="grid grid-cols-2 gap-4 px-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+          <div className="grid grid-cols-2 gap-4 px-2 pt-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
             {products.map((product) => (
               <ProductCard key={product._id} product={product} />
             ))}
