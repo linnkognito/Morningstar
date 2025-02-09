@@ -1,10 +1,11 @@
 import { useState } from "react";
 import ArrowButton from "../ui/buttons/ArrowButton";
+import { AdvancedImage, responsive } from "@cloudinary/react";
 
 function CategoryCard({
   color = "pearl",
   title = "",
-  bgImage = "",
+  image = "",
   className = "",
   hoverColor = "bg-zest/60",
   hoverClass = "",
@@ -15,14 +16,17 @@ function CategoryCard({
 
   return (
     <div
-      className={`${color} ${className} w-full grow bg-cover shadow-sm shadow-offblack md:mt-2 md:w-1/4 md:bg-center`}
-      style={{
-        backgroundImage: `url(${bgImage})`,
-      }}
+      className={`${color} ${className} relative w-full grow shadow-sm shadow-offblack md:mt-2 md:w-1/4`}
       onMouseEnter={toggleHover}
       onMouseLeave={toggleHover}
       onClick={onClick}
     >
+      <AdvancedImage
+        cldImg={image}
+        plugins={[responsive({ steps: 200 })]}
+        className={`${className} absolute h-full w-full object-cover object-[50%_40%]`}
+      />
+
       <div className="relative flex h-full min-w-full cursor-pointer items-end justify-start">
         {hovered && (
           <div className="absolute end-0 flex h-full w-fit cursor-pointer items-center md:w-full md:justify-center">

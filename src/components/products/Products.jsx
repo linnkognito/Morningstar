@@ -2,20 +2,16 @@ import { useEffect } from "react";
 import { useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 
-import {
-  fetchAllProducts,
-  fetchProductsByCategory,
-  getProducts,
-} from "./productSlice";
+import { fetchAllProducts, fetchProductsByCategory } from "./productSlice";
 
 import RefineMenu from "./menus/RefineMenu";
 import ProductCard from "./ProductCard";
+import Spinner from "../common/Spinner";
 
 function Products() {
   const { categoryName } = useParams();
-
   const dispatch = useDispatch();
-  const products = useSelector(getProducts);
+  const { status, products } = useSelector((state) => state.products);
 
   useEffect(() => {
     if (categoryName) {
@@ -38,15 +34,20 @@ function Products() {
           </h2>
         </div>
 
+        {/* Content */}
         <div className="mx-auto flex w-full min-w-fit max-w-[1284px] flex-col space-y-3">
           {/* Filter & Sort menu */}
           <RefineMenu />
 
           {/* Product cards */}
           <div className="grid grid-cols-2 gap-4 px-2 pt-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
-            {products.map((product) => (
-              <ProductCard key={product._id} product={product} />
-            ))}
+            {/* Spinner */}
+            {status === "loading" && <Spinner />}
+
+            {status === "idle" &&
+              products.map((product) => (
+                <ProductCard key={product._id} product={product} />
+              ))}
           </div>
         </div>
       </div>
