@@ -4,11 +4,11 @@ import PromotionBar from "./header/PromotionBar";
 
 function AppLayout() {
   return (
-    <div className="flex h-screen max-h-screen w-screen flex-col items-center overflow-x-hidden">
+    <div className="flex h-screen w-screen flex-col items-center overflow-x-hidden">
       <PromotionBar code="SPRING" />
       <Header />
 
-      <main className="h-full w-full grow bg-pearl pb-[69px] sm:pb-2">
+      <main className="h-full min-h-fit w-full grow bg-pearl pb-[64px] sm:pb-0">
         <Outlet />
       </main>
     </div>
