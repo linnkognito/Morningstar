@@ -1,22 +1,13 @@
 import { useNavigate } from "react-router";
-import { Cloudinary } from "@cloudinary/url-gen/index";
+import { optimizeImage } from "../../utils/cloudinary";
 
 import CategoryCard from "./CategoryCard";
 
 function Categories() {
   const navigate = useNavigate();
 
-  const cloudinary = new Cloudinary({
-    cloud: { cloudName: "dsqgkyybl" },
-  });
-
-  const optimizeImage = (publicId) =>
-    cloudinary.image(publicId).quality(100).format("auto");
-
   const imageHer = optimizeImage("HER_escape_uwutqq");
-
   const imageHim = optimizeImage("HIM_buckethat_zlkjv8");
-
   const imageUnisex = optimizeImage("UNI_monochrome_t4wteo");
   const imageNew = optimizeImage("HER_bikini_apdjt3");
 

@@ -1,20 +1,22 @@
 import { useRef, useState } from "react";
+import { useNavigate } from "react-router";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import toast, { Toaster } from "react-hot-toast";
 
 import { useDispatch } from "react-redux";
 import { addItem } from "../cart/cartSlice";
+import { setCurrentProduct } from "./productSlice";
 
+import RefineDropdown from "./menus/RefineDropdown";
 import SizeSelector from "../ui/inputs/SizeSelector";
 import ColorSelector from "../ui/inputs/ColorSelector";
 import ActionButton from "../ui/buttons/ActionButton";
 import Icon from "../common/Icon";
-import RefineDropdown from "./menus/RefineDropdown";
-import { LazyLoadImage } from "react-lazy-load-image-component";
 
 function ProductCard({ product }) {
   const { name, image, price, sizes, colors, _id: id } = product;
   const dispatch = useDispatch();
-
+  const navigator = useNavigate();
   const productBar = useRef(null);
 
   const [showMenu, setShowMenu] = useState(false);
@@ -49,6 +51,11 @@ function ProductCard({ product }) {
     toast.success(`${name} added to cart!`);
   }
 
+  function handleProductCardClick() {
+    navigator(`/products/${id}`);
+    dispatch(setCurrentProduct(id));
+  }
+
   return (
     <div className="relative flex min-h-[200px] max-w-[250px] cursor-pointer flex-col rounded bg-pearl shadow-sm shadow-offblack">
       {/* Heart (save product) */}
@@ -66,6 +73,7 @@ function ProductCard({ product }) {
         effect="opacity"
         wrapperProps={{ style: { transitionDelay: "1.5s" } }}
         className="h-[280px] w-full rounded-t object-cover object-center"
+        onClick={handleProductCardClick}
       />
 
       {/* Product bar */}
@@ -74,7 +82,10 @@ function ProductCard({ product }) {
         className="flex w-full grow items-center justify-between overflow-hidden rounded-b bg-aura/80 pl-2"
       >
         <div className="flex h-full flex-col pt-2">
-          <h2 className="font-bebas text-xl tracking-widest xl:text-[1.35rem]">
+          <h2
+            className="font-bebas text-xl tracking-widest hover:bg-pearl/50 xl:text-[1.35rem]"
+            onClick={handleProductCardClick}
+          >
             {product.name}
           </h2>
           <h3 className="font-bebas text-lg tracking-widest">

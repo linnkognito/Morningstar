@@ -25,9 +25,9 @@ function Products() {
     <div className="flex w-full justify-center pb-[75px] sm:pb-4">
       <div className="flex w-full max-w-[1284px] flex-col gap-3 px-2">
         {/* Banner */}
-        <div className="mt-4 h-[7vh] min-h-fit w-full rounded-lg bg-gradient-to-r from-aura via-mint to-zest py-2 text-pearl shadow-sm shadow-offblack/40">
+        <div className="w-fullrounded-lg mt-4 h-[7vh] min-h-fit bg-gradient-to-r from-aura via-mint to-zest py-2 text-right text-pearl shadow-sm shadow-offblack/40">
           <h2
-            className="w-full pl-8 font-bebas text-6xl uppercase tracking-widest sm:pl-16"
+            className="ml-auto w-full pr-10 font-bebas text-6xl uppercase tracking-widest sm:pl-16"
             style={{ textShadow: "2px 2px 4px rgba(0, 0, 0, 0.3)" }}
           >
             {categoryName}

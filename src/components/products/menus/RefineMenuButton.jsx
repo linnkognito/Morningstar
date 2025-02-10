@@ -4,9 +4,7 @@ function RefineMenuButton({ children, isOpen, onClick = () => {} }) {
   return (
     <Button
       type="filter"
-      className={
-        isOpen ? "border-transparent bg-zest text-offblack" : "bg-aura/30"
-      }
+      className={`hover:bg-zest ${isOpen ? "border-transparent bg-zest text-offblack" : "bg-aura/30"}`}
       onClick={onClick}
     >
       {children}

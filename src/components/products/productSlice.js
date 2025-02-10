@@ -38,9 +38,9 @@ export const fetchProductsByCategory = createAsyncThunk(
 
 export const fetchProductById = createAsyncThunk(
   "products/fetchById",
-  async (productId, { rejectWithValue }) => {
+  async (id, { rejectWithValue }) => {
     try {
-      const res = await fetch(`${API_BASE_URL}/products/${productId}`);
+      const res = await fetch(`${API_BASE_URL}/products/${id}`);
 
       if (!res.ok) throw new Error("Failed to fetch product data");
 
@@ -70,6 +70,11 @@ const productsSlice = createSlice({
   reducers: {
     setFilters: (state, action) => {
       state.filters = action.payload;
+    },
+    setCurrentProduct: (state, action) => {
+      state.currentProduct = state.products.find(
+        (product) => product._id === action.payload,
+      );
     },
     clearFilters: (state) => {
       state.filters = initialState.filters;
@@ -143,6 +148,7 @@ export const getFilteredProducts = (state) => {
 };
 
 export const {
+  setCurrentProduct,
   setFilters,
   clearFilters,
   sortLowestPriceFirst,

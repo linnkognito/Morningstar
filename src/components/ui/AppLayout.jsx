@@ -8,7 +8,7 @@ function AppLayout() {
       <PromotionBar code="SPRING" />
       <Header />
 
-      <main className="h-full w-full grow bg-pearl px-[2px] pb-[69px] sm:pb-2">
+      <main className="h-full w-full grow bg-pearl pb-[69px] sm:pb-2">
         <Outlet />
       </main>
     </div>
