@@ -17,7 +17,6 @@ export const fetchAllProducts = createAsyncThunk(
     }
   },
 );
-
 export const fetchProductsByCategory = createAsyncThunk(
   "products/fetchByCategory",
   async (categoryName, { rejectWithValue }) => {
@@ -35,7 +34,6 @@ export const fetchProductsByCategory = createAsyncThunk(
     }
   },
 );
-
 export const fetchProductById = createAsyncThunk(
   "products/fetchById",
   async (id, { rejectWithValue }) => {
@@ -61,6 +59,11 @@ const initialState = {
   },
   currentCategory: null,
   currentProduct: null,
+  selections: {
+    size: null,
+    color: null,
+    quantity: 0,
+  },
   status: "idle",
 };
 
@@ -68,13 +71,19 @@ const productsSlice = createSlice({
   name: "products",
   initialState,
   reducers: {
+    // Quantity updates (accepts item object)
+    incQuantity: (state) => {
+      state.selections.quantity++;
+    },
+    decQuantity: (state) => {
+      if (state.selections.quantity === 1) return;
+
+      state.selections.quantity--;
+    },
+
+    // Sorting & Filters
     setFilters: (state, action) => {
       state.filters = action.payload;
-    },
-    setCurrentProduct: (state, action) => {
-      state.currentProduct = state.products.find(
-        (product) => product._id === action.payload,
-      );
     },
     clearFilters: (state) => {
       state.filters = initialState.filters;
@@ -148,7 +157,8 @@ export const getFilteredProducts = (state) => {
 };
 
 export const {
-  setCurrentProduct,
+  incQuantity,
+  decQuantity,
   setFilters,
   clearFilters,
   sortLowestPriceFirst,

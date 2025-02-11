@@ -5,7 +5,6 @@ import toast, { Toaster } from "react-hot-toast";
 
 import { useDispatch } from "react-redux";
 import { addItem } from "../cart/cartSlice";
-import { setCurrentProduct } from "./productSlice";
 
 import RefineDropdown from "./menus/RefineDropdown";
 import SizeSelector from "../ui/inputs/SizeSelector";
@@ -51,11 +50,6 @@ function ProductCard({ product }) {
     toast.success(`${name} added to cart!`);
   }
 
-  function handleProductCardClick() {
-    navigator(`/products/${id}`);
-    dispatch(setCurrentProduct(id));
-  }
-
   return (
     <div className="relative flex min-h-[200px] max-w-[250px] cursor-pointer flex-col rounded bg-pearl shadow-sm shadow-offblack">
       {/* Heart (save product) */}
@@ -73,7 +67,7 @@ function ProductCard({ product }) {
         effect="opacity"
         wrapperProps={{ style: { transitionDelay: "1.5s" } }}
         className="h-[280px] w-full rounded-t object-cover object-center"
-        onClick={handleProductCardClick}
+        onClick={() => navigator(`/products/${id}`)}
       />
 
       {/* Product bar */}
@@ -84,7 +78,7 @@ function ProductCard({ product }) {
         <div className="flex h-full flex-col pt-2">
           <h2
             className="font-bebas text-xl tracking-widest hover:bg-pearl/50 xl:text-[1.35rem]"
-            onClick={handleProductCardClick}
+            onClick={() => navigator(`/products/${id}`)}
           >
             {product.name}
           </h2>

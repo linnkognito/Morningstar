@@ -60,6 +60,7 @@ function CartItem({ item }) {
           />
         </div>
 
+        {/* Quantity */}
         <QuantitySelector
           quantity={item.quantity}
           text="Quantity:"
