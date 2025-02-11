@@ -37,7 +37,7 @@ function UserAction({ activeItem, onToggle }) {
         </ul>
       </nav>
 
-      <nav className="fixed bottom-0 z-[9999] w-full cursor-pointer border-t border-zest/20 bg-pearl shadow-[2px_-2px_4px_rgba(15,15,15,0.2)] sm:hidden">
+      <nav className="fixed bottom-0 z-[9999] w-full cursor-pointer bg-pearl shadow-[2px_-2px_4px_rgba(15,15,15,0.2)] sm:hidden">
         <ul className="flex h-full items-center text-2xl">
           {icons.map((icon) => (
             <NavItem

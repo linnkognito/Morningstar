@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { handleSizeSelection } from "../../utils/handleSizeSelection";
 
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
@@ -60,7 +61,7 @@ const initialState = {
   currentCategory: null,
   currentProduct: null,
   selections: {
-    size: null,
+    size: [],
     color: null,
     quantity: 0,
   },
@@ -71,7 +72,16 @@ const productsSlice = createSlice({
   name: "products",
   initialState,
   reducers: {
-    // Quantity updates (accepts item object)
+    // Selections
+    setSizeSelection: (state, action) => {
+      const { size, isMultiselect } = action.payload;
+      state.selections.size = handleSizeSelection(
+        state.selections.size,
+        size,
+        isMultiselect,
+      );
+    },
+
     incQuantity: (state) => {
       state.selections.quantity++;
     },
@@ -157,6 +167,7 @@ export const getFilteredProducts = (state) => {
 };
 
 export const {
+  setSizeSelection,
   incQuantity,
   decQuantity,
   setFilters,

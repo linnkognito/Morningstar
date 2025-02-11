@@ -1,3 +1,6 @@
+import { useDispatch, useSelector } from "react-redux";
+import { setSizeSelection } from "../../products/productSlice";
+
 import ButtonTiny from "../buttons/ButtonTiny";
 
 const defaultSizes = [
@@ -10,46 +13,21 @@ const defaultSizes = [
   { size: "onesize" },
 ];
 
-function SizeSelector({
-  sizes = defaultSizes,
-  multiSelect = false,
-  sizeSelection,
-  setSizeSelection,
-}) {
-  function checkSizeSelection(size) {
-    if (multiSelect) {
-      // No selection
-      if (!Array.isArray(sizeSelection) || !sizeSelection.length)
-        return "bg-pearl";
+function SizeSelector({ sizes = defaultSizes, multiSelect = false }) {
+  const dispatch = useDispatch();
+  const sizeSelections = useSelector((state) => state.products.selections.size);
 
-      // At least one size selected
-      return Array.isArray(sizeSelection) &&
-        sizeSelection.length &&
-        sizeSelection.includes(size)
+  function applyStyles(size) {
+    if (!sizeSelections.length) return "bg-pearl";
+
+    if (multiSelect)
+      return sizeSelections.includes(size)
         ? "scale-105 bg-aura"
         : "opacity-50 bg-pearl hover:opacity-100";
-    }
 
-    // Multiselect not allowed
-    return sizeSelection === size
+    return sizeSelections[0] === size
       ? "scale-105 bg-aura"
       : "opacity-50 bg-pearl hover:opacity-100";
-  }
-
-  function handleClick(size) {
-    setSizeSelection((prev) => {
-      // Multi selection toggle
-      if (multiSelect) {
-        const selectedSizes = Array.isArray(prev) ? prev : [];
-
-        return selectedSizes.includes(size)
-          ? selectedSizes.filter((s) => s !== size)
-          : [...selectedSizes, size];
-      }
-
-      // Single selection toggle
-      return prev === size ? null : size;
-    });
   }
 
   return (
@@ -57,8 +35,12 @@ function SizeSelector({
       {sizes.map((size) => (
         <ButtonTiny
           key={size.size}
-          onClick={() => handleClick(size.size)}
-          className={sizeSelection ? checkSizeSelection(size.size) : "bg-pearl"}
+          onClick={() =>
+            dispatch(
+              setSizeSelection({ size: size.size, isMultiselect: multiSelect }),
+            )
+          }
+          className={applyStyles(size.size)}
         >
           {size.size}
         </ButtonTiny>
