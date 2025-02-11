@@ -74,7 +74,7 @@ const productsSlice = createSlice({
   reducers: {
     // Selections
     clearSelections: (state) => {
-      state.selections = { size: [], color: [], quantity: 0 };
+      state.selections = { size: [], color: [], quantity: 1 };
     },
     setSizeSelection: (state, action) => {
       const { size, isMultiSelect } = action.payload;

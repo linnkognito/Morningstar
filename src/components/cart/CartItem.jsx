@@ -5,9 +5,11 @@ import QuantitySelector from "../ui/inputs/QuantitySelector";
 import ColorSelector from "../ui/inputs/ColorSelector";
 import { useDispatch } from "react-redux";
 import { decQuantity, deleteItem, incQuantity } from "./cartSlice";
+import { useNavigate } from "react-router";
 
 function CartItem({ item }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [deleteIsHovered, setDeleteIsHovered] = useState(false);
 
   const optimizedImage = item.image.replace(
@@ -34,7 +36,10 @@ function CartItem({ item }) {
 
       {/* Product Name */}
       <div className="flex min-w-[4em] flex-col justify-center font-bebas">
-        <h2 className="w-fit cursor-pointer text-xl transition-all duration-200 ease-out hover:bg-zest/70 sm:text-2xl lg:text-3xl">
+        <h2
+          className="w-fit cursor-pointer text-xl transition-all duration-200 ease-out hover:bg-zest/70 sm:text-2xl lg:text-3xl"
+          onClick={() => navigate(`/products/${item.id}`)}
+        >
           {item.name}
         </h2>
 

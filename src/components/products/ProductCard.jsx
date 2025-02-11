@@ -28,7 +28,8 @@ function ProductCard({ product }) {
         name={saveButtonHover ? "heart_plus" : "favorite"}
         onMouseEnter={() => setSaveButtonHover(true)}
         onMouseLeave={() => setSaveButtonHover(false)}
-        className="border-red absolute right-0 pr-1 pt-0.5 text-aura"
+        className="border-red absolute right-0 pr-2 pt-0.5 text-pearl"
+        style={{ textShadow: "1px 1px 1px rgba(0, 0, 0, 1)" }}
       />
 
       {/* Image */}

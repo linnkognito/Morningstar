@@ -23,7 +23,6 @@ function ProductPage() {
 
   useEffect(() => {
     if (id) dispatch(fetchProductById(id));
-
     return () => dispatch(clearSelections());
   }, [dispatch, id]);
 

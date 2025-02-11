@@ -8,7 +8,9 @@ import { clearSelections } from "../productSlice";
 
 function AddToCartButton({ product }) {
   const { name, image, price, _id: id } = product;
-  const { size, color } = useSelector((state) => state.products.selections);
+  const { size, color, quantity } = useSelector(
+    (state) => state.products.selections,
+  );
 
   const dispatch = useDispatch();
 
@@ -23,7 +25,7 @@ function AddToCartButton({ product }) {
       price: price,
       size: size,
       color: color,
-      quantity: 1,
+      quantity: quantity || 1,
     };
 
     dispatch(addItem(newCartItem));

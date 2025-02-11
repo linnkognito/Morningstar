@@ -7,6 +7,7 @@ import Error from "./ui/Error";
 import Products from "./products/Products";
 import ProductPage from "./products/ProductPage";
 import { Toaster } from "react-hot-toast";
+import SavedProducts from "./user/SavedProducts";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,11 @@ const router = createBrowserRouter([
       {
         path: "/cart",
         element: <Cart />,
+        errorElement: <Error />,
+      },
+      {
+        path: "/user/saved",
+        element: <SavedProducts />,
         errorElement: <Error />,
       },
     ],
