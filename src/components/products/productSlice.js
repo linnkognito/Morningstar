@@ -78,6 +78,7 @@ const productsSlice = createSlice({
     },
     setSizeSelection: (state, action) => {
       const { size, isMultiSelect } = action.payload;
+
       state.selections.size = handleSelection(
         state.selections.size,
         size,
@@ -92,7 +93,6 @@ const productsSlice = createSlice({
         isMultiSelect,
       );
     },
-
     incQuantity: (state) => {
       state.selections.quantity++;
     },
@@ -103,7 +103,20 @@ const productsSlice = createSlice({
 
     // Sorting & Filters
     setFilters: (state, action) => {
-      state.filters = action.payload;
+      const { maxPrice } = action.payload;
+
+      state.filters.sizes = state.selections.size;
+      state.filters.maxPrice = maxPrice;
+      state.filters.colors = state.selections.color;
+    },
+    setSizeFilter: (state, action) => {
+      const { size, isMultiSelect } = action.payload;
+
+      state.filters.sizes = handleSelection(
+        state.filters.sizes,
+        size,
+        isMultiSelect,
+      );
     },
     clearFilters: (state) => {
       state.filters = initialState.filters;
@@ -183,6 +196,7 @@ export const {
   incQuantity,
   decQuantity,
   setFilters,
+  setSizeFilter,
   clearFilters,
   sortLowestPriceFirst,
   sortHighestPriceFirst,

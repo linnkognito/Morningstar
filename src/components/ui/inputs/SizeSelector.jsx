@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { setSizeSelection } from "../../products/productSlice";
+import { setSizeFilter, setSizeSelection } from "../../products/productSlice";
 
 import ButtonTiny from "../buttons/ButtonTiny";
 
@@ -13,9 +13,18 @@ const defaultSizes = [
   { size: "onesize" },
 ];
 
-function SizeSelector({ sizes = defaultSizes, multiSelect = false }) {
+function SizeSelector({
+  sizes = defaultSizes,
+  multiSelect = false,
+  type = "selections",
+}) {
   const dispatch = useDispatch();
-  const sizeSelections = useSelector((state) => state.products.selections.size);
+  // const sizeSelections = useSelector((state) => state.products.selections.size);
+  const sizeSelections = useSelector((state) =>
+    type === "selections"
+      ? state.products.selections.size
+      : state.products.filters.sizes,
+  );
 
   function applyStyles(size) {
     if (!sizeSelections.length) return "bg-pearl";
@@ -25,16 +34,20 @@ function SizeSelector({ sizes = defaultSizes, multiSelect = false }) {
       : "opacity-50 bg-pearl hover:opacity-100";
   }
 
+  function toggleSizeSelection(size) {
+    if (type === "selections")
+      return dispatch(setSizeSelection({ size, isMultiSelect: multiSelect }));
+
+    if (type === "filters")
+      return dispatch(setSizeFilter({ size, isMultiSelect: multiSelect }));
+  }
+
   return (
     <div className="flex items-center justify-between gap-2">
       {sizes.map((sz) => (
         <ButtonTiny
           key={sz.size}
-          onClick={() =>
-            dispatch(
-              setSizeSelection({ size: sz.size, isMultiSelect: multiSelect }),
-            )
-          }
+          onClick={() => toggleSizeSelection(sz.size)}
           className={applyStyles(sz.size)}
         >
           {sz.size}

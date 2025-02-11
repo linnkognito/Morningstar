@@ -12,7 +12,7 @@ function Searchbar() {
       <Icon
         name="search"
         al="search"
-        className="absolute right-3 bg-transparent text-offblack"
+        className="absolute right-3 cursor-pointer bg-transparent text-offblack"
       />
     </div>
   );
