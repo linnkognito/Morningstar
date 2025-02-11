@@ -1,9 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import {
-  // handleColorSelection,
-  handleSelection,
-  // handleSizeSelection,
-} from "../../utils/handleSelections";
+import { handleSelection } from "../../utils/handleSelections";
 
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
@@ -67,7 +63,7 @@ const initialState = {
   selections: {
     size: [],
     color: [],
-    quantity: 0,
+    quantity: 1,
   },
   status: "idle",
 };
@@ -90,7 +86,6 @@ const productsSlice = createSlice({
     },
     setColorSelection: (state, action) => {
       const { color, isMultiSelect } = action.payload;
-
       state.selections.color = handleSelection(
         state.selections.color,
         color,
@@ -103,7 +98,6 @@ const productsSlice = createSlice({
     },
     decQuantity: (state) => {
       if (state.selections.quantity === 1) return;
-
       state.selections.quantity--;
     },
 

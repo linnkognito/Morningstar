@@ -40,7 +40,7 @@ function Products() {
           <RefineMenu />
 
           {/* Product cards */}
-          <div className="grid grid-cols-2 gap-4 px-2 pt-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+          <div className="grid grid-cols-2 gap-3 px-2 pt-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
             {/* Spinner */}
             {status === "loading" && <Spinner />}
 

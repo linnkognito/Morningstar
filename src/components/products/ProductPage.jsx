@@ -2,16 +2,23 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 
-import { clearSelections, fetchProductById } from "./productSlice";
+import {
+  clearSelections,
+  decQuantity,
+  fetchProductById,
+  incQuantity,
+} from "./productSlice";
 
 import Container from "../common/Container";
 import SizeSelector from "../ui/inputs/SizeSelector";
 import ColorSelector from "../ui/inputs/ColorSelector";
 import QuantitySelector from "../ui/inputs/QuantitySelector";
 import Spinner from "../common/Spinner";
+import AddToCartButton from "./menus/AddToCartButton";
 
 function ProductPage() {
   const dispatch = useDispatch();
+  const { quantity } = useSelector((state) => state.products.selections);
   const { id } = useParams();
 
   useEffect(() => {
@@ -55,11 +62,13 @@ function ProductPage() {
               />
               <QuantitySelector
                 text="quantity:"
-                className="rounded-xl bg-aura/50 py-1 text-offblack"
-                // increase={() => dispatch(incQuantity(product))}
-                // decrease={() => dispatch(decQuantity(product))}
+                quantity={quantity}
+                className="rounded-xl bg-aura/50 py-1 text-xl text-offblack"
+                increase={() => dispatch(incQuantity(product))}
+                decrease={() => dispatch(decQuantity(product))}
               />
             </Container>
+            <AddToCartButton product={product} />
           </>
         )}
       </Container>

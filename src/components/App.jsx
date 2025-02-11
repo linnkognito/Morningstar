@@ -6,6 +6,7 @@ import Home from "./home/Home";
 import Error from "./ui/Error";
 import Products from "./products/Products";
 import ProductPage from "./products/ProductPage";
+import { Toaster } from "react-hot-toast";
 
 const router = createBrowserRouter([
   {
@@ -41,5 +42,30 @@ const router = createBrowserRouter([
 ]);
 
 export default function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <RouterProvider router={router} />
+
+      <Toaster
+        toastOptions={{
+          success: {
+            duration: 3000,
+          },
+          error: {
+            duration: 5000,
+          },
+          style: {
+            fontSize: "1.2rem",
+            fontFamily: "Bebas Neue, sans-serif",
+            color: "#0F0F0F",
+            backgroundColor: "rgba(244, 244, 242, 0.8)",
+            backdropFilter: "blur(2px)",
+            border: "2px solid #D19BF3",
+            borderRadius: "1em",
+            boxShadow: "0 0 15px rgba(15,15,15,0.1)",
+          },
+        }}
+      />
+    </>
+  );
 }

@@ -1,57 +1,28 @@
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import toast, { Toaster } from "react-hot-toast";
-
-import { useDispatch } from "react-redux";
-import { addItem } from "../cart/cartSlice";
 
 import RefineDropdown from "./menus/RefineDropdown";
 import SizeSelector from "../ui/inputs/SizeSelector";
 import ColorSelector from "../ui/inputs/ColorSelector";
-import ActionButton from "../ui/buttons/ActionButton";
 import Icon from "../common/Icon";
+import AddToCartButton from "./menus/AddToCartButton";
 
 function ProductCard({ product }) {
-  const { name, image, price, sizes, colors, _id: id } = product;
-  const dispatch = useDispatch();
+  const { _id: id, sizes, colors } = product;
   const navigator = useNavigate();
   const productBar = useRef(null);
 
   const [showMenu, setShowMenu] = useState(false);
   const [saveButtonHover, setSaveButtonHover] = useState(false);
-  const [sizeSelection, setSizeSelection] = useState(null);
-  const [colorSelection, setColorSelection] = useState(null);
 
   const optimizedImage = product.image.replace(
     "/upload/",
     "/upload/h_380,f_auto,q_auto/",
   );
 
-  function addToCart() {
-    if (!sizeSelection || !colorSelection)
-      return toast.error("Please select a size & color before adding to cart.");
-
-    const newCartItem = {
-      id: id,
-      name: name,
-      image: image,
-      price: price,
-      size: sizeSelection,
-      color: colorSelection,
-      quantity: 1,
-    };
-
-    dispatch(addItem(newCartItem));
-
-    setSizeSelection(null);
-    setColorSelection(null);
-
-    toast.success(`${name} added to cart!`);
-  }
-
   return (
-    <div className="relative flex min-h-[200px] max-w-[250px] cursor-pointer flex-col rounded bg-pearl shadow-sm shadow-offblack">
+    <div className="relative flex h-full min-h-[200px] w-full max-w-[285px] cursor-pointer flex-col justify-self-center rounded bg-pearl shadow-sm shadow-offblack">
       {/* Heart (save product) */}
       <Icon
         name={saveButtonHover ? "heart_plus" : "favorite"}
@@ -101,50 +72,13 @@ function ProductCard({ product }) {
           style={{ bottom: `${productBar.current.offsetHeight}px` }}
         >
           <RefineDropdown className="rounded-b-none">
-            <SizeSelector
-              sizes={sizes}
-              sizeSelection={sizeSelection}
-              setSizeSelection={setSizeSelection}
-            />
-            <ColorSelector
-              colors={colors}
-              colorSelection={colorSelection}
-              setColorSelection={setColorSelection}
-              height="h-[1.5em]"
-            />
+            <SizeSelector sizes={sizes} />
+            <ColorSelector colors={colors} height="h-[1.5em]" />
 
-            <ActionButton
-              className="gap-2 pt-0"
-              fontSize="text-xl"
-              onClick={addToCart}
-            >
-              <Icon name="shopping_basket" />
-              Add to cart
-            </ActionButton>
+            <AddToCartButton product={product} />
           </RefineDropdown>
         </div>
       )}
-
-      <Toaster
-        toastOptions={{
-          success: {
-            duration: 3000,
-          },
-          error: {
-            duration: 5000,
-          },
-          style: {
-            fontSize: "1.2rem",
-            fontFamily: "Bebas Neue, sans-serif",
-            color: "#0F0F0F",
-            backgroundColor: "rgba(244, 244, 242, 0.8)",
-            backdropFilter: "blur(2px)",
-            border: "2px solid #D19BF3",
-            borderRadius: "1em",
-            boxShadow: "0 0 15px rgba(15,15,15,0.1)",
-          },
-        }}
-      />
     </div>
   );
 }
