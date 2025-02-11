@@ -25,7 +25,7 @@ function RefineMenu() {
         {/* Sort dropdown */}
         {isOpen === "sort" && (
           <div className="absolute z-[100] w-full">
-            <SortDropdown />
+            <SortDropdown setIsOpen={setIsOpen} />
           </div>
         )}
       </div>

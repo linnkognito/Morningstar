@@ -33,11 +33,13 @@ function ColorSelector({
   }
 
   return (
-    <div className="flex w-full gap-3">
+    <div
+      className={`w-full gap-2 ${type === "filters" ? "grid grid-cols-8" : "flex"}`}
+    >
       {colors.map((color) => (
         <button
           key={color}
-          className={`${color} ${height} ${className} grow rounded shadow-sm shadow-offblack transition-transform duration-300 ease-out will-change-transform ${applyStyles(color)}`}
+          className={`${color} ${height} ${className} w-full rounded shadow-sm shadow-offblack transition-transform duration-300 ease-out will-change-transform ${applyStyles(color)}`}
           onClick={() => toggleColorSelection(color)}
           disabled={disabled}
         ></button>

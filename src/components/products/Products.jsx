@@ -30,7 +30,7 @@ function Products() {
             className="ml-auto w-full pr-10 font-bebas text-6xl uppercase tracking-widest sm:pl-16"
             style={{ textShadow: "2px 2px 4px rgba(0, 0, 0, 0.3)" }}
           >
-            {categoryName}
+            {categoryName || "All products"}
           </h2>
         </div>
 

@@ -19,6 +19,7 @@ export const fetchAllProducts = createAsyncThunk(
     }
   },
 );
+
 export const fetchProductsByCategory = createAsyncThunk(
   "products/fetchByCategory",
   async (categoryName, { rejectWithValue }) => {
@@ -152,6 +153,7 @@ const productsSlice = createSlice({
       })
       .addCase(fetchAllProducts.fulfilled, (state, action) => {
         state.products = action.payload;
+        state.currentCategory = null;
         state.status = "idle";
       })
       .addCase(fetchAllProducts.rejected, (state, action) => {
@@ -186,8 +188,6 @@ const productsSlice = createSlice({
 });
 
 export const getProducts = (state) => state.products.products;
-
-export const getCurrentCategory = (state) => state.products.currentCategory;
 
 export const getFilteredProducts = (state) => {
   const { products, filters } = state.products;

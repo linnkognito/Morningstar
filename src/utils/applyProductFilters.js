@@ -10,7 +10,9 @@ export function applyProductFilters(products, filters) {
         : true,
     )
     .filter((product) =>
-      filterColors.length ? filterColors.includes(product.color) : true,
+      filterColors.length
+        ? product.colors.some((color) => filterColors.includes(color))
+        : true,
     )
     .filter((product) => product.price <= maxPrice);
 }

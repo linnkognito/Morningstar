@@ -49,7 +49,7 @@ function ProductCard({ product }) {
       >
         <div className="flex h-full flex-col pt-2">
           <h2
-            className="font-bebas text-xl tracking-widest hover:bg-pearl/50 xl:text-[1.35rem]"
+            className="font-bebas text-xl tracking-widest hover:bg-zest/70 xl:text-[1.35rem]"
             onClick={() => navigator(`/products/${id}`)}
           >
             {product.name}

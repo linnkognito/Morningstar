@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   applyFilters,
   clearFilters,
+  fetchAllProducts,
   fetchProductsByCategory,
   setMaxPriceFilter,
 } from "../productSlice";
@@ -11,17 +12,28 @@ import SizeSelector from "../../ui/inputs/SizeSelector";
 import RangeSelector from "../../ui/inputs/RangeSelector";
 import ColorSelector from "../../ui/inputs/ColorSelector";
 import Button from "../../ui/buttons/Button";
-
-const colorsArr = ["bg-ember", "bg-zest", "bg-aura", "bg-pearl", "bg-offblack"];
+import { useMemo } from "react";
 
 function FilterDropdown({ setIsOpen }) {
   const dispatch = useDispatch();
   const { maxPrice } = useSelector((state) => state.products.filters);
-  const { currentCategory } = useSelector((state) => state.products);
+  const { products, currentCategory } = useSelector((state) => state.products);
+
+  const availableColors = useMemo(() => {
+    const colorSet = new Set();
+
+    products.forEach((product) => {
+      product.colors.forEach((color) => colorSet.add(color));
+    });
+
+    return Array.from(colorSet);
+  }, [products]);
 
   function handleClearFilters() {
     dispatch(clearFilters());
-    dispatch(fetchProductsByCategory(currentCategory));
+    currentCategory
+      ? dispatch(fetchProductsByCategory(currentCategory))
+      : dispatch(fetchAllProducts());
     setIsOpen(false);
   }
 
@@ -39,7 +51,11 @@ function FilterDropdown({ setIsOpen }) {
         onChange={(e) => dispatch(setMaxPriceFilter(+e.target.value))}
       />
 
-      <ColorSelector type="filters" colors={colorsArr} multiSelect={true} />
+      <ColorSelector
+        type="filters"
+        colors={availableColors}
+        multiSelect={true}
+      />
 
       <div className="flex gap-4 px-2 pt-2">
         <Button
