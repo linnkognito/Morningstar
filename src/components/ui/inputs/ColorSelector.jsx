@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { setColorSelection } from "../../products/productSlice";
+import { setColorFilter, setColorSelection } from "../../products/productSlice";
 
 function ColorSelector({
   colors = [],
@@ -7,10 +7,13 @@ function ColorSelector({
   className = "",
   multiSelect = false,
   disabled = false,
+  type = "selections",
 }) {
   const dispatch = useDispatch();
-  const colorSelections = useSelector(
-    (state) => state.products.selections.color,
+  const colorSelections = useSelector((state) =>
+    type === "selections"
+      ? state.products.selections.color
+      : state.products.filters.colors,
   );
 
   function applyStyles(color) {
@@ -21,15 +24,21 @@ function ColorSelector({
       : "opacity-30 hover:opacity-100 hover:scale-[1.01]";
   }
 
+  function toggleColorSelection(color) {
+    if (type === "selections")
+      return dispatch(setColorSelection({ color, isMultiSelect: multiSelect }));
+
+    if (type === "filters")
+      return dispatch(setColorFilter({ color, isMultiSelect: multiSelect }));
+  }
+
   return (
     <div className="flex w-full gap-3">
       {colors.map((color) => (
         <button
           key={color}
-          onClick={() =>
-            dispatch(setColorSelection({ color, isMultiSelect: multiSelect }))
-          }
           className={`${color} ${height} ${className} grow rounded shadow-sm shadow-offblack transition-transform duration-300 ease-out will-change-transform ${applyStyles(color)}`}
+          onClick={() => toggleColorSelection(color)}
           disabled={disabled}
         ></button>
       ))}

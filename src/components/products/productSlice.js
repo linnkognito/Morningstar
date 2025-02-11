@@ -101,13 +101,9 @@ const productsSlice = createSlice({
       state.selections.quantity--;
     },
 
-    // Sorting & Filters
-    setFilters: (state, action) => {
-      const { maxPrice } = action.payload;
-
-      state.filters.sizes = state.selections.size;
-      state.filters.maxPrice = maxPrice;
-      state.filters.colors = state.selections.color;
+    // Filters
+    applyFilters: (state) => {
+      state.products = filterProducts(state.products);
     },
     setSizeFilter: (state, action) => {
       const { size, isMultiSelect } = action.payload;
@@ -118,17 +114,33 @@ const productsSlice = createSlice({
         isMultiSelect,
       );
     },
+    setMaxPriceFilter: (state, action) => {
+      state.filters.maxPrice = action.payload;
+    },
+    setColorFilter: (state, action) => {
+      const { color, isMultiSelect } = action.payload;
+
+      state.filters.colors = handleSelection(
+        state.filters.colors,
+        color,
+        isMultiSelect,
+      );
+    },
     clearFilters: (state) => {
       state.filters = initialState.filters;
     },
-    clearCurrentProduct: (state) => {
-      state.currentProduct = null;
-    },
+
+    // Sorting
     sortLowestPriceFirst: (state) => {
       state.products.sort((a, b) => a.price - b.price);
     },
     sortHighestPriceFirst: (state) => {
       state.products.sort((a, b) => b.price - a.price);
+    },
+
+    // Current product
+    clearCurrentProduct: (state) => {
+      state.currentProduct = null;
     },
   },
   extraReducers: (builder) => {
@@ -195,8 +207,10 @@ export const {
   setColorSelection,
   incQuantity,
   decQuantity,
-  setFilters,
+  applyFilters,
   setSizeFilter,
+  setColorFilter,
+  setMaxPriceFilter,
   clearFilters,
   sortLowestPriceFirst,
   sortHighestPriceFirst,
