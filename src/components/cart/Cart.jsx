@@ -2,12 +2,11 @@ import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
 
 import { getCartItems, getTotalPrice } from "./cartSlice";
+import cartBgImage from "../../images/HER_buttonup_2.jpg";
 
 import CartItem from "./CartItem";
 import Icon from "../common/Icon";
 import ActionButton from "../ui/buttons/ActionButton";
-
-import cartBgImage from "../../images/HER_buttonup_2.jpg";
 
 function Cart() {
   const navigate = useNavigate();

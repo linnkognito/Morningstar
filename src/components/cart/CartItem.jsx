@@ -70,8 +70,8 @@ function CartItem({ item }) {
           quantity={item.quantity}
           text="Quantity:"
           className="w-full rounded-xl bg-mint/80 px-3 py-1 tracking-wide"
-          increase={() => dispatch(incQuantity(item.id))}
-          decrease={() => dispatch(decQuantity(item.id))}
+          increase={() => dispatch(incQuantity(item))}
+          decrease={() => dispatch(decQuantity(item))}
         />
       </div>
 
@@ -81,7 +81,7 @@ function CartItem({ item }) {
         className="h-fit origin-center cursor-pointer rounded duration-300 ease-out will-change-[scale,color] hover:scale-[1.2] hover:text-ember"
         onMouseEnter={() => setDeleteIsHovered(true)}
         onMouseLeave={() => setDeleteIsHovered(false)}
-        onClick={() => dispatch(deleteItem(item.id))}
+        onClick={() => dispatch(deleteItem(item))}
       />
     </div>
   );

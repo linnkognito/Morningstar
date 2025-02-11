@@ -23,8 +23,8 @@ function AddToCartButton({ product }) {
       name: name,
       image: image,
       price: price,
-      size: size,
-      color: color,
+      size: size[0],
+      color: color[0],
       quantity: quantity || 1,
     };
 

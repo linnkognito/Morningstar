@@ -89,7 +89,6 @@ function ProductCard({ product, setProductCardMenu, currentMenu }) {
           <RefineDropdown className="rounded-b-none">
             <SizeSelector sizes={sizes} className="" />
             <ColorSelector colors={colors} height="h-[1.5em]" />
-
             <AddToCartButton product={product} />
           </RefineDropdown>
         </div>
