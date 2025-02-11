@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { handleSizeSelection } from "../../utils/handleSizeSelection";
+import { handleSizeSelection } from "../../utils/handleSelections";
 
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 

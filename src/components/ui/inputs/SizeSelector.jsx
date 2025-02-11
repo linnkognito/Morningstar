@@ -20,29 +20,24 @@ function SizeSelector({ sizes = defaultSizes, multiSelect = false }) {
   function applyStyles(size) {
     if (!sizeSelections.length) return "bg-pearl";
 
-    if (multiSelect)
-      return sizeSelections.includes(size)
-        ? "scale-105 bg-aura"
-        : "opacity-50 bg-pearl hover:opacity-100";
-
-    return sizeSelections[0] === size
+    return sizeSelections.includes(size) || sizeSelections[0] === size
       ? "scale-105 bg-aura"
       : "opacity-50 bg-pearl hover:opacity-100";
   }
 
   return (
     <div className="flex items-center justify-between gap-2">
-      {sizes.map((size) => (
+      {sizes.map((sz) => (
         <ButtonTiny
-          key={size.size}
+          key={sz.size}
           onClick={() =>
             dispatch(
-              setSizeSelection({ size: size.size, isMultiselect: multiSelect }),
+              setSizeSelection({ size: sz.size, isMultiselect: multiSelect }),
             )
           }
-          className={applyStyles(size.size)}
+          className={applyStyles(sz.size)}
         >
-          {size.size}
+          {sz.size}
         </ButtonTiny>
       ))}
     </div>
