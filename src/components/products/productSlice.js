@@ -1,5 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { handleSizeSelection } from "../../utils/handleSelections";
+import {
+  // handleColorSelection,
+  handleSelection,
+  // handleSizeSelection,
+} from "../../utils/handleSelections";
 
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
@@ -62,7 +66,7 @@ const initialState = {
   currentProduct: null,
   selections: {
     size: [],
-    color: null,
+    color: [],
     quantity: 0,
   },
   status: "idle",
@@ -73,12 +77,24 @@ const productsSlice = createSlice({
   initialState,
   reducers: {
     // Selections
+    clearSelections: (state) => {
+      state.selections = { size: [], color: [], quantity: 0 };
+    },
     setSizeSelection: (state, action) => {
-      const { size, isMultiselect } = action.payload;
-      state.selections.size = handleSizeSelection(
+      const { size, isMultiSelect } = action.payload;
+      state.selections.size = handleSelection(
         state.selections.size,
         size,
-        isMultiselect,
+        isMultiSelect,
+      );
+    },
+    setColorSelection: (state, action) => {
+      const { color, isMultiSelect } = action.payload;
+
+      state.selections.color = handleSelection(
+        state.selections.color,
+        color,
+        isMultiSelect,
       );
     },
 
@@ -167,7 +183,9 @@ export const getFilteredProducts = (state) => {
 };
 
 export const {
+  clearSelections,
   setSizeSelection,
+  setColorSelection,
   incQuantity,
   decQuantity,
   setFilters,

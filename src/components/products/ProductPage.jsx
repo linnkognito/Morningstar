@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 
-import { fetchProductById } from "./productSlice";
+import { clearSelections, fetchProductById } from "./productSlice";
 
 import Container from "../common/Container";
 import SizeSelector from "../ui/inputs/SizeSelector";
@@ -16,6 +16,8 @@ function ProductPage() {
 
   useEffect(() => {
     if (id) dispatch(fetchProductById(id));
+
+    return () => dispatch(clearSelections());
   }, [dispatch, id]);
 
   const { currentProduct: product, status } = useSelector(
@@ -42,9 +44,15 @@ function ProductPage() {
               <h2 className="text-3xl text-offblack">{product.name}</h2>
               <h3 className="text-2xl text-offblack">${product.price}</h3>
             </div>
+
+            {/* Selections */}
             <Container className="w-full px-4 py-4">
-              <SizeSelector sizes={product.sizes} multiSelect={true} />
-              <ColorSelector colors={product.colors} />
+              <SizeSelector sizes={product.sizes} multiSelect={false} />
+              <ColorSelector
+                colors={product.colors}
+                multiSelect={false}
+                className="px-6"
+              />
               <QuantitySelector
                 text="quantity:"
                 className="rounded-xl bg-aura/50 py-1 text-offblack"

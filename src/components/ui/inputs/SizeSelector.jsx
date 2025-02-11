@@ -32,7 +32,7 @@ function SizeSelector({ sizes = defaultSizes, multiSelect = false }) {
           key={sz.size}
           onClick={() =>
             dispatch(
-              setSizeSelection({ size: sz.size, isMultiselect: multiSelect }),
+              setSizeSelection({ size: sz.size, isMultiSelect: multiSelect }),
             )
           }
           className={applyStyles(sz.size)}

@@ -1,11 +1,11 @@
-export function handleSizeSelection(current, size, isMultiselect) {
-  if (!current.length) return [size];
+export function handleSelection(current, selection, isMultiSelect) {
+  if (!current.length) return [selection];
 
-  if (!isMultiselect) return current.includes(size) ? [] : [size];
+  if (!isMultiSelect) return current.includes(selection) ? [] : [selection];
 
-  if (isMultiselect) {
-    return current.includes(size)
-      ? current.filter((currentSize) => currentSize !== size)
-      : [...current, size];
+  if (isMultiSelect) {
+    return current.includes(selection)
+      ? current.filter((currentSelection) => currentSelection !== selection)
+      : [...current, selection];
   }
 }
