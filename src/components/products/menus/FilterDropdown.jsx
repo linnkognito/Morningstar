@@ -43,8 +43,12 @@ function FilterDropdown({ setIsOpen }) {
   }
 
   return (
-    <RefineDropdown>
-      <SizeSelector type="filters" multiSelect={true} />
+    <RefineDropdown className="flex">
+      <SizeSelector
+        type="filters"
+        multiSelect={true}
+        className="sm:justify-between"
+      />
 
       <RangeSelector
         value={maxPrice}
@@ -57,7 +61,7 @@ function FilterDropdown({ setIsOpen }) {
         multiSelect={true}
       />
 
-      <div className="flex gap-4 px-2 pt-2">
+      <div className="flex w-full gap-4 px-2 pt-2">
         <Button
           type="filter"
           className="will-change bg-sea duration-300 ease-out hover:scale-105"

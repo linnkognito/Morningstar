@@ -17,6 +17,7 @@ function SizeSelector({
   sizes = defaultSizes,
   multiSelect = false,
   type = "selections",
+  className = "",
 }) {
   const dispatch = useDispatch();
 
@@ -47,7 +48,9 @@ function SizeSelector({
   }
 
   return (
-    <div className="flex items-center justify-between gap-2">
+    <div
+      className={`${className} flex max-w-full flex-wrap items-center justify-start gap-2`}
+    >
       {sizes.map((sz) => (
         <ButtonTiny
           key={sz.size}

@@ -8,28 +8,38 @@ import ColorSelector from "../ui/inputs/ColorSelector";
 import Icon from "../common/Icon";
 import AddToCartButton from "./menus/AddToCartButton";
 
-function ProductCard({ product }) {
+function ProductCard({ product, setProductCardMenu, currentMenu }) {
   const { _id: id, sizes, colors } = product;
   const navigator = useNavigate();
   const productBar = useRef(null);
 
-  const [showMenu, setShowMenu] = useState(false);
-  const [saveButtonHover, setSaveButtonHover] = useState(false);
-
+  const [heartButtonHover, setHeartButtonHover] = useState(false);
+  const [savedProduct, setSavedProduct] = useState(false);
   const optimizedImage = product.image.replace(
     "/upload/",
     "/upload/h_380,f_auto,q_auto/",
   );
 
+  function handleMenuToggle(id) {
+    currentMenu === id ? setProductCardMenu(null) : setProductCardMenu(id);
+  }
+
   return (
     <div className="relative flex h-full min-h-[200px] w-full max-w-[285px] cursor-pointer flex-col justify-self-center rounded bg-pearl shadow-sm shadow-offblack">
       {/* Heart (save product) */}
       <Icon
-        name={saveButtonHover ? "heart_plus" : "favorite"}
-        onMouseEnter={() => setSaveButtonHover(true)}
-        onMouseLeave={() => setSaveButtonHover(false)}
-        className="border-red absolute right-0 pr-2 pt-0.5 text-pearl"
+        name={
+          savedProduct
+            ? "heart_check"
+            : heartButtonHover
+              ? "heart_plus"
+              : "favorite"
+        }
+        onMouseEnter={() => setHeartButtonHover(true)}
+        onMouseLeave={() => setHeartButtonHover(false)}
+        className={`absolute right-0 pr-2 pt-0.5 ${savedProduct ? "text-zest" : "text-pearl"}`}
         style={{ textShadow: "1px 1px 1px rgba(0, 0, 0, 1)" }}
+        onClick={() => setSavedProduct((saved) => !saved)}
       />
 
       {/* Image */}
@@ -60,20 +70,20 @@ function ProductCard({ product }) {
         </div>
         <button
           className="font-base flex h-full w-[50px] min-w-[50px] items-center justify-center font-bebas text-6xl transition-transform duration-300 ease-out will-change-transform hover:scale-110 hover:bg-pearl/50"
-          onClick={() => setShowMenu((show) => !show)}
+          onClick={() => handleMenuToggle(id)}
         >
-          <span>{showMenu ? "-" : "+"}</span>
+          <span>{currentMenu === id ? "-" : "+"}</span>
         </button>
       </div>
 
       {/* Size/Color selection menu */}
-      {showMenu && (
+      {currentMenu === id && (
         <div
           className="absolute flex w-full flex-col"
           style={{ bottom: `${productBar.current.offsetHeight}px` }}
         >
           <RefineDropdown className="rounded-b-none">
-            <SizeSelector sizes={sizes} />
+            <SizeSelector sizes={sizes} className="" />
             <ColorSelector colors={colors} height="h-[1.5em]" />
 
             <AddToCartButton product={product} />

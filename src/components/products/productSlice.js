@@ -19,7 +19,6 @@ export const fetchAllProducts = createAsyncThunk(
     }
   },
 );
-
 export const fetchProductsByCategory = createAsyncThunk(
   "products/fetchByCategory",
   async (categoryName, { rejectWithValue }) => {
