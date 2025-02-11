@@ -11,20 +11,22 @@ import SizeSelector from "../../ui/inputs/SizeSelector";
 import RangeSelector from "../../ui/inputs/RangeSelector";
 import ColorSelector from "../../ui/inputs/ColorSelector";
 import Button from "../../ui/buttons/Button";
-import { useState } from "react";
 
 const colorsArr = ["bg-ember", "bg-zest", "bg-aura", "bg-pearl", "bg-offblack"];
 
-function FilterDropdown() {
+function FilterDropdown({ setIsOpen }) {
   const dispatch = useDispatch();
   const { maxPrice } = useSelector((state) => state.products.filters);
   const { currentCategory } = useSelector((state) => state.products);
 
-  const [isOpen, setIsOpen] = useState(false);
-
   function handleClearFilters() {
     dispatch(clearFilters());
     dispatch(fetchProductsByCategory(currentCategory));
+    setIsOpen(false);
+  }
+
+  function handleApplyFilters() {
+    dispatch(applyFilters());
     setIsOpen(false);
   }
 
@@ -50,7 +52,7 @@ function FilterDropdown() {
         <Button
           type="filter"
           className="will-change bg-pearl duration-300 ease-out hover:scale-105"
-          onClick={() => dispatch(applyFilters())}
+          onClick={handleApplyFilters}
         >
           Apply
         </Button>

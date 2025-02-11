@@ -42,7 +42,7 @@ function RefineMenu() {
         {/* Filter dropdown */}
         {isOpen === "filter" && (
           <div className="absolute z-[100] w-full">
-            <FilterDropdown handleClick={handleClick} />
+            <FilterDropdown setIsOpen={setIsOpen} handleClick={handleClick} />
           </div>
         )}
       </div>
