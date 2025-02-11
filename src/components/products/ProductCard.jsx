@@ -1,6 +1,8 @@
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { useDispatch } from "react-redux";
+import { clearSelections } from "./productSlice";
 
 import RefineDropdown from "./menus/RefineDropdown";
 import SizeSelector from "../ui/inputs/SizeSelector";
@@ -10,6 +12,7 @@ import AddToCartButton from "./menus/AddToCartButton";
 
 function ProductCard({ product, setProductCardMenu, currentMenu }) {
   const { _id: id, sizes, colors } = product;
+  const dispatch = useDispatch();
   const navigator = useNavigate();
   const productBar = useRef(null);
 
@@ -22,6 +25,7 @@ function ProductCard({ product, setProductCardMenu, currentMenu }) {
 
   function handleMenuToggle(id) {
     currentMenu === id ? setProductCardMenu(null) : setProductCardMenu(id);
+    dispatch(clearSelections());
   }
 
   return (
