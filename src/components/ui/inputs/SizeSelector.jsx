@@ -19,7 +19,7 @@ function SizeSelector({
   type = "selections",
 }) {
   const dispatch = useDispatch();
-  // const sizeSelections = useSelector((state) => state.products.selections.size);
+
   const sizeSelections = useSelector((state) =>
     type === "selections"
       ? state.products.selections.size
@@ -27,6 +27,8 @@ function SizeSelector({
   );
 
   function applyStyles(size) {
+    size = size.toUpperCase();
+
     if (!sizeSelections.length) return "bg-pearl";
 
     return sizeSelections.includes(size) || sizeSelections[0] === size
@@ -35,6 +37,8 @@ function SizeSelector({
   }
 
   function toggleSizeSelection(size) {
+    size = size.toUpperCase();
+
     if (type === "selections")
       return dispatch(setSizeSelection({ size, isMultiSelect: multiSelect }));
 

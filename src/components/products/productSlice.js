@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { handleSelection } from "../../utils/handleSelections";
+import { applyProductFilters } from "../../utils/applyProductFilters";
 
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
@@ -103,7 +104,7 @@ const productsSlice = createSlice({
 
     // Filters
     applyFilters: (state) => {
-      state.products = filterProducts(state.products);
+      state.products = applyProductFilters(state.products, state.filters);
     },
     setSizeFilter: (state, action) => {
       const { size, isMultiSelect } = action.payload;
