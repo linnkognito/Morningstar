@@ -83,6 +83,7 @@ const cartSlice = createSlice({
       const item = findItem(state, action.payload);
 
       item.quantity--;
+      item.maxQuantity++;
       state.price -= item.price;
       state.totalPrice = state.price - state.discount;
 
