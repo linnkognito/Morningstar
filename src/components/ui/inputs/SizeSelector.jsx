@@ -17,6 +17,7 @@ function SizeSelector({
   sizes = defaultSizes,
   multiSelect = false,
   type = "selections",
+  buttonColor = "bg-pearl",
   className = "",
 }) {
   const dispatch = useDispatch();
@@ -49,13 +50,14 @@ function SizeSelector({
 
   return (
     <div
-      className={`${className} flex max-w-full flex-wrap items-center justify-start gap-2`}
+      className={`${className} grid-cols-auto-fit grid w-full max-w-full items-center justify-start gap-2 xl:grid-cols-6 ${sizes.length === 1 ? "grid-cols-1" : "grid-cols-3"}`}
     >
       {sizes.map((sz) => (
         <ButtonTiny
           key={sz.size}
+          color={buttonColor}
           onClick={() => toggleSizeSelection(sz.size)}
-          className={`${applyStyles(sz.size)} ${type === "productPage" ? "grow" : "grow-0"}`}
+          className={`text-base ${applyStyles(sz.size)} `}
         >
           {sz.size}
         </ButtonTiny>

@@ -74,16 +74,16 @@ function ProductCard({ product, setProductCardMenu, currentMenu }) {
         </button>
       </div>
 
-      {/* Size/Color selection menu */}
+      {/* Selection menu */}
       {currentMenu === id && (
         <div
           className="absolute flex w-full flex-col"
           style={{ bottom: `${productBar.current.offsetHeight}px` }}
         >
           <RefineDropdown className="rounded-b-none">
-            <SizeSelector sizes={sizes} className="" />
+            <SizeSelector sizes={sizes} />
             <ColorSelector colors={colors} height="h-[1.5em]" />
-            <AddToCartButton product={product} />
+            <AddToCartButton product={product} bgColor="bg-zest/70" />
           </RefineDropdown>
         </div>
       )}
