@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { useDispatch } from "react-redux";
@@ -7,16 +7,13 @@ import { clearSelections } from "./productSlice";
 import RefineDropdown from "./menus/RefineDropdown";
 import SizeSelector from "../ui/inputs/SizeSelector";
 import ColorSelector from "../ui/inputs/ColorSelector";
-import Icon from "../common/Icon";
 import AddToCartButton from "../cart/AddToCartButton";
 import HeartButton from "./HeartButton";
-import { set } from "@cloudinary/url-gen/actions/variable";
 
 function ProductCard({ product, setProductCardMenu, currentMenu }) {
   const { _id: id, sizes, colors } = product;
   const dispatch = useDispatch();
   const navigator = useNavigate();
-  const productBar = useRef(null);
 
   const [heartButtonHover, setHeartButtonHover] = useState(false);
   const [savedProduct, setSavedProduct] = useState(false);
@@ -24,6 +21,22 @@ function ProductCard({ product, setProductCardMenu, currentMenu }) {
     "/upload/",
     "/upload/h_380,f_auto,q_auto/",
   );
+
+  const productBar = useRef(null);
+  const [productBarHeight, setProductBarHeight] = useState(0);
+
+  useEffect(() => {
+    if (!productBar.current) return;
+
+    const observer = new ResizeObserver(() => {
+      const height = productBar.current.offsetHeight;
+      setProductBarHeight(height);
+    });
+
+    observer.observe(productBar.current);
+
+    return () => observer.disconnect();
+  }, []);
 
   function handleMenuToggle(id) {
     currentMenu === id ? setProductCardMenu(null) : setProductCardMenu(id);
@@ -53,7 +66,7 @@ function ProductCard({ product, setProductCardMenu, currentMenu }) {
       {/* Product bar */}
       <div
         ref={productBar}
-        className="flex w-full grow items-center justify-between overflow-hidden rounded-b bg-aura/80 pl-2"
+        className="relative flex min-h-[84px] w-full flex-1 items-center justify-between overflow-hidden rounded-b bg-aura/80 pl-2"
       >
         <div className="flex h-full flex-col pt-2">
           <h2
@@ -78,7 +91,8 @@ function ProductCard({ product, setProductCardMenu, currentMenu }) {
       {currentMenu === id && (
         <div
           className="absolute flex w-full flex-col"
-          style={{ bottom: `${productBar.current.offsetHeight}px` }}
+          style={{ bottom: `${productBarHeight}px` }}
+          // style={{ bottom: `${productBar.current.offsetHeight}px` }}
         >
           <RefineDropdown className="rounded-b-none">
             <SizeSelector sizes={sizes} />
