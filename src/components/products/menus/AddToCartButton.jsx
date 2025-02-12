@@ -26,7 +26,13 @@ function AddToCartButton({ product }) {
       size: size[0],
       color: color[0],
       quantity: quantity || 1,
+      productData: product,
     };
+
+    const sizeData = product.sizes.find((sz) => sz.size === newCartItem.size);
+
+    if (!sizeData || sizeData.quantity === 0)
+      return toast.error("Sorry! No more items available in this size.");
 
     dispatch(addItem(newCartItem));
     dispatch(clearSelections());

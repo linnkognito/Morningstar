@@ -18,7 +18,6 @@ function updateLocalStorage(state, method, timestamp = false) {
     if (timestamp) localStorage.removeItem("cartTimestamp");
   }
 }
-
 function findItem(state, product) {
   return (
     state.cart.find(
@@ -34,15 +33,30 @@ const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
+    // Accepts: newCartItem object
     addItem(state, action) {
-      const product = action.payload;
-      const existingItem = findItem(state, product);
+      const newCartItem = action.payload;
+      const existingItem = findItem(state, newCartItem);
 
-      existingItem
-        ? (existingItem.quantity += 1)
-        : state.cart.push({ ...product });
+      const { productData } = newCartItem;
+      const sizeData = productData.sizes.find(
+        (sz) => sz.size === newCartItem.size,
+      );
 
-      state.price += product.price;
+      if (!sizeData || sizeData.quantity === 0) return; // No stock
+
+      if (existingItem) {
+        if (existingItem.maxQuantity === 0) return;
+
+        existingItem.quantity += 1;
+        existingItem.maxQuantity -= 1;
+      } else {
+        const maxQuantity = sizeData.quantity - newCartItem.quantity;
+        state.cart.push({ ...newCartItem, maxQuantity });
+      }
+
+      // Update price
+      state.price += newCartItem.price;
       state.totalPrice = state.price - state.discount;
 
       updateLocalStorage(state, "set", true);
@@ -53,20 +67,18 @@ const cartSlice = createSlice({
       state.cart = state.cart.filter((item) => item !== itemToDelete);
       updateLocalStorage(state, "set");
     },
-
     incQuantity(state, action) {
       const item = findItem(state, action.payload);
 
-      if (item.quantity === item.maxQuantity)
-        return alert("No more items available in this size");
+      if (!item || item.maxQuantity === 0) return;
 
       item.quantity++;
+      item.maxQuantity--;
       state.price += item.price;
       state.totalPrice = state.price - state.discount;
 
       updateLocalStorage(state, "set");
     },
-
     decQuantity(state, action) {
       const item = findItem(state, action.payload);
 
@@ -78,7 +90,6 @@ const cartSlice = createSlice({
 
       updateLocalStorage(state, "set");
     },
-
     clearCart(state) {
       state.cart = [];
 

@@ -6,6 +6,7 @@ import ColorSelector from "../ui/inputs/ColorSelector";
 import { useDispatch } from "react-redux";
 import { decQuantity, deleteItem, incQuantity } from "./cartSlice";
 import { useNavigate } from "react-router";
+// import { decStockCount } from "../products/productSlice";
 
 function CartItem({ item }) {
   const dispatch = useDispatch();
@@ -70,7 +71,9 @@ function CartItem({ item }) {
           quantity={item.quantity}
           text="Quantity:"
           className="w-full rounded-xl bg-mint/80 px-3 py-1 tracking-wide"
-          increase={() => dispatch(incQuantity(item))}
+          increase={() => {
+            dispatch(incQuantity(item));
+          }}
           decrease={() => dispatch(decQuantity(item))}
         />
       </div>
