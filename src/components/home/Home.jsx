@@ -12,7 +12,7 @@ function Categories() {
   const imageNew = optimizeImage("HER_bikini_apdjt3");
 
   return (
-    <section className="mx-auto flex size-full h-full flex-col gap-1 px-1 pt-1 md:flex-row md:pt-0">
+    <section className="mx-auto flex h-full w-full flex-col gap-1 overflow-y-hidden px-1 py-2 md:flex-row md:pt-0">
       <CategoryCard
         image={imageHer}
         color="bg-ember"
@@ -37,7 +37,7 @@ function Categories() {
         color="bg-zest"
         hoverColor="bg-moss/50"
         title="uni"
-        className="object-[50%_30%]"
+        className="object-[60%_30%]"
         onClick={() => navigate("products/category/unisex")}
       />
 

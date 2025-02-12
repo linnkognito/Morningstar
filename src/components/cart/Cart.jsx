@@ -2,11 +2,11 @@ import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
 
 import { getCartItems, getTotalPrice } from "./cartSlice";
-import cartBgImage from "../../images/HER_buttonup_2.jpg";
 
 import CartItem from "./CartItem";
 import Icon from "../common/Icon";
 import ActionButton from "../ui/buttons/ActionButton";
+import Container from "../common/Container";
 
 function Cart() {
   const navigate = useNavigate();
@@ -16,10 +16,7 @@ function Cart() {
   const cartIsEmpty = total === 0;
 
   return (
-    <div
-      className="mx-auto h-full origin-center bg-cover bg-center p-4 backdrop-blur-xl"
-      style={{ backgroundImage: `url(${cartBgImage})` }}
-    >
+    <div className="mx-auto h-full origin-center bg-gradient-to-r from-aura/60 via-mint/40 to-zest/30 bg-cover bg-center p-4 backdrop-blur-xl">
       {/* Product list */}
       <div className="mx-auto mt-4 grid max-w-[1024px] grid-cols-1 gap-6 rounded-md bg-pearl/60 p-6 shadow-sm shadow-offblack backdrop-blur-md md:grid-cols-[2fr_1fr]">
         <p className="w-full font-bebas text-xl tracking-wider md:col-span-2">
@@ -27,12 +24,12 @@ function Cart() {
         </p>
 
         {/* Cart items */}
-        <div className="flex flex-col gap-3">
+        <Container width="w-full" className="flex flex-col gap-3 px-4 py-4">
           {cart.length ? (
             cart.map((item) => <CartItem key={item.id} item={item} />)
           ) : (
-            <div className="rounded-xl bg-pearl/90 p-4 text-center">
-              <h2 className="text-2xl">Your cart is empty.</h2>
+            <div className="rounded-xl p-4 text-center">
+              <h2 className="text-2xl text-offblack">Your cart is empty.</h2>
               <Icon
                 name="sentiment_dissatisfied"
                 className="text-3xl text-aura"
@@ -41,13 +38,13 @@ function Cart() {
           )}
           <ActionButton
             color="bg-sea"
-            width="w-full"
+            width="w-[90%]"
             onClick={() => navigate(-1)}
           >
             <Icon name="arrow_back" />
             {cart.length > 0 ? "Continue shopping" : "Go back"}
           </ActionButton>
-        </div>
+        </Container>
 
         {/* Checkout */}
         <div

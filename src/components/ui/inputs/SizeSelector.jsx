@@ -55,7 +55,7 @@ function SizeSelector({
         <ButtonTiny
           key={sz.size}
           onClick={() => toggleSizeSelection(sz.size)}
-          className={applyStyles(sz.size)}
+          className={`${applyStyles(sz.size)} ${type === "productPage" ? "grow" : "grow-0"}`}
         >
           {sz.size}
         </ButtonTiny>

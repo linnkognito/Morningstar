@@ -8,7 +8,9 @@ import RefineDropdown from "./menus/RefineDropdown";
 import SizeSelector from "../ui/inputs/SizeSelector";
 import ColorSelector from "../ui/inputs/ColorSelector";
 import Icon from "../common/Icon";
-import AddToCartButton from "./menus/AddToCartButton";
+import AddToCartButton from "../cart/AddToCartButton";
+import HeartButton from "./HeartButton";
+import { set } from "@cloudinary/url-gen/actions/variable";
 
 function ProductCard({ product, setProductCardMenu, currentMenu }) {
   const { _id: id, sizes, colors } = product;
@@ -31,19 +33,11 @@ function ProductCard({ product, setProductCardMenu, currentMenu }) {
   return (
     <div className="relative flex h-full min-h-[200px] w-full max-w-[285px] cursor-pointer flex-col justify-self-center rounded bg-pearl shadow-sm shadow-offblack">
       {/* Heart (save product) */}
-      <Icon
-        name={
-          savedProduct
-            ? "heart_check"
-            : heartButtonHover
-              ? "heart_plus"
-              : "favorite"
-        }
-        onMouseEnter={() => setHeartButtonHover(true)}
-        onMouseLeave={() => setHeartButtonHover(false)}
-        className={`absolute right-0 pr-2 pt-0.5 ${savedProduct ? "text-zest" : "text-pearl"}`}
-        style={{ textShadow: "1px 1px 1px rgba(0, 0, 0, 1)" }}
-        onClick={() => setSavedProduct((saved) => !saved)}
+      <HeartButton
+        savedProduct={savedProduct}
+        setSavedProduct={setSavedProduct}
+        heartButtonHover={heartButtonHover}
+        setHeartButtonHover={setHeartButtonHover}
       />
 
       {/* Image */}
