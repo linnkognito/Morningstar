@@ -14,9 +14,17 @@ function AddToCartButton({ product }) {
 
   const dispatch = useDispatch();
 
+  const cartItem = useSelector((state) =>
+    state.cart.cart.find((cartItem) => cartItem.id === id),
+  );
+  const maxQuantity = cartItem?.maxQuantity || 0;
+
   function addToCart() {
     if (!size.length || !color.length)
       return toast.error("Please select a size & color before adding to cart.");
+
+    if (quantity >= maxQuantity)
+      return toast.error("Sorry! No more items available in this size.");
 
     const newCartItem = {
       id: id,

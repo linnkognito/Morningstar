@@ -3,20 +3,33 @@ import { useState } from "react";
 import Icon from "../common/Icon";
 import QuantitySelector from "../ui/inputs/QuantitySelector";
 import ColorSelector from "../ui/inputs/ColorSelector";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { decQuantity, deleteItem, incQuantity } from "./cartSlice";
 import { useNavigate } from "react-router";
+import toast from "react-hot-toast";
 // import { decStockCount } from "../products/productSlice";
 
 function CartItem({ item }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const cartItem = useSelector((state) =>
+    state.cart.cart.find((cartItem) => cartItem.id === item.id),
+  );
+  const maxQuantity = cartItem?.maxQuantity || 0;
+
   const [deleteIsHovered, setDeleteIsHovered] = useState(false);
 
   const optimizedImage = item.image.replace(
     "/upload/",
     "/upload/w_150,f_auto,q_auto/",
   );
+
+  function handleIncQuantity() {
+    if (item.quantity >= maxQuantity)
+      return toast.error("Sorry! No more items available in this size.");
+
+    dispatch(incQuantity(item));
+  }
 
   return (
     <div
@@ -71,9 +84,7 @@ function CartItem({ item }) {
           quantity={item.quantity}
           text="Quantity:"
           className="w-full rounded-xl bg-mint/80 px-3 py-1 tracking-wide"
-          increase={() => {
-            dispatch(incQuantity(item));
-          }}
+          increase={handleIncQuantity}
           decrease={() => dispatch(decQuantity(item))}
         />
       </div>
