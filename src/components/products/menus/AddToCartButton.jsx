@@ -5,6 +5,7 @@ import { addItem } from "../../cart/cartSlice";
 import Icon from "../../common/Icon";
 import ActionButton from "../../ui/buttons/ActionButton";
 import { clearSelections } from "../productSlice";
+import { useNavigate } from "react-router";
 
 function AddToCartButton({ product }) {
   const { name, image, price, _id: id } = product;
@@ -12,16 +13,21 @@ function AddToCartButton({ product }) {
     (state) => state.products.selections,
   );
 
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const cartItem = useSelector((state) =>
     state.cart.cart.find((cartItem) => cartItem.id === id),
   );
-  const maxQuantity = cartItem?.maxQuantity || 0;
+  const maxQuantity = cartItem?.maxQuantity;
 
   function addToCart() {
     if (!size.length || !color.length)
       return toast.error("Please select a size & color before adding to cart.");
+
+    console.log(
+      `cartItem: ${cartItem} | max: ${maxQuantity} | quantity ${quantity}`,
+    );
 
     if (quantity >= maxQuantity)
       return toast.error("Sorry! No more items available in this size.");
@@ -39,13 +45,22 @@ function AddToCartButton({ product }) {
 
     const sizeData = product.sizes.find((sz) => sz.size === newCartItem.size);
 
-    if (!sizeData || sizeData.quantity === 0)
+    if (sizeData.quantity === 0)
       return toast.error("Sorry! No more items available in this size.");
 
     dispatch(addItem(newCartItem));
     dispatch(clearSelections());
 
-    toast.success(`${name} added to cart!`);
+    toast.success((t) => (
+      <button
+        onClick={() => {
+          toast.dismiss(t.id);
+          navigate("/cart");
+        }}
+      >
+        {name} added to cart!
+      </button>
+    ));
   }
   return (
     <ActionButton className="gap-2 pt-0" fontSize="text-xl" onClick={addToCart}>

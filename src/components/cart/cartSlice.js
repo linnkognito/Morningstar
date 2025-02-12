@@ -33,7 +33,6 @@ const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    // Accepts: newCartItem object
     addItem(state, action) {
       const newCartItem = action.payload;
       const existingItem = findItem(state, newCartItem);
