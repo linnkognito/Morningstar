@@ -47,6 +47,7 @@ function ProductCard({ product, setProductCardMenu, currentMenu }) {
     <div className="relative flex h-full min-h-[200px] w-full max-w-[285px] cursor-pointer flex-col justify-self-center rounded bg-pearl shadow-sm shadow-offblack">
       {/* Heart (save product) */}
       <HeartButton
+        product={product}
         savedProduct={savedProduct}
         setSavedProduct={setSavedProduct}
         heartButtonHover={heartButtonHover}
