@@ -3,18 +3,18 @@ import { useNavigate } from "react-router";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { useDispatch, useSelector } from "react-redux";
 import { clearSelections } from "./productSlice";
+import toast from "react-hot-toast";
+import {
+  addToSavedItems,
+  getSavedItems,
+  removeFromSavedItems,
+} from "../user/userSlice";
 
 import RefineDropdown from "./menus/RefineDropdown";
 import SizeSelector from "../ui/inputs/SizeSelector";
 import ColorSelector from "../ui/inputs/ColorSelector";
 import AddToCartButton from "../cart/AddToCartButton";
 import HeartButton from "./HeartButton";
-import {
-  addToSavedItems,
-  getSavedItems,
-  removeFromSavedItems,
-} from "../user/userSlice";
-import toast from "react-hot-toast";
 
 function ProductCard({ product, setProductCardMenu, currentMenu }) {
   const { _id: id, sizes, colors } = product;
@@ -54,7 +54,6 @@ function ProductCard({ product, setProductCardMenu, currentMenu }) {
   }
 
   function handleSaveItem() {
-    console.log("isSavedItem:", isSavedItem);
     if (isSavedItem) {
       toast.error("Removed from wishlist");
       dispatch(removeFromSavedItems(id));

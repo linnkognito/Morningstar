@@ -17,7 +17,7 @@ function Cart() {
   return (
     <WrapperScreenGradient>
       {/* Product list */}
-      <div className="mx-auto mt-4 grid max-w-[1024px] grid-cols-1 gap-6 rounded-md bg-pearl/60 p-6 shadow-sm shadow-offblack backdrop-blur-md md:grid-cols-[2fr_1fr]">
+      <div className="mx-auto mt-4 grid grid-cols-1 gap-6 rounded-md bg-pearl/60 p-6 shadow-sm shadow-offblack backdrop-blur-md md:grid-cols-[2fr_1fr]">
         <p className="w-full font-bebas text-xl tracking-wider md:col-span-2">
           {cart.length} items
         </p>

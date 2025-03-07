@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router";
 
@@ -22,6 +22,10 @@ import Accordion from "../common/Accordion";
 function ProductPage() {
   const { id } = useParams();
   const { quantity } = useSelector((state) => state.products.selections);
+  const { products, status } = useSelector((state) => state.products);
+
+  const product = products.find((product) => product._id === id);
+  console.log(product.sizes);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -30,10 +34,6 @@ function ProductPage() {
     if (id) dispatch(fetchProductById(id));
     return () => dispatch(clearSelections());
   }, [dispatch, id]);
-
-  const { currentProduct: product, status } = useSelector(
-    (state) => state.products,
-  );
 
   if (status === "loading") return <Spinner />;
 
@@ -48,6 +48,7 @@ function ProductPage() {
             onClick={() => navigate(-1)}
           />
         </div>
+
         {/* Actionbar (top) */}
         {/* <div className="flex items-center"> */}
         {/* <ArrowButton dir="left" size="text-md" className="text-offblack" /> */}
@@ -77,12 +78,12 @@ function ProductPage() {
                 className="px-4 py-4"
               >
                 <SizeSelector
-                  sizes={product.sizes}
+                  sizes={product?.sizes}
                   multiSelect={false}
                   type="productPage"
                 />
                 <ColorSelector
-                  colors={product.colors}
+                  colors={product?.colors}
                   multiSelect={false}
                   className="px-6"
                 />

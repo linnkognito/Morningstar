@@ -1,23 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  cart: JSON.parse(localStorage.getItem("cart")) || [],
+  cart: [],
   price: 0,
   discount: 0,
   totalPrice: 0,
 };
 
-function updateLocalStorage(state, method, timestamp = false) {
-  if (method === "set") {
-    localStorage.setItem("cart", JSON.stringify(state.cart));
-    if (timestamp) localStorage.setItem("cartTimestamp", Date.now());
-  }
-
-  if (method === "remove") {
-    localStorage.removeItem("cart");
-    if (timestamp) localStorage.removeItem("cartTimestamp");
-  }
-}
 function findItem(state, product) {
   return (
     state.cart.find(
@@ -57,15 +46,21 @@ const cartSlice = createSlice({
       // Update price
       state.price += newCartItem.price;
       state.totalPrice = state.price - state.discount;
-
-      updateLocalStorage(state, "set", true);
     },
+
     deleteItem(state, action) {
       const itemToDelete = findItem(state, action.payload);
+      if (!itemToDelete) return;
 
       state.cart = state.cart.filter((item) => item !== itemToDelete);
-      updateLocalStorage(state, "set");
+
+      state.price = state.cart.reduce(
+        (sum, item) => sum + item.quantity * item.price,
+        0,
+      );
+      state.totalPrice = state.price - state.discount;
     },
+
     incQuantity(state, action) {
       const item = findItem(state, action.payload);
 
@@ -75,8 +70,6 @@ const cartSlice = createSlice({
       item.maxQuantity--;
       state.price += item.price;
       state.totalPrice = state.price - state.discount;
-
-      updateLocalStorage(state, "set");
     },
     decQuantity(state, action) {
       const item = findItem(state, action.payload);
@@ -87,13 +80,9 @@ const cartSlice = createSlice({
       state.totalPrice = state.price - state.discount;
 
       if (item.quantity === 0) cartSlice.caseReducers.deleteItem(state, action);
-
-      updateLocalStorage(state, "set");
     },
     clearCart(state) {
       state.cart = [];
-
-      updateLocalStorage(state, "remove", true);
     },
   },
 });
