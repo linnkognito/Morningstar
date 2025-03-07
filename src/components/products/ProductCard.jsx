@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { clearSelections } from "./productSlice";
 
 import RefineDropdown from "./menus/RefineDropdown";
@@ -9,14 +9,24 @@ import SizeSelector from "../ui/inputs/SizeSelector";
 import ColorSelector from "../ui/inputs/ColorSelector";
 import AddToCartButton from "../cart/AddToCartButton";
 import HeartButton from "./HeartButton";
+import {
+  addToSavedItems,
+  getSavedItems,
+  removeFromSavedItems,
+} from "../user/userSlice";
+import toast from "react-hot-toast";
 
 function ProductCard({ product, setProductCardMenu, currentMenu }) {
   const { _id: id, sizes, colors } = product;
+
   const dispatch = useDispatch();
   const navigator = useNavigate();
 
+  // Toggle save
+  const savedItems = useSelector(getSavedItems);
+  const isSavedItem = savedItems?.some((item) => item._id === id);
   const [heartButtonHover, setHeartButtonHover] = useState(false);
-  const [savedProduct, setSavedProduct] = useState(false);
+
   const optimizedImage = product.image.replace(
     "/upload/",
     "/upload/h_380,f_auto,q_auto/",
@@ -43,15 +53,25 @@ function ProductCard({ product, setProductCardMenu, currentMenu }) {
     dispatch(clearSelections());
   }
 
+  function handleSaveItem() {
+    console.log("isSavedItem:", isSavedItem);
+    if (isSavedItem) {
+      toast.error("Removed from wishlist");
+      dispatch(removeFromSavedItems(id));
+    } else {
+      toast.success("Added to wishlist");
+      dispatch(addToSavedItems(product));
+    }
+  }
+
   return (
     <div className="relative flex h-full min-h-[200px] w-full max-w-[285px] cursor-pointer flex-col justify-self-center rounded bg-pearl shadow-sm shadow-offblack">
       {/* Heart (save product) */}
       <HeartButton
-        product={product}
-        savedProduct={savedProduct}
-        setSavedProduct={setSavedProduct}
+        isSaved={isSavedItem}
         heartButtonHover={heartButtonHover}
         setHeartButtonHover={setHeartButtonHover}
+        onClick={handleSaveItem}
       />
 
       {/* Image */}

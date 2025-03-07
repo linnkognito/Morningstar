@@ -16,12 +16,12 @@ const userSlice = createSlice({
     },
     removeFromSavedItems: (state, action) => {
       // action.payload = product id
-      state.saved = state.saved.filter((item) => item.id !== action.payload);
+      state.saved = state.saved.filter((item) => item._id !== action.payload);
     },
   },
 });
 
-export const { addToSavedItems } = userSlice.actions;
+export const { addToSavedItems, removeFromSavedItems } = userSlice.actions;
 export const getSavedItems = (state) => state.user.saved;
 
 export default userSlice.reducer;
