@@ -5,8 +5,8 @@ import NavItem from "./NavItem";
 import { useState } from "react";
 
 const icons = [
-  { id: "icon-person", name: "person", path: "/profile" },
-  { id: "icon-fav", name: "favorite", path: "/profile/favorites" },
+  { id: "icon-person", name: "person", path: "/user/login" },
+  { id: "icon-fav", name: "favorite", path: "/user/saved" },
   { id: "icon-cart", name: "shopping_cart", path: "/cart" },
 ];
 

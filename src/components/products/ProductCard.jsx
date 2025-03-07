@@ -29,8 +29,8 @@ function ProductCard({ product, setProductCardMenu, currentMenu }) {
     if (!productBar.current) return;
 
     const observer = new ResizeObserver(() => {
-      const height = productBar.current.offsetHeight;
-      setProductBarHeight(height);
+      if (productBar.current)
+        setProductBarHeight(productBar.current.offsetHeight);
     });
 
     observer.observe(productBar.current);

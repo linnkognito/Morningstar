@@ -10,10 +10,8 @@ import Container from "../common/Container";
 
 function Cart() {
   const navigate = useNavigate();
-
   const cart = useSelector(getCartItems);
-  const total = useSelector(getTotalPrice);
-  const cartIsEmpty = total === 0;
+  const totalPrice = useSelector(getTotalPrice);
 
   return (
     <div className="mx-auto h-full origin-center bg-gradient-to-r from-aura/60 via-mint/40 to-zest/30 bg-cover bg-center p-4 backdrop-blur-xl">
@@ -48,7 +46,7 @@ function Cart() {
 
         {/* Checkout */}
         <div
-          className={`flex h-full flex-col gap-1 ${total === 0 ? "opacity-50" : "opacity-100"}`}
+          className={`flex h-full flex-col gap-1 ${cart.length === 0 ? "opacity-50" : "opacity-100"}`}
         >
           <div className="flex flex-col justify-between rounded bg-aura/15 p-4 shadow-sm shadow-offblack backdrop-blur-md">
             {/* Promo code */}
@@ -62,20 +60,22 @@ function Cart() {
               <input
                 type="text"
                 placeholder="123PROMO"
-                disabled={cartIsEmpty}
+                disabled={!cart.length}
                 className="h-7 max-w-[400px] rounded-md px-2 font-primary text-base tracking-wide shadow-sm shadow-offblack"
               />
             </div>
 
             {/* Total */}
-            <h2 className="mt-4 pl-1 font-bebas text-4xl">Total: ${total}</h2>
+            <h2 className="mt-4 pl-1 font-bebas text-4xl">
+              Total: ${totalPrice}
+            </h2>
           </div>
 
           <ActionButton
             color="bg-aura/80"
             width="w-full"
             className="place-self-end"
-            disabled={cartIsEmpty}
+            disabled={!cart.length}
           >
             Go to checkout
           </ActionButton>
