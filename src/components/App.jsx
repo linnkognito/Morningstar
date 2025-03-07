@@ -9,6 +9,7 @@ import ProductPage from "./products/ProductPage";
 import { Toaster } from "react-hot-toast";
 import SavedProducts from "./user/SavedProducts";
 import Login from "./user/Login";
+import Signup from "./user/Signup";
 
 const router = createBrowserRouter([
   {
@@ -51,7 +52,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/user/signup",
-        element: <Login />,
+        element: <Signup />,
         errorElement: <Error />,
       },
     ],

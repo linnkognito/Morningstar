@@ -7,6 +7,7 @@ import CartItem from "./CartItem";
 import Icon from "../common/Icon";
 import ActionButton from "../ui/buttons/ActionButton";
 import Container from "../common/Container";
+import WrapperScreenGradient from "../ui/containers/WrapperScreenGradient";
 
 function Cart() {
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ function Cart() {
   const totalPrice = useSelector(getTotalPrice);
 
   return (
-    <div className="mx-auto h-full origin-center bg-gradient-to-r from-aura/60 via-mint/40 to-zest/30 bg-cover bg-center p-4 backdrop-blur-xl">
+    <WrapperScreenGradient>
       {/* Product list */}
       <div className="mx-auto mt-4 grid max-w-[1024px] grid-cols-1 gap-6 rounded-md bg-pearl/60 p-6 shadow-sm shadow-offblack backdrop-blur-md md:grid-cols-[2fr_1fr]">
         <p className="w-full font-bebas text-xl tracking-wider md:col-span-2">
@@ -81,7 +82,7 @@ function Cart() {
           </ActionButton>
         </div>
       </div>
-    </div>
+    </WrapperScreenGradient>
   );
 }
 

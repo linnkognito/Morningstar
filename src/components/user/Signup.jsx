@@ -1,22 +1,16 @@
-import { NavLink } from "react-router";
-
 import WrapperScreenGradient from "../ui/containers/WrapperScreenGradient";
+import FormElement from "../ui/FormElement";
 import ContainerSimple from "../ui/containers/ContainerSimple";
 import Form from "../ui/Form";
-import FormElement from "../ui/FormElement";
 import ActionButton from "../ui/buttons/ActionButton";
 import AuthRedirect from "../ui/AuthRedirect";
 
-function Login() {
+function Signup() {
   return (
     <WrapperScreenGradient>
-      <ContainerSimple
-        width="w-fit max-w-[700px]"
-        bg="bg-white/80"
-        className="px-20 pb-10 pt-6"
-      >
+      <ContainerSimple bg="bg-white/80">
         <h2 className="w-full border-b border-aura/30 pb-4 text-center font-bebas text-4xl">
-          Login
+          Signup
         </h2>
 
         <Form
@@ -26,32 +20,30 @@ function Login() {
           }}
         >
           <FormElement
+            label="Full name"
+            input={{ type: "text", placeholder: "Jane Doe" }}
+          />
+          <FormElement
             label="Email"
             input={{ type: "text", placeholder: "123@email.com" }}
           />
           <FormElement
             label="Password"
             input={{ type: "password", placeholder: "●●●●●●●" }}
-          >
-            <p className="text-xs text-gray-400">
-              Forgot password?{" "}
-              <NavLink
-                to="/user/login/restore-password"
-                className="text-aura hover:underline"
-              >
-                Restore
-              </NavLink>
-            </p>
-          </FormElement>
+          />
+          <FormElement
+            label="Confirm password"
+            input={{ type: "password", placeholder: "●●●●●●●" }}
+          />
 
           <ActionButton type="submit" color="bg-aura/50">
-            Login
+            Signup
           </ActionButton>
 
           <AuthRedirect
-            text="No account yet?"
+            text="Already have an account?"
             path="/user/signup"
-            linkText="Sign up!"
+            linkText="Login"
           />
         </Form>
       </ContainerSimple>
@@ -59,4 +51,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Signup;
