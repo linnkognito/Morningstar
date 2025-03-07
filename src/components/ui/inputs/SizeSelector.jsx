@@ -41,7 +41,7 @@ function SizeSelector({
   function toggleSizeSelection(size) {
     size = size.toUpperCase();
 
-    if (type === "selections" || type === "productPage")
+    if (type === "selections")
       return dispatch(setSizeSelection({ size, isMultiSelect: multiSelect }));
 
     if (type === "filters")
