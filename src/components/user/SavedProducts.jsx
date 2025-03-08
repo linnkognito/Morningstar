@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { NavLink, useNavigate } from "react-router";
 
 import WrapperScreenGradient from "../ui/containers/WrapperScreenGradient";
 import ProductCard from "../products/ProductCard";
@@ -8,7 +9,7 @@ import TextButton from "../ui/buttons//TextButton";
 import Icon from "../common/Icon";
 
 function SavedProducts() {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [productCardMenu, setProductCardMenu] = useState(null);
 
   const { saved: savedProducts } = useSelector((state) => state.user);
@@ -23,8 +24,11 @@ function SavedProducts() {
         {/* Content */}
         <div className="mx-auto flex w-full min-w-fit max-w-[1284px] flex-col space-y-3 rounded-md bg-pearl/60 p-6 shadow-sm shadow-offblack backdrop-blur-md">
           <div className="flex justify-between border-b border-aura/30 pb-2">
-            <TextButton>&larr; Back</TextButton>
-            <TextButton>Cart &rarr; </TextButton>
+            <TextButton onClick={() => navigate(-1)}>&larr; Back</TextButton>
+
+            <NavLink to="/cart">
+              <TextButton>Cart &rarr; </TextButton>
+            </NavLink>
           </div>
 
           {/* Product cards */}
