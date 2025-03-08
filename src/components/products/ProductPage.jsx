@@ -18,12 +18,11 @@ import AddToCartButton from "../cart/AddToCartButton";
 import ActionButton from "../ui/buttons/ActionButton";
 import ArrowButton from "../ui/buttons/ArrowButton";
 import Accordion from "../common/Accordion";
+import { useSaveItem } from "../../utils/useSaveItem";
 
 function ProductPage() {
   const { id } = useParams();
   const { quantity } = useSelector((state) => state.products.selections);
-  // const { products, status } = useSelector((state) => state.products);
-  // const product = products.find((product) => product._id === id);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -36,6 +35,7 @@ function ProductPage() {
   const { currentProduct: product, status } = useSelector(
     (state) => state.products,
   );
+  const { isSavedItem, toggleSave } = useSaveItem(id, product);
 
   if (status === "loading") return <Spinner />;
 
@@ -109,8 +109,9 @@ function ProductPage() {
                   hoverColor="hover:bg-aura"
                   width="w-full"
                   className="text-lg"
+                  onClick={toggleSave}
                 >
-                  Add to wishlist
+                  {isSavedItem ? "Remove from wishlist" : "Add to wishlist"}
                 </ActionButton>
               </div>
               {/* Accordions */}

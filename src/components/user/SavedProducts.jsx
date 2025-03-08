@@ -5,12 +5,14 @@ import WrapperScreenGradient from "../ui/containers/WrapperScreenGradient";
 import ProductCard from "../products/ProductCard";
 import Banner from "../ui/Banner";
 import TextButton from "../ui/buttons//TextButton";
+import Icon from "../common/Icon";
 
 function SavedProducts() {
   // const navigate = useNavigate();
   const [productCardMenu, setProductCardMenu] = useState(null);
 
-  const { name, saved: savedProducts } = useSelector((state) => state.user);
+  const { saved: savedProducts } = useSelector((state) => state.user);
+  const hasSavedProducts = savedProducts?.length > 0;
 
   return (
     <WrapperScreenGradient className="flex justify-center pb-[75px] sm:pb-4">
@@ -26,11 +28,9 @@ function SavedProducts() {
           </div>
 
           {/* Product cards */}
-          <div className="grid grid-cols-2 gap-3 px-2 pt-2 sm:grid-cols-3 lg:grid-cols-4">
-            {/* Spinner */}
-
-            {savedProducts.length &&
-              savedProducts.map((product) => (
+          {hasSavedProducts && (
+            <div className="grid grid-cols-2 gap-3 px-2 pt-2 sm:grid-cols-3 lg:grid-cols-4">
+              {savedProducts.map((product) => (
                 <ProductCard
                   key={product._id}
                   currentMenu={productCardMenu}
@@ -38,7 +38,18 @@ function SavedProducts() {
                   product={product}
                 />
               ))}
-          </div>
+            </div>
+          )}
+
+          {!hasSavedProducts && (
+            <div className="rounded-xl p-4 text-center">
+              <h2 className="text-2xl text-offblack">Your cart is empty.</h2>
+              <Icon
+                name="sentiment_dissatisfied"
+                className="text-3xl text-aura"
+              />
+            </div>
+          )}
         </div>
       </div>
     </WrapperScreenGradient>

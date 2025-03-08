@@ -17,7 +17,6 @@ function SizeSelector({
   sizes = defaultSizes,
   multiSelect = false,
   type = "selections",
-  buttonColor = "bg-pearl",
   className = "",
 }) {
   const dispatch = useDispatch();
@@ -28,14 +27,21 @@ function SizeSelector({
       : state.products.filters.sizes,
   );
 
-  function applyStyles(size) {
+  function applyStyles(size, type) {
     size = size.toUpperCase();
 
-    if (!sizeSelections.length) return "bg-pearl";
+    if (type === "bg") {
+      if (!sizeSelections.length) return "bg-pearl";
+      return sizeSelections.includes(size) || sizeSelections[0] === size
+        ? "bg-aura/60"
+        : "bg-pearl";
+    }
 
-    return sizeSelections.includes(size) || sizeSelections[0] === size
-      ? "scale-105 bg-aura"
-      : "opacity-50 bg-pearl hover:opacity-100";
+    if (type === "className") {
+      return sizeSelections.includes(size) || sizeSelections[0] === size
+        ? "scale-105"
+        : "opacity-50 hover:opacity-100";
+    }
   }
 
   function toggleSizeSelection(size) {
@@ -55,9 +61,9 @@ function SizeSelector({
       {sizes.map((sz) => (
         <ButtonTiny
           key={sz.size}
-          color={buttonColor}
+          color={applyStyles(sz.size, "bg")}
           onClick={() => toggleSizeSelection(sz.size)}
-          className={`text-base ${applyStyles(sz.size)} `}
+          className={`text-base ${applyStyles(sz.size, "className")} `}
         >
           {sz.size}
         </ButtonTiny>

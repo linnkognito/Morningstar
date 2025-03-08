@@ -1,30 +1,29 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { clearSelections } from "./productSlice";
-import toast from "react-hot-toast";
-import {
-  addToSavedItems,
-  getSavedItems,
-  removeFromSavedItems,
-} from "../user/userSlice";
+// import toast from "react-hot-toast";
+// import {
+//   addToSavedItems,
+//   getSavedItems,
+//   removeFromSavedItems,
+// } from "../user/userSlice";
 
 import RefineDropdown from "./menus/RefineDropdown";
 import SizeSelector from "../ui/inputs/SizeSelector";
 import ColorSelector from "../ui/inputs/ColorSelector";
 import AddToCartButton from "../cart/AddToCartButton";
 import HeartButton from "./HeartButton";
+import { useSaveItem } from "../../utils/useSaveItem";
 
 function ProductCard({ product, setProductCardMenu, currentMenu }) {
   const { _id: id, sizes, colors } = product;
+  const { isSavedItem, toggleSave } = useSaveItem(id, product);
 
   const dispatch = useDispatch();
   const navigator = useNavigate();
 
-  // Toggle save
-  const savedItems = useSelector(getSavedItems);
-  const isSavedItem = savedItems?.some((item) => item._id === id);
   const [heartButtonHover, setHeartButtonHover] = useState(false);
 
   const optimizedImage = product.image.replace(
@@ -53,16 +52,6 @@ function ProductCard({ product, setProductCardMenu, currentMenu }) {
     dispatch(clearSelections());
   }
 
-  function handleSaveItem() {
-    if (isSavedItem) {
-      toast.error("Removed from wishlist");
-      dispatch(removeFromSavedItems(id));
-    } else {
-      toast.success("Added to wishlist");
-      dispatch(addToSavedItems(product));
-    }
-  }
-
   return (
     <div className="relative flex h-full min-h-[200px] w-full max-w-[285px] cursor-pointer flex-col justify-self-center rounded bg-pearl shadow-sm shadow-offblack">
       {/* Heart (save product) */}
@@ -70,7 +59,8 @@ function ProductCard({ product, setProductCardMenu, currentMenu }) {
         isSaved={isSavedItem}
         heartButtonHover={heartButtonHover}
         setHeartButtonHover={setHeartButtonHover}
-        onClick={handleSaveItem}
+        onClick={toggleSave}
+        // onClick={handleSaveItem}
       />
 
       {/* Image */}
