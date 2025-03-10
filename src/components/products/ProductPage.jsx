@@ -19,6 +19,7 @@ import ActionButton from "../ui/buttons/ActionButton";
 import ArrowButton from "../ui/buttons/ArrowButton";
 import Accordion from "../common/Accordion";
 import { useSaveItem } from "../../utils/useSaveItem";
+import AddProductButtonSet from "./AddProductButtonSet";
 
 function ProductPage() {
   const { id } = useParams();
@@ -42,7 +43,7 @@ function ProductPage() {
   return (
     <div className="flex h-full w-full justify-center bg-gradient-to-l from-aura/50 via-mint/40 to-zest/30 px-6 py-6">
       <Container className="relative max-w-[1000px] px-4 py-4">
-        <div className="will-change absolute -left-12 flex cursor-pointer items-center rounded-xl bg-aura/65 px-2 py-1 shadow-sm shadow-offblack duration-300 ease-out hover:-left-14">
+        <div className="will-change absolute -left-12 hidden cursor-pointer items-center rounded-xl bg-aura/65 px-2 py-1 shadow-sm shadow-offblack duration-300 ease-out hover:-left-14 xl:flex">
           <ArrowButton
             dir="left"
             size="text-md"
@@ -52,17 +53,30 @@ function ProductPage() {
         </div>
 
         {/* Actionbar (top) */}
-        {/* <div className="flex items-center"> */}
-        {/* <ArrowButton dir="left" size="text-md" className="text-offblack" /> */}
-        {/* </div> */}
+        <div className="flex items-center xl:hidden">
+          <ArrowButton
+            dir="left"
+            size="text-md"
+            className="cursor-pointer text-offblack"
+          />
+        </div>
 
         {product && (
-          <div className="grid grid-cols-2 gap-3">
-            <img
-              src={product.image}
-              alt={`Product: ${product.name}`}
-              className="rounded-xl shadow-sm shadow-offblack"
-            />
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+            <div className="w-full">
+              <img
+                src={product.image}
+                alt={`Product: ${product.name}`}
+                className="rounded-xl shadow-sm shadow-offblack"
+              />
+              <AddProductButtonSet
+                product={product}
+                onClick={toggleSave}
+                isSavedItem={isSavedItem}
+                className="hidden sm:grid md:hidden"
+                buttonWidth="w-[95%]"
+              />
+            </div>
             {/* Title, Price & Selectiors */}
             <Container
               width="w-full"
@@ -98,7 +112,14 @@ function ProductPage() {
                 />
               </Container>
 
-              <div className="grid w-full grid-cols-1 gap-1">
+              <AddProductButtonSet
+                product={product}
+                onClick={toggleSave}
+                isSavedItem={isSavedItem}
+                className="sm:hidden md:grid"
+              />
+
+              {/* <div className="grid w-full grid-cols-1 gap-1">
                 <AddToCartButton
                   product={product}
                   width="w-full"
@@ -113,7 +134,7 @@ function ProductPage() {
                 >
                   {isSavedItem ? "Remove from wishlist" : "Add to wishlist"}
                 </ActionButton>
-              </div>
+              </div> */}
               {/* Accordions */}
               <div className="mt-4 w-full">
                 <Accordion title="Product details">
