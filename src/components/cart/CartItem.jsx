@@ -33,70 +33,71 @@ function CartItem({ item }) {
 
   return (
     <div
-      className={`relative grid grid-cols-[auto_3fr_1fr_auto] gap-3 rounded-md bg-pearl/60 pr-1 text-offblack shadow-sm shadow-offblack backdrop-blur-md duration-300 ease-out will-change-[scale] sm:grid-cols-[auto_2fr_1fr_auto] ${deleteIsHovered ? "scale-[1.005]" : ""}`}
+      className={`relative flex h-fit rounded-md bg-pearl/60 text-offblack shadow-sm shadow-offblack backdrop-blur-md duration-300 ease-out will-change-[scale] ${deleteIsHovered ? "scale-[1.005]" : ""}`}
     >
       {deleteIsHovered && (
         <div className="z-100 absolute h-full w-full bg-ember/30"></div>
       )}
 
+      <Icon
+        name="close"
+        al="Close button"
+        onMouseEnter={() => setDeleteIsHovered(true)}
+        onMouseLeave={() => setDeleteIsHovered(false)}
+        onClick={() => dispatch(deleteItem(item))}
+        className="absolute right-2 top-2 h-fit origin-center cursor-pointer duration-300 ease-out will-change-[scale,color] hover:scale-[1.2] hover:text-ember"
+      />
+
       {/* Image */}
-      <div className="flex h-full max-h-[7em] min-h-[7em] min-w-[7em] max-w-[7em] rounded-l-md">
+      <div className="min-w-[30%] max-w-[30%] lg:min-w-[20%] lg:max-w-[20%]">
         <img
           src={optimizedImage}
           alt=""
-          className="cursor-pointer rounded rounded-r-none object-cover"
+          className="max-h-full min-h-full w-full cursor-pointer rounded-l object-cover"
         />
       </div>
 
-      <div className="flex min-w-[4em] flex-col justify-center text-left font-bebas">
-        {/* Product Name */}
-        <h2
-          className="w-fit cursor-pointer text-xl transition-all duration-200 ease-out hover:bg-zest/70 sm:text-2xl lg:text-3xl"
-          onClick={() => navigate(`/products/${item.id}`)}
-        >
-          {item.name}
-        </h2>
+      <div className="flex w-full flex-col gap-2 px-4 pb-2 pr-10 pt-3">
+        {/* Text content container */}
+        <div className="pl-2 text-left font-bebas">
+          <h2
+            className="w-fit cursor-pointer text-2xl transition-all duration-200 ease-out hover:bg-zest/70 lg:text-3xl"
+            onClick={() => navigate(`/products/${item.id}`)}
+          >
+            {item.name}
+          </h2>
 
-        {/* Product Price */}
-        <p className="text-md pl-1 text-grey-600 sm:text-xl lg:text-2xl">
-          ${item.price}
-        </p>
-      </div>
+          {/* Product Price */}
+          <p className="text-md pl-1 text-grey-600 sm:text-xl lg:text-2xl">
+            ${item.price}
+          </p>
+        </div>
 
-      {/* Actions */}
-      <div className="mr-4 flex h-full flex-col justify-center gap-2 py-2 font-bebas text-offblack">
-        {/* Size & Color*/}
-        <div className="flex gap-2">
-          <div className="text-md flex w-full cursor-pointer place-content-center rounded-xl bg-zest/80 p-1 tracking-wide md:text-xl">
+        {/* Actions */}
+        <div className="flex h-full w-3/4 max-w-full flex-col gap-2 py-2 font-bebas text-offblack sm:mr-4">
+          {/* Size & Color*/}
+          <div className="flex w-full cursor-pointer place-content-center rounded-xl bg-zest/80 p-1 text-base tracking-wide">
             {item.size}
           </div>
 
           <ColorSelector
             colors={[item.color]}
-            height="h-full"
+            height="h-full min-h-[2rem]"
             className="rounded-xl hover:scale-100"
             disabled={true}
           />
+
+          {/* Quantity */}
+          <QuantitySelector
+            quantity={item.quantity}
+            text="Qty:"
+            fontSize="text-base"
+            className="w-full rounded-xl bg-mint/80 px-3 py-1 tracking-wide"
+            increase={handleIncQuantity}
+            decrease={() => dispatch(decQuantity(item))}
+          />
         </div>
-
-        {/* Quantity */}
-        <QuantitySelector
-          quantity={item.quantity}
-          text="Quantity:"
-          className="w-full rounded-xl bg-mint/80 px-3 py-1 tracking-wide"
-          increase={handleIncQuantity}
-          decrease={() => dispatch(decQuantity(item))}
-        />
       </div>
-
-      <Icon
-        name="close"
-        al="Close button"
-        className="h-fit origin-center cursor-pointer rounded duration-300 ease-out will-change-[scale,color] hover:scale-[1.2] hover:text-ember"
-        onMouseEnter={() => setDeleteIsHovered(true)}
-        onMouseLeave={() => setDeleteIsHovered(false)}
-        onClick={() => dispatch(deleteItem(item))}
-      />
     </div>
   );
 }

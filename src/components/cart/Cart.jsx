@@ -17,12 +17,13 @@ function Cart() {
   return (
     <WrapperScreenGradient>
       {/* Product list */}
-      <div className="mx-auto mt-4 grid grid-cols-1 gap-6 rounded-md bg-pearl/60 p-6 shadow-sm shadow-offblack backdrop-blur-md md:grid-cols-[2fr_1fr]">
+      <div className="mx-auto mt-4 grid min-w-[290px] max-w-[1284px] gap-6 rounded-md bg-pearl/60 p-6 shadow-sm shadow-offblack backdrop-blur-md sm:grid-cols-1 md:grid-cols-[2fr_1fr]">
         <p className="w-full font-bebas text-xl tracking-wider md:col-span-2">
           {cart.length} items
         </p>
 
         {/* Cart items */}
+        {/* <Container width="w-full" className="flex flex-col gap-3 px-4 py-4"> */}
         <Container width="w-full" className="flex flex-col gap-3 px-4 py-4">
           {cart.length ? (
             cart.map((item) => <CartItem key={item.id} item={item} />)
@@ -38,6 +39,7 @@ function Cart() {
           <ActionButton
             color="bg-sea"
             width="w-[90%]"
+            className="col-span-2 lg:col-span-1" //ADDED
             onClick={() => navigate(-1)}
           >
             <Icon name="arrow_back" />
