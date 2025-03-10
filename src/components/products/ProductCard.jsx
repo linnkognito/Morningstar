@@ -3,12 +3,6 @@ import { useNavigate } from "react-router";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { useDispatch } from "react-redux";
 import { clearSelections } from "./productSlice";
-// import toast from "react-hot-toast";
-// import {
-//   addToSavedItems,
-//   getSavedItems,
-//   removeFromSavedItems,
-// } from "../user/userSlice";
 
 import RefineDropdown from "./menus/RefineDropdown";
 import SizeSelector from "../ui/inputs/SizeSelector";

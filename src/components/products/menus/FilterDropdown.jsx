@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useMemo, useRef } from "react";
+import { useMemo } from "react";
 import {
   applyFilters,
   clearFilters,
