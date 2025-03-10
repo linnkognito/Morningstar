@@ -7,6 +7,8 @@ import ProductCard from "../products/ProductCard";
 import Banner from "../ui/Banner";
 import TextButton from "../ui/buttons//TextButton";
 import Icon from "../common/Icon";
+import ActionButton from "../ui/buttons/ActionButton";
+import ArrowButton from "../ui/buttons/ArrowButton";
 
 function SavedProducts() {
   const navigate = useNavigate();
@@ -19,17 +21,38 @@ function SavedProducts() {
     <WrapperScreenGradient className="flex justify-center pb-[75px] sm:pb-4">
       <div className="flex w-full max-w-[1284px] flex-col gap-3 px-2">
         {/* Banner */}
-        <Banner heading="Saved products" />
+        <Banner heading="Wishlist" />
 
         {/* Content */}
         <div className="mx-auto flex w-full min-w-fit max-w-[1284px] flex-col space-y-3 rounded-md bg-pearl/60 p-6 shadow-sm shadow-offblack backdrop-blur-md">
-          <div className="flex justify-between border-b border-aura/30 pb-2">
-            <TextButton onClick={() => navigate(-1)}>&larr; Back</TextButton>
+          {/* Nav */}
+          {hasSavedProducts && (
+            <nav className="flex justify-between border-b border-aura/30 pb-2">
+              <NavLink to={() => navigate(-1)}>
+                <ActionButton
+                  width="w-fit"
+                  fontSize="text-xl"
+                  className="flex pl-2 pr-4"
+                  onClick={() => navigate(-1)}
+                >
+                  <Icon name="arrow_back" />
+                  Back
+                </ActionButton>
+              </NavLink>
 
-            <NavLink to="/cart">
-              <TextButton>Cart &rarr; </TextButton>
-            </NavLink>
-          </div>
+              <NavLink to="/cart">
+                <ActionButton
+                  width="w-fit"
+                  fontSize="text-xl"
+                  className="flex pl-4 pr-2"
+                  onClick={() => navigate(-1)}
+                >
+                  Cart
+                  <Icon name="arrow_forward" />
+                </ActionButton>
+              </NavLink>
+            </nav>
+          )}
 
           {/* Product cards */}
           {hasSavedProducts && (
@@ -46,12 +69,13 @@ function SavedProducts() {
           )}
 
           {!hasSavedProducts && (
-            <div className="rounded-xl p-4 text-center">
-              <h2 className="text-2xl text-offblack">Your cart is empty.</h2>
-              <Icon
-                name="sentiment_dissatisfied"
-                className="text-3xl text-aura"
-              />
+            <div className="mx-auto w-1/2 space-y-4 rounded-xl p-4 text-center">
+              <h2 className="text-2xl text-offblack">Your wishlist is empty</h2>
+              <NavLink to="/products">
+                <ActionButton>
+                  <Icon name="arrow_back" /> <span>Continue shopping</span>
+                </ActionButton>
+              </NavLink>
             </div>
           )}
         </div>

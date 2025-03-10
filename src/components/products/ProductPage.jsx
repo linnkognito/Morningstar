@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router";
+import { useSaveItem } from "../../utils/useSaveItem";
 
 import {
   clearSelections,
@@ -14,11 +15,8 @@ import SizeSelector from "../ui/inputs/SizeSelector";
 import ColorSelector from "../ui/inputs/ColorSelector";
 import QuantitySelector from "../ui/inputs/QuantitySelector";
 import Spinner from "../common/Spinner";
-import AddToCartButton from "../cart/AddToCartButton";
-import ActionButton from "../ui/buttons/ActionButton";
 import ArrowButton from "../ui/buttons/ArrowButton";
 import Accordion from "../common/Accordion";
-import { useSaveItem } from "../../utils/useSaveItem";
 import AddProductButtonSet from "./AddProductButtonSet";
 
 function ProductPage() {
