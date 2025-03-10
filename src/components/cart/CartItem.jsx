@@ -48,8 +48,8 @@ function CartItem({ item }) {
         />
       </div>
 
-      {/* Product Name */}
       <div className="flex min-w-[4em] flex-col justify-center text-left font-bebas">
+        {/* Product Name */}
         <h2
           className="w-fit cursor-pointer text-xl transition-all duration-200 ease-out hover:bg-zest/70 sm:text-2xl lg:text-3xl"
           onClick={() => navigate(`/products/${item.id}`)}

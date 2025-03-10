@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router";
+import { NavLink, useNavigate, useParams } from "react-router";
 import { useSaveItem } from "../../utils/useSaveItem";
 
 import {
@@ -56,6 +56,7 @@ function ProductPage() {
             dir="left"
             size="text-md"
             className="cursor-pointer text-offblack"
+            onClick={() => navigate(-1)}
           />
         </div>
 

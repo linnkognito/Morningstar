@@ -1,3 +1,5 @@
+import { useSaveItem } from "../../utils/useSaveItem";
+
 import AddToCartButton from "../cart/AddToCartButton";
 import ActionButton from "../ui/buttons/ActionButton";
 
@@ -15,12 +17,13 @@ function AddProductButtonSet({
         width={buttonWidth || "w-full"}
         bgColor="bg-zest/70"
       />
+
       <ActionButton
         color="bg-aura/70"
         hoverColor="hover:bg-aura"
         width={buttonWidth || "w-full"}
         className="text-lg"
-        onClick={(onClick = () => {})}
+        onClick={onClick}
       >
         {isSavedItem ? "Remove from wishlist" : "Add to wishlist"}
       </ActionButton>
