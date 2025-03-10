@@ -17,7 +17,10 @@ function RefineMenu() {
       <div className="relative w-full">
         <RefineMenuButton
           isOpen={isOpen === "sort"}
-          onClick={() => handleClick("sort")}
+          onClick={(e) => {
+            e.stopPropagation();
+            handleClick("sort");
+          }}
         >
           Sort
         </RefineMenuButton>
@@ -34,7 +37,10 @@ function RefineMenu() {
       <div className="relative w-full">
         <RefineMenuButton
           isOpen={isOpen === "filter"}
-          onClick={() => handleClick("filter")}
+          onClick={(e) => {
+            e.stopPropagation();
+            handleClick("filter");
+          }}
         >
           Filter
         </RefineMenuButton>

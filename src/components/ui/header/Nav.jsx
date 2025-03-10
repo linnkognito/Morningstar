@@ -1,7 +1,8 @@
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router";
+
 import NavItem from "./NavItem";
 import Icon from "../../common/Icon";
-import { useState } from "react";
 
 const navItems = [
   { id: "home", text: "Home", path: "/" },
@@ -11,7 +12,6 @@ const navItems = [
   { id: "new", text: "New", path: "/products/category/new" },
   { id: "all", text: "All", path: "/products" },
 ];
-
 const dropdownNavItems = [
   { id: "womens", text: "Womens", path: "/products/category/womens" },
   { id: "mens", text: "Mens", path: "/products/category/mens" },
@@ -22,7 +22,19 @@ const dropdownNavItems = [
 
 function Nav({ onToggle, activeItem }) {
   const navigate = useNavigate();
+  const dropdownRef = useRef();
   const [showDropdownNav, setShowDropdownNav] = useState(false);
+
+  useEffect(() => {
+    function handleClick(e) {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target))
+        setShowDropdownNav(false);
+    }
+
+    document.addEventListener("click", handleClick);
+
+    return () => document.removeEventListener("click", handleClick);
+  }, []);
 
   return (
     <nav className="relative h-full cursor-pointer">
@@ -32,14 +44,20 @@ function Nav({ onToggle, activeItem }) {
         className={`xl:hidden ${showDropdownNav && "bg-zest text-offblack"}`}
         isActive={activeItem === "dropdown"}
         onToggle={onToggle}
-        onClick={() => setShowDropdownNav((show) => !show)}
+        onClick={(e) => {
+          e.stopPropagation();
+          setShowDropdownNav((show) => !show);
+        }}
       >
         <Icon name="menu" />
       </NavItem>
 
       {/* Dropdown menu */}
       {showDropdownNav && (
-        <nav className="absolute z-[9999] w-[250px] rounded rounded-tl-none border-2 border-zest bg-offblack bg-pearl/70 text-offblack backdrop-blur-sm xl:hidden">
+        <nav
+          ref={dropdownRef}
+          className="absolute z-[9999] w-[250px] rounded rounded-tl-none border-2 border-zest bg-offblack bg-pearl/70 text-offblack backdrop-blur-sm xl:hidden"
+        >
           {dropdownNavItems.map((li) => (
             <NavItem
               key={li.id}

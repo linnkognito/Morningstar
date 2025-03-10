@@ -16,7 +16,7 @@ function SortDropdown({ setIsOpen }) {
   }
 
   return (
-    <RefineDropdown padding="py-2">
+    <RefineDropdown setIsOpen={setIsOpen} padding="py-2">
       <ul>
         <NavItem
           key="lowestPrice"

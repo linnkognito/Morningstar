@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
+import { useMemo, useRef } from "react";
 import {
   applyFilters,
   clearFilters,
@@ -12,10 +13,10 @@ import SizeSelector from "../../ui/inputs/SizeSelector";
 import RangeSelector from "../../ui/inputs/RangeSelector";
 import ColorSelector from "../../ui/inputs/ColorSelector";
 import Button from "../../ui/buttons/Button";
-import { useMemo } from "react";
 
 function FilterDropdown({ setIsOpen }) {
   const dispatch = useDispatch();
+
   const { maxPrice } = useSelector((state) => state.products.filters);
   const { products, currentCategory } = useSelector((state) => state.products);
 
@@ -43,7 +44,7 @@ function FilterDropdown({ setIsOpen }) {
   }
 
   return (
-    <RefineDropdown className="flex">
+    <RefineDropdown setIsOpen={setIsOpen} className="flex">
       <SizeSelector
         type="filters"
         multiSelect={true}
