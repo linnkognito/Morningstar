@@ -23,6 +23,7 @@ function ProductCard({ product, setProductCardMenu, currentMenu }) {
 
   const dispatch = useDispatch();
   const navigator = useNavigate();
+  const ref = useRef();
 
   const [heartButtonHover, setHeartButtonHover] = useState(false);
 
@@ -52,6 +53,17 @@ function ProductCard({ product, setProductCardMenu, currentMenu }) {
     dispatch(clearSelections());
   }
 
+  useEffect(() => {
+    function handleClick(e) {
+      if (ref.current && !ref.current.contains(e.target))
+        setProductCardMenu(false);
+    }
+
+    document.addEventListener("click", handleClick);
+
+    return () => document.removeEventListener("click", handleClick);
+  }, [setProductCardMenu]);
+
   return (
     <div className="relative flex h-full min-h-[200px] w-full max-w-[285px] cursor-pointer flex-col justify-self-center rounded bg-pearl shadow-sm shadow-offblack">
       {/* Heart (save product) */}
@@ -60,7 +72,6 @@ function ProductCard({ product, setProductCardMenu, currentMenu }) {
         heartButtonHover={heartButtonHover}
         setHeartButtonHover={setHeartButtonHover}
         onClick={toggleSave}
-        // onClick={handleSaveItem}
       />
 
       {/* Image */}
@@ -91,7 +102,10 @@ function ProductCard({ product, setProductCardMenu, currentMenu }) {
         </div>
         <button
           className="font-base flex h-full w-[50px] min-w-[50px] items-center justify-center font-bebas text-6xl transition-transform duration-300 ease-out will-change-transform hover:scale-110 hover:bg-pearl/50"
-          onClick={() => handleMenuToggle(id)}
+          onClick={(e) => {
+            e.stopPropagation();
+            handleMenuToggle(id);
+          }}
         >
           <span>{currentMenu === id ? "-" : "+"}</span>
         </button>
@@ -100,9 +114,9 @@ function ProductCard({ product, setProductCardMenu, currentMenu }) {
       {/* Selection menu */}
       {currentMenu === id && (
         <div
+          ref={ref}
           className="absolute flex w-full flex-col"
           style={{ bottom: `${productBarHeight}px` }}
-          // style={{ bottom: `${productBar.current.offsetHeight}px` }}
         >
           <RefineDropdown className="rounded-b-none">
             <SizeSelector sizes={sizes} />
