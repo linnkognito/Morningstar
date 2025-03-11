@@ -4,14 +4,20 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  @apply font-primary;
+@layer base {
+  body {
+    @apply font-primary;
+  }
+  input[type="range"] {
+    accent-color: #0f0f0f; /* Changes the slider color */
+  }
 }
 
-.material-symbols-outlined {
-  font-family: "Material Symbols Outlined";
-}
-
-input[type="range"] {
-  accent-color: #0f0f0f; /* Changes the slider color */
+@layer utilities {
+  .animation-prep-300 {
+    @apply will-change transition-all duration-300 ease-out;
+  }
+  .animation-prep-transform {
+    @apply transition-transform duration-300 ease-out will-change-transform;
+  }
 }

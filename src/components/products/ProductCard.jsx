@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import { useDispatch } from "react-redux";
-import { clearSelections } from "./productSlice";
+// import { useDispatch } from "react-redux";
+// import { clearSelections } from "./productSlice";
 
 import RefineDropdown from "./menus/RefineDropdown";
 import SizeSelector from "../ui/inputs/SizeSelector";
@@ -10,14 +10,22 @@ import ColorSelector from "../ui/inputs/ColorSelector";
 import AddToCartButton from "../cart/AddToCartButton";
 import HeartButton from "./HeartButton";
 import { useSaveItem } from "../../utils/useSaveItem";
+// import ProductCardMenuButton from "./ProductCardMenuButton";
+import { useResizeObserver } from "../../hooks/useResizeObserver";
+import { useClickOutside } from "../../hooks/useClickOutside";
+import ProductCardBar from "./ProductCardBar";
 
 function ProductCard({ product, setProductCardMenu, currentMenu }) {
   const { _id: id, sizes, colors } = product;
   const { isSavedItem, toggleSave } = useSaveItem(id, product);
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const navigator = useNavigate();
+
+  const menuIsOpen = currentMenu === id;
+
   const ref = useRef();
+  useClickOutside(ref, () => setProductCardMenu(false));
 
   const [heartButtonHover, setHeartButtonHover] = useState(false);
 
@@ -27,40 +35,16 @@ function ProductCard({ product, setProductCardMenu, currentMenu }) {
   );
 
   const productBar = useRef(null);
-  const [productBarHeight, setProductBarHeight] = useState(0);
+  const productBarHeight = useResizeObserver(productBar);
 
-  useEffect(() => {
-    if (!productBar.current) return;
-
-    const observer = new ResizeObserver(() => {
-      if (productBar.current)
-        setProductBarHeight(productBar.current.offsetHeight);
-    });
-
-    observer.observe(productBar.current);
-
-    return () => observer.disconnect();
-  }, []);
-
-  function handleMenuToggle(id) {
-    currentMenu === id ? setProductCardMenu(null) : setProductCardMenu(id);
-    dispatch(clearSelections());
-  }
-
-  useEffect(() => {
-    function handleClick(e) {
-      if (ref.current && !ref.current.contains(e.target))
-        setProductCardMenu(false);
-    }
-
-    document.addEventListener("click", handleClick);
-
-    return () => document.removeEventListener("click", handleClick);
-  }, [setProductCardMenu]);
+  // function handleMenuToggle(id) {
+  //   menuIsOpen ? setProductCardMenu(null) : setProductCardMenu(id);
+  //   dispatch(clearSelections());
+  // }
 
   return (
     <div className="relative flex h-full min-h-[200px] w-full max-w-[285px] cursor-pointer flex-col justify-self-center rounded bg-pearl shadow-sm shadow-offblack">
-      {/* Heart (save product) */}
+      {/* Heart icon (save product) */}
       <HeartButton
         isSaved={isSavedItem}
         heartButtonHover={heartButtonHover}
@@ -79,7 +63,14 @@ function ProductCard({ product, setProductCardMenu, currentMenu }) {
       />
 
       {/* Product bar */}
-      <div
+      <ProductCardBar
+        ref={productBar}
+        id={id}
+        product={product}
+        isOpen={menuIsOpen}
+        setMenu={setProductCardMenu}
+      />
+      {/* <div
         ref={productBar}
         className="relative flex min-h-[84px] w-full flex-1 items-center justify-between overflow-hidden rounded-b bg-aura/80 pl-2"
       >
@@ -93,17 +84,18 @@ function ProductCard({ product, setProductCardMenu, currentMenu }) {
           <h3 className="font-bebas text-lg tracking-widest">
             ${product.price}
           </h3>
-        </div>
-        <button
-          className="font-base flex h-full w-[50px] min-w-[50px] items-center justify-center font-bebas text-6xl transition-transform duration-300 ease-out will-change-transform hover:scale-110 hover:bg-pearl/50"
+        </div>*/}
+
+      {/* Open menu button */}
+      {/*<ProductCardMenuButton
+          id={id}
+          isOpen={currentMenu === id}
           onClick={(e) => {
             e.stopPropagation();
             handleMenuToggle(id);
           }}
-        >
-          <span>{currentMenu === id ? "-" : "+"}</span>
-        </button>
-      </div>
+        />
+      </div> */}
 
       {/* Selection menu */}
       {currentMenu === id && (

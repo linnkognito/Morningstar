@@ -1,0 +1,24 @@
+import { useEffect } from "react";
+
+export function useClickOutside(ref, handler) {
+  useEffect(() => {
+    function handleClick(e) {
+      if (ref.current && !ref.current.contains(e.target)) handler();
+    }
+
+    document.addEventListener("click", handleClick);
+
+    return () => document.removeEventListener("click", handleClick);
+  }, [ref, handler]);
+}
+
+// useEffect(() => {
+//   function handleClick(e) {
+//     if (ref.current && !ref.current.contains(e.target))
+//       setProductCardMenu(false);
+//   }
+
+//   document.addEventListener("click", handleClick);
+
+//   return () => document.removeEventListener("click", handleClick);
+// }, [setProductCardMenu]);
