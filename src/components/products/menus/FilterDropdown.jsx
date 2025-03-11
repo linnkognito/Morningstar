@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useMemo } from "react";
+import { useAvailableColors } from "../../../hooks/useAvailableColors";
 import {
   applyFilters,
   clearFilters,
@@ -18,17 +18,9 @@ function FilterDropdown({ setIsOpen }) {
   const dispatch = useDispatch();
 
   const { maxPrice } = useSelector((state) => state.products.filters);
+
   const { products, currentCategory } = useSelector((state) => state.products);
-
-  const availableColors = useMemo(() => {
-    const colorSet = new Set();
-
-    products.forEach((product) => {
-      product.colors.forEach((color) => colorSet.add(color));
-    });
-
-    return Array.from(colorSet);
-  }, [products]);
+  const availableColors = useAvailableColors(products);
 
   function handleClearFilters() {
     dispatch(clearFilters());

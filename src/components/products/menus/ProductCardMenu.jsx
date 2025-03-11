@@ -1,8 +1,9 @@
 import { forwardRef } from "react";
-import AddToCartButton from "../../cart/AddToCartButton";
-import ColorSelector from "../../ui/inputs/ColorSelector";
-import SizeSelector from "../../ui/inputs/SizeSelector";
+
 import RefineDropdown from "./RefineDropdown";
+import SizeSelector from "../../ui/inputs/SizeSelector";
+import ColorSelector from "../../ui/inputs/ColorSelector";
+import AddToCartButton from "../../cart/AddToCartButton";
 
 const ProductCardMenu = forwardRef(({ product, productBarHeight }, ref) => {
   const { sizes, colors } = product;
