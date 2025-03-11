@@ -1,24 +1,25 @@
+import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
+
 import { addItem } from "./cartSlice";
+import { clearSelections } from "../products/productSlice";
 
 import Icon from "../common/Icon";
 import ActionButton from "../ui/buttons/ActionButton";
-import { clearSelections } from "../products/productSlice";
-import { useNavigate } from "react-router";
 
 function AddToCartButton({ product, width = "w-[90%]", bgColor = "bg-pearl" }) {
   const { name, image, price, _id: id } = product;
   const { size, color, quantity } = useSelector(
     (state) => state.products.selections,
   );
+  const cartItem = useSelector((state) =>
+    state.cart.cart.find((cartItem) => cartItem.id === id),
+  );
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const cartItem = useSelector((state) =>
-    state.cart.cart.find((cartItem) => cartItem.id === id),
-  );
   const maxQuantity = cartItem?.maxQuantity;
 
   function addToCart() {

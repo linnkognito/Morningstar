@@ -21,14 +21,14 @@ function SortDropdown({ setIsOpen }) {
         <NavItem
           key="lowestPrice"
           onClick={() => handleSort("low")}
-          className="will-change group flex w-full items-center text-2xl tracking-wider text-offblack transition-all duration-300 ease-out hover:bg-zest/65 hover:pl-6 group-hover:inline sm:text-2xl"
+          className="will-change group flex w-full items-center text-[1.4rem] tracking-wider text-offblack transition-all duration-300 ease-out hover:bg-zest/65 hover:pl-6 group-hover:inline"
         >
           <span>Price: Lowest first</span>
         </NavItem>
         <NavItem
           key="highestPrice"
           onClick={() => handleSort("high")}
-          className="will-change group flex w-full items-center text-2xl tracking-wider text-offblack transition-all duration-300 ease-out hover:bg-zest/65 hover:pl-6 group-hover:inline sm:text-2xl"
+          className="will-change group flex w-full items-center text-[1.4rem] tracking-wider text-offblack transition-all duration-300 ease-out hover:bg-zest/65 hover:pl-6 group-hover:inline"
         >
           <span>Price: Highest first</span>
         </NavItem>

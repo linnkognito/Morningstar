@@ -68,7 +68,7 @@ function CartItem({ item }) {
           </h2>
 
           {/* Product Price */}
-          <p className="text-md pl-1 text-grey-600 sm:text-xl lg:text-2xl">
+          <p className="text-md text-grey-600 sm:text-xl lg:text-2xl">
             ${item.price}
           </p>
         </div>

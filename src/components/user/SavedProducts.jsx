@@ -5,15 +5,12 @@ import { NavLink, useNavigate } from "react-router";
 import WrapperScreenGradient from "../ui/containers/WrapperScreenGradient";
 import ProductCard from "../products/ProductCard";
 import Banner from "../ui/Banner";
-import TextButton from "../ui/buttons//TextButton";
 import Icon from "../common/Icon";
 import ActionButton from "../ui/buttons/ActionButton";
-import ArrowButton from "../ui/buttons/ArrowButton";
 
 function SavedProducts() {
   const navigate = useNavigate();
   const [productCardMenu, setProductCardMenu] = useState(null);
-
   const { saved: savedProducts } = useSelector((state) => state.user);
   const hasSavedProducts = savedProducts?.length > 0;
 
@@ -66,7 +63,7 @@ function SavedProducts() {
           )}
 
           {!hasSavedProducts && (
-            <div className="mx-auto w-1/2 space-y-4 rounded-xl p-4 text-center">
+            <div className="mx-auto space-y-4 rounded-xl p-4 text-center md:w-1/2">
               <h2 className="text-2xl text-offblack">Your wishlist is empty</h2>
               <NavLink to="/products">
                 <ActionButton>

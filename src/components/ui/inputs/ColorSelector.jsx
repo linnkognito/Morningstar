@@ -15,6 +15,7 @@ function ColorSelector({
       ? state.products.selections.color
       : state.products.filters.colors,
   );
+  const isFilter = type === "filters";
 
   function applyStyles(color) {
     if (!colorSelections.length) return "hover:scale-105";
@@ -34,10 +35,14 @@ function ColorSelector({
 
   return (
     <div
-      className={`grid w-full gap-2 ${type === "filters" ? "grid-cols-8" : ""}`}
-      style={{
-        gridTemplateColumns: `repeat(${colors.length}, minmax(30px, 1fr))`,
-      }}
+      className={`grid w-full gap-2 ${isFilter ? "grid-cols-8" : ""}`}
+      style={
+        !isFilter
+          ? {
+              gridTemplateColumns: `repeat(${colors.length}, minmax(30px, 1fr))`,
+            }
+          : {}
+      }
     >
       {colors.map((color) => (
         <button

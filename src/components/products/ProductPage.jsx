@@ -51,13 +51,18 @@ function ProductPage() {
         </div>
 
         {/* Actionbar (top) */}
-        <div className="flex items-center xl:hidden">
+        <div
+          className="group flex w-fit cursor-pointer items-center xl:hidden"
+          onClick={() => navigate(-1)}
+        >
           <ArrowButton
             dir="left"
             size="text-md"
             className="cursor-pointer text-offblack"
-            onClick={() => navigate(-1)}
           />
+          <span className="will-change pl-1 text-offblack opacity-0 duration-300 ease-in-out group-hover:opacity-100">
+            Back
+          </span>
         </div>
 
         {product && (
@@ -68,13 +73,6 @@ function ProductPage() {
                 alt={`Product: ${product.name}`}
                 className="rounded-xl shadow-sm shadow-offblack"
               />
-              <AddProductButtonSet
-                product={product}
-                onClick={toggleSave}
-                isSavedItem={isSavedItem}
-                className="hidden sm:grid md:hidden"
-                buttonWidth="w-[95%]"
-              />
             </div>
             {/* Title, Price & Selectiors */}
             <Container
@@ -83,13 +81,15 @@ function ProductPage() {
               color="bg-aura/20"
               className="flex flex-col items-start justify-start gap-1 px-6 py-6"
             >
-              <h2 className="text-3xl text-offblack">{product.name}</h2>
-              <h3 className="text-2xl text-offblack">${product.price}</h3>
+              <div className="flex flex-col items-start">
+                <h2 className="text-3xl text-offblack">{product.name}</h2>
+                <h3 className="text-2xl text-grey-600">${product.price}</h3>
+              </div>
 
               {/* Selections */}
               <Container
                 color="bg-pearl/90"
-                width="w-full  max-w-full"
+                width="w-full max-w-full"
                 className="px-4 py-4"
               >
                 <SizeSelector
@@ -97,11 +97,7 @@ function ProductPage() {
                   multiSelect={false}
                   type="selections"
                 />
-                <ColorSelector
-                  colors={product?.colors}
-                  multiSelect={false}
-                  // className="px-6"
-                />
+                <ColorSelector colors={product?.colors} multiSelect={false} />
                 <QuantitySelector
                   text="quantity:"
                   quantity={quantity}
@@ -115,25 +111,9 @@ function ProductPage() {
                 product={product}
                 onClick={toggleSave}
                 isSavedItem={isSavedItem}
-                className="sm:hidden md:grid"
+                className="grid"
               />
 
-              {/* <div className="grid w-full grid-cols-1 gap-1">
-                <AddToCartButton
-                  product={product}
-                  width="w-full"
-                  bgColor="bg-zest/70"
-                />
-                <ActionButton
-                  color="bg-aura/70"
-                  hoverColor="hover:bg-aura"
-                  width="w-full"
-                  className="text-lg"
-                  onClick={toggleSave}
-                >
-                  {isSavedItem ? "Remove from wishlist" : "Add to wishlist"}
-                </ActionButton>
-              </div> */}
               {/* Accordions */}
               <div className="mt-4 w-full">
                 <Accordion title="Product details">

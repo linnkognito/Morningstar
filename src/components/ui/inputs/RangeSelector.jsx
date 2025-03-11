@@ -1,7 +1,7 @@
 function RangeSelector({ value, onChange = () => {} }) {
   return (
     <div className="flex w-full items-center gap-3 px-2 text-offblack">
-      <span className="text-2xl">Max</span>
+      <span className="text-xl">Max</span>
 
       <input
         className="w-full"
@@ -14,7 +14,7 @@ function RangeSelector({ value, onChange = () => {} }) {
         onChange={onChange}
       />
 
-      <span className="text-2xl">${value}</span>
+      <span className="text-xl">${value}</span>
     </div>
   );
 }

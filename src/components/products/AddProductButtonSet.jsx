@@ -1,5 +1,3 @@
-import { useSaveItem } from "../../utils/useSaveItem";
-
 import AddToCartButton from "../cart/AddToCartButton";
 import ActionButton from "../ui/buttons/ActionButton";
 

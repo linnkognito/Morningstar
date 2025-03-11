@@ -42,7 +42,7 @@ function Signup() {
 
           <AuthRedirect
             text="Already have an account?"
-            path="/user/signup"
+            path="/user/login"
             linkText="Login"
           />
         </Form>

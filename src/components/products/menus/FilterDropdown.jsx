@@ -65,14 +65,14 @@ function FilterDropdown({ setIsOpen }) {
       <div className="flex w-full gap-4 px-2 pt-2">
         <Button
           type="filter"
-          className="will-change bg-sea duration-300 ease-out hover:scale-105"
+          className="will-change bg-sea text-xl duration-300 ease-out hover:scale-105"
           onClick={handleClearFilters}
         >
           Clear
         </Button>
         <Button
           type="filter"
-          className="will-change bg-pearl duration-300 ease-out hover:scale-105"
+          className="will-change bg-pearl text-xl duration-300 ease-out hover:scale-105"
           onClick={handleApplyFilters}
         >
           Apply
