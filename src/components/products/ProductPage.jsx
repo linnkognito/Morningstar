@@ -89,7 +89,7 @@ function ProductPage() {
               {/* Selections */}
               <Container
                 color="bg-pearl/90"
-                width="w-full"
+                width="w-full  max-w-full"
                 className="px-4 py-4"
               >
                 <SizeSelector
@@ -100,7 +100,7 @@ function ProductPage() {
                 <ColorSelector
                   colors={product?.colors}
                   multiSelect={false}
-                  className="px-6"
+                  // className="px-6"
                 />
                 <QuantitySelector
                   text="quantity:"

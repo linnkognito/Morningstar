@@ -27,23 +27,6 @@ function SizeSelector({
       : state.products.filters.sizes,
   );
 
-  function applyStyles(size, type) {
-    size = size.toUpperCase();
-
-    if (type === "bg") {
-      if (!sizeSelections.length) return "bg-pearl";
-      return sizeSelections.includes(size) || sizeSelections[0] === size
-        ? "bg-aura/60"
-        : "bg-pearl";
-    }
-
-    if (type === "className") {
-      return sizeSelections.includes(size) || sizeSelections[0] === size
-        ? "scale-105"
-        : "opacity-50 hover:opacity-100";
-    }
-  }
-
   function toggleSizeSelection(size) {
     size = size.toUpperCase();
 
@@ -52,6 +35,22 @@ function SizeSelector({
 
     if (type === "filters")
       return dispatch(setSizeFilter({ size, isMultiSelect: multiSelect }));
+  }
+
+  function applyStyles(size, type) {
+    size = size.toUpperCase();
+
+    if (type === "bg") {
+      if (!sizeSelections.length) return "bg-pearl";
+      return sizeSelections.includes(size) ? "bg-aura/60" : "bg-pearl";
+    }
+
+    if (type === "className") {
+      if (!sizeSelections.length) return;
+      return sizeSelections.includes(size)
+        ? "scale-105"
+        : "opacity-50 hover:opacity-100";
+    }
   }
 
   return (

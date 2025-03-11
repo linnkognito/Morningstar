@@ -34,12 +34,15 @@ function ColorSelector({
 
   return (
     <div
-      className={`w-full gap-2 ${type === "filters" ? "grid grid-cols-8" : "flex"}`}
+      className={`grid w-full gap-2 ${type === "filters" ? "grid-cols-8" : ""}`}
+      style={{
+        gridTemplateColumns: `repeat(${colors.length}, minmax(30px, 1fr))`,
+      }}
     >
       {colors.map((color) => (
         <button
           key={color}
-          className={`${color} ${height} ${className} w-full rounded shadow-sm shadow-offblack transition-transform duration-300 ease-out will-change-transform ${applyStyles(color)}`}
+          className={`${color} ${height} ${className} rounded shadow-sm shadow-offblack transition-transform duration-300 ease-out will-change-transform ${applyStyles(color)}`}
           onClick={() => toggleColorSelection(color)}
           disabled={disabled}
         ></button>

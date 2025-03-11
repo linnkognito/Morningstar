@@ -27,25 +27,22 @@ function SavedProducts() {
         <div className="mx-auto flex w-full min-w-fit max-w-[1284px] flex-col space-y-3 rounded-md bg-pearl/60 p-6 shadow-sm shadow-offblack backdrop-blur-md">
           {/* Nav */}
           {hasSavedProducts && (
-            <nav className="flex justify-between border-b border-aura/30 pb-2">
-              <NavLink to={() => navigate(-1)}>
-                <ActionButton
-                  width="w-fit"
-                  fontSize="text-xl"
-                  className="flex pl-2 pr-4"
-                  onClick={() => navigate(-1)}
-                >
-                  <Icon name="arrow_back" />
-                  Back
-                </ActionButton>
-              </NavLink>
+            <nav className="flex items-center justify-between border-b border-aura/30 pb-2">
+              <ActionButton
+                width="w-fit"
+                fontSize="text-xl"
+                className="mx-0 pl-2 pr-4"
+                onClick={() => navigate(-1)}
+              >
+                <Icon name="arrow_back" />
+                Back
+              </ActionButton>
 
               <NavLink to="/cart">
                 <ActionButton
                   width="w-fit"
                   fontSize="text-xl"
                   className="flex pl-4 pr-2"
-                  onClick={() => navigate(-1)}
                 >
                   Cart
                   <Icon name="arrow_forward" />
