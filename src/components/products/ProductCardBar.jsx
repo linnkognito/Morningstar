@@ -3,9 +3,11 @@ import { clearSelections } from "./productSlice";
 
 import ProductCardMenuButton from "./ProductCardMenuButton";
 import { forwardRef } from "react";
+import { useNavigate } from "react-router";
 
 const ProductCardBar = forwardRef(({ id, product, isOpen, setMenu }, ref) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   function handleMenuToggle() {
     isOpen ? setMenu(null) : setMenu(id);
@@ -20,7 +22,7 @@ const ProductCardBar = forwardRef(({ id, product, isOpen, setMenu }, ref) => {
       <div className="flex h-full flex-col pt-2">
         <h2
           className="font-bebas text-xl tracking-widest hover:bg-zest/70 xl:text-[1.35rem]"
-          onClick={() => navigator(`/products/${id}`)}
+          onClick={() => navigate(`/products/${id}`)}
         >
           {product.name}
         </h2>

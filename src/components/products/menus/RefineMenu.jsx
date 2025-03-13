@@ -7,8 +7,8 @@ import FilterDropdown from "./FilterDropdown";
 function RefineMenu() {
   const [isOpen, setIsOpen] = useState(null);
 
-  const handleClick = (button) => {
-    isOpen === button ? setIsOpen(null) : setIsOpen(button);
+  const handleClick = (type) => {
+    isOpen === type ? setIsOpen(null) : setIsOpen(type);
   };
 
   return (

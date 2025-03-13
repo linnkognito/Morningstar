@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useNavigate, useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { useSaveItem } from "../../utils/useSaveItem";
 
 import {
@@ -18,6 +18,7 @@ import Spinner from "../common/Spinner";
 import ArrowButton from "../ui/buttons/ArrowButton";
 import Accordion from "../common/Accordion";
 import AddProductButtonSet from "./AddProductButtonSet";
+import ProductPageNav from "./menus/ProductPageNav";
 
 function ProductPage() {
   const { id } = useParams();
@@ -50,20 +51,8 @@ function ProductPage() {
           />
         </div>
 
-        {/* Actionbar (top) */}
-        <div
-          className="group flex w-fit cursor-pointer items-center xl:hidden"
-          onClick={() => navigate(-1)}
-        >
-          <ArrowButton
-            dir="left"
-            size="text-md"
-            className="cursor-pointer text-offblack"
-          />
-          <span className="will-change pl-1 text-offblack opacity-0 duration-300 ease-in-out group-hover:opacity-100">
-            Back
-          </span>
-        </div>
+        {/* Navigation (top) */}
+        <ProductPageNav />
 
         {product && (
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
@@ -74,6 +63,7 @@ function ProductPage() {
                 className="rounded-xl shadow-sm shadow-offblack"
               />
             </div>
+
             {/* Title, Price & Selectiors */}
             <Container
               width="w-full"
@@ -118,16 +108,16 @@ function ProductPage() {
               <div className="mt-4 w-full">
                 <Accordion title="Product details">
                   <ul className="list-disc">
-                    <li>100% cotton</li>
-                    <li>Length 32"</li>
-                    <li>Cropped</li>
+                    {product.productDetails?.map((detail) => (
+                      <li>{detail}</li>
+                    ))}
                   </ul>
                 </Accordion>
                 <Accordion title="Care instructions">
                   <ul className="list-disc">
-                    <li>Machine wash cold</li>
-                    <li>Wash with similar colors</li>
-                    <li>Do not tumble dry</li>
+                    {product.careInstructions?.map((care) => (
+                      <li>{care}</li>
+                    ))}
                   </ul>
                 </Accordion>
               </div>

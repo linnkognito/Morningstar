@@ -25,6 +25,7 @@ function SortDropdown({ setIsOpen }) {
         >
           <span>Price: Lowest first</span>
         </NavItem>
+
         <NavItem
           key="highestPrice"
           onClick={() => handleSort("high")}

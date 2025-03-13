@@ -69,10 +69,6 @@ const initialState = {
   status: "idle",
 };
 
-// function findProduct(state, id) {
-//   return state.products.find((product) => product._id === id) || null;
-// }
-
 const productsSlice = createSlice({
   name: "products",
   initialState,

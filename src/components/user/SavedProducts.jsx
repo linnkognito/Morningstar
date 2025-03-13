@@ -21,19 +21,21 @@ function SavedProducts() {
         <Banner heading="Wishlist" />
 
         {/* Content */}
-        <div className="mx-auto flex w-full min-w-fit max-w-[1284px] flex-col space-y-3 rounded-md bg-pearl/60 p-6 shadow-sm shadow-offblack backdrop-blur-md">
+        <div className="mx-auto flex w-full min-w-fit max-w-[1284px] flex-col space-y-3 rounded-md bg-pearl/60 px-6 pb-6 pt-2 shadow-sm shadow-offblack backdrop-blur-md">
           {/* Nav */}
           {hasSavedProducts && (
-            <nav className="flex items-center justify-between border-b border-aura/30 pb-2">
-              <ActionButton
-                width="w-fit"
-                fontSize="text-xl"
-                className="mx-0 pl-2 pr-4"
-                onClick={() => navigate(-1)}
-              >
-                <Icon name="arrow_back" />
-                Back
-              </ActionButton>
+            <nav className="flex h-full items-center justify-between border-b border-aura/30 px-2 pb-3">
+              <div>
+                <ActionButton
+                  width="w-fit"
+                  fontSize="text-xl"
+                  className="mx-0 pl-2 pr-4"
+                  onClick={() => navigate(-1)}
+                >
+                  <Icon name="arrow_back" />
+                  Back
+                </ActionButton>
+              </div>
 
               <NavLink to="/cart">
                 <ActionButton

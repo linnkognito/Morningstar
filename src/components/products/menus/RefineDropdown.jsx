@@ -1,4 +1,5 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
+import { useClickOutside } from "../../../hooks/useClickOutside";
 
 function RefineDropdown({
   children,
@@ -7,16 +8,7 @@ function RefineDropdown({
   setIsOpen,
 }) {
   const ref = useRef();
-
-  useEffect(() => {
-    function handleClick(e) {
-      if (ref.current && !ref.current.contains(e.target)) setIsOpen(false);
-    }
-
-    document.addEventListener("click", handleClick);
-
-    return () => document.removeEventListener("click", handleClick);
-  }, [setIsOpen]);
+  useClickOutside(ref, () => setIsOpen(false));
 
   return (
     <div

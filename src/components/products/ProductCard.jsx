@@ -14,7 +14,7 @@ function ProductCard({ product, setProductCardMenu, currentMenu }) {
   const { _id: id } = product;
   const { isSavedItem, toggleSave } = useSaveItem(id, product);
 
-  const navigator = useNavigate();
+  const navigate = useNavigate();
 
   const menuIsOpen = currentMenu === id;
 
@@ -48,7 +48,7 @@ function ProductCard({ product, setProductCardMenu, currentMenu }) {
         effect="opacity"
         wrapperProps={{ style: { transitionDelay: "1.5s" } }}
         className="h-[280px] w-full rounded-t object-cover object-center"
-        onClick={() => navigator(`/products/${id}`)}
+        onClick={() => navigate(`/products/${id}`)}
       />
 
       {/* Product bar */}
