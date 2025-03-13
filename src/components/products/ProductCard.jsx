@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { useNavigate } from "react-router";
 import { useSaveItem } from "../../utils/useSaveItem";
 import { useResizeObserver } from "../../hooks/useResizeObserver";
-import { useClickOutside } from "../../hooks/useClickOutside";
+// import { useClickOutside } from "../../hooks/useClickOutside";
 
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
@@ -22,7 +22,7 @@ function ProductCard({ product, setProductCardMenu, currentMenu }) {
   const productBarHeight = useResizeObserver(productBar);
 
   const ref = useRef();
-  useClickOutside(ref, () => setProductCardMenu(false));
+  // useClickOutside(ref, () => setProductCardMenu(false));
 
   const [heartButtonHover, setHeartButtonHover] = useState(false);
 
@@ -66,6 +66,7 @@ function ProductCard({ product, setProductCardMenu, currentMenu }) {
           ref={ref}
           product={product}
           productBarHeight={productBarHeight}
+          setIsOpen={setProductCardMenu}
         />
       )}
     </div>

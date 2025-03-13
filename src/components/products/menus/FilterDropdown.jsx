@@ -27,7 +27,6 @@ function FilterDropdown({ setIsOpen }) {
     currentCategory
       ? dispatch(fetchProductsByCategory(currentCategory))
       : dispatch(fetchAllProducts());
-    setIsOpen(false);
   }
 
   function handleApplyFilters() {
