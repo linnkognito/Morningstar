@@ -1,5 +1,7 @@
+import Login from '../../_components/user/Login';
+
 function Page() {
-  return <div>LoginPage</div>;
+  return <Login />;
 }
 
 export default Page;

@@ -3,7 +3,7 @@
 import { useEffect, RefObject } from 'react';
 
 interface UseDismissDropdownProps {
-  dropdownRef: RefObject<HTMLElement>;
+  dropdownRef: RefObject<HTMLElement> | null;
   onDismiss: () => void;
 }
 
@@ -12,6 +12,8 @@ export default function useDismissDropdown({
   onDismiss,
 }: UseDismissDropdownProps) {
   useEffect(() => {
+    if (!dropdownRef) return;
+
     const handleClick = (e: MouseEvent) => {
       if (
         dropdownRef.current &&

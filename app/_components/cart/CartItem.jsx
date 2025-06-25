@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import toast from 'react-hot-toast';
-
-import { decQuantity, deleteItem, incQuantity } from './cartSlice';
-
+import {
+  decQuantity,
+  deleteItem,
+  incQuantity,
+} from '@/app/_redux/slices/cartSlice';
 import Icon from '../common/Icon';
 import QuantitySelector from '../ui/inputs/QuantitySelector';
 import ColorSelector from '../ui/inputs/ColorSelector';
@@ -14,9 +16,7 @@ function CartItem({ item }) {
     state.cart.cart.find((cartItem) => cartItem.id === item.id)
   );
   const maxQuantity = cartItem?.maxQuantity || 0;
-
   const [deleteIsHovered, setDeleteIsHovered] = useState(false);
-
   const optimizedImage = item.image.replace(
     '/upload/',
     '/upload/w_150,f_auto,q_auto/'
@@ -25,7 +25,6 @@ function CartItem({ item }) {
   function handleIncQuantity() {
     if (item.quantity >= maxQuantity)
       return toast.error('Sorry! No more items available in this size.');
-
     dispatch(incQuantity(item));
   }
 
