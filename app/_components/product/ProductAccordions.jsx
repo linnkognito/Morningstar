@@ -7,16 +7,16 @@ function ProductAccordions({ product }) {
     <div className='mt-4 w-full'>
       <Accordion title='Product details'>
         <ul className='list-disc'>
-          {product.productDetails?.map((detail) => (
-            <li>{detail}</li>
+          {product.productDetails?.map((detail, i) => (
+            <li key={`${detail}-${i}`}>{detail}</li>
           ))}
         </ul>
       </Accordion>
 
       <Accordion title='Care instructions'>
         <ul className='list-disc'>
-          {product.careInstructions?.map((care) => (
-            <li>{care}</li>
+          {product.careInstructions?.map((care, i) => (
+            <li key={`${care}-${i}`}>{care}</li>
           ))}
         </ul>
       </Accordion>

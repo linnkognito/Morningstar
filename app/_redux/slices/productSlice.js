@@ -116,11 +116,10 @@ const productsSlice = createSlice({
       );
     },
     setMaxPriceFilter: (state, action) => {
-      state.filters.maxPrice = action.payload;
+      state.filters = { ...state.filters, maxPrice: action.payload };
     },
     setColorFilter: (state, action) => {
       const { color, isMultiSelect } = action.payload;
-
       state.filters.colors = handleSelection(
         state.filters.colors,
         color,
@@ -133,10 +132,10 @@ const productsSlice = createSlice({
 
     // Sorting
     sortLowestPriceFirst: (state) => {
-      state.products.sort((a, b) => a.price - b.price);
+      state.products = [...state.products].sort((a, b) => a.price - b.price);
     },
     sortHighestPriceFirst: (state) => {
-      state.products.sort((a, b) => b.price - a.price);
+      state.products = [...state.products].sort((a, b) => b.price - a.price);
     },
 
     // Current product

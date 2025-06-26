@@ -15,7 +15,7 @@ function SortDropdown({ isOpen, setIsOpen }) {
   const dropdownRef = useRef(null);
 
   function handleSort(selection) {
-    selection === 'low'
+    selection === 'price-lowest'
       ? dispatch(sortLowestPriceFirst())
       : dispatch(sortHighestPriceFirst());
 
