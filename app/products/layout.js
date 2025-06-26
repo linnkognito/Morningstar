@@ -6,6 +6,7 @@ import RefineMenu from '@/app/_components/products/menus/RefineMenu';
 
 function ProductsLayout({ children }) {
   const { categoryName } = useParams();
+  const { id } = useParams();
 
   return (
     <article className='flex w-full justify-center pb-[75px] sm:pb-4'>

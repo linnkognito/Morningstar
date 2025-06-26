@@ -1,5 +1,7 @@
+import Signup from '../../_components/user/Signup';
+
 function Page() {
-  return <div>SignupPage</div>;
+  return <Signup />;
 }
 
 export default Page;

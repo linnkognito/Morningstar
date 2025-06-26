@@ -21,7 +21,7 @@ export default function Header() {
           <h1
             className='
           md:text-5xl xl:text-center text-black 
-          duration-300 animate-none
+          animate-none
           hover:animate-[gradient-animation_2s_ease_infinite]
           hover:bg-gradient-to-r hover:from-zest  hover:to-aura
           hover:bg-[length:200%] hover:bg-clip-text

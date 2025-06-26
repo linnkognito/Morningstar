@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { clearSelections } from '@/app/_redux/slices/productSlice';
 
 import ProductCardMenuButton from '@/app/_components/products/ProductCardMenuButton';
+import Link from 'next/link';
 
 const ProductCardBar = forwardRef(({ id, product, isOpen, setMenu }, ref) => {
   const dispatch = useDispatch();
@@ -20,7 +21,7 @@ const ProductCardBar = forwardRef(({ id, product, isOpen, setMenu }, ref) => {
       className='relative flex min-h-[84px] w-full flex-1 items-center justify-between overflow-hidden rounded-b bg-aura/80 pl-2'
     >
       <div className='flex h-full flex-col pt-2'>
-        <Link href={`/products/${id}`}>
+        <Link href={`/product/${id}`}>
           <h2 className='font-bebas text-xl tracking-widest hover:bg-zest/70 xl:text-[1.35rem]'>
             {product.name}
           </h2>

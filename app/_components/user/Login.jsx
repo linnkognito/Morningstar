@@ -14,7 +14,7 @@ function Login() {
       <ContainerSimple
         width='w-fit max-w-[700px]'
         bg='bg-white/80'
-        className='px-20 pb-10 pt-6 text-offblack z-100'
+        className='px-20 pb-10 pt-6 text-offblack'
       >
         <h2 className='w-full border-b border-aura/30 pb-4 text-center font-bebas text-4xl'>
           Login

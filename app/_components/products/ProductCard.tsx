@@ -1,26 +1,35 @@
+'use client';
+
 import { useRef, useState } from 'react';
 import { useSaveItem } from '@/app/_utils/useSaveItem';
+import { useClickOutside } from '@/app/_hooks/useClickOutside';
 import { useResizeObserver } from '@/app/_hooks/useResizeObserver';
-
+import { Product } from '@/app/_types/product';
 import HeartButton from './HeartButton';
 import ProductCardBar from './ProductCardBar';
 import ProductCardMenu from './menus/ProductCardMenu';
 import Image from 'next/image';
 import Link from 'next/link';
 
-function ProductCard({ product, setProductCardMenu, currentMenu }) {
-  const { _id: id } = product;
-  const { isSavedItem, toggleSave } = useSaveItem(id, product);
-
-  const menuIsOpen = currentMenu === id;
-
+function ProductCard({
+  product,
+  setProductCardMenu,
+  currentMenu,
+}: {
+  product: Product;
+  setProductCardMenu: (menu: string | boolean) => void;
+  currentMenu: string;
+}) {
+  const { _id: id, image, name } = product;
   const productBar = useRef(null);
   const productBarHeight = useResizeObserver(productBar);
-
-  const ref = useRef();
-  // useClickOutside(ref, () => setProductCardMenu(false));
+  const ref = useRef(null);
 
   const [heartButtonHover, setHeartButtonHover] = useState(false);
+  const { isSavedItem, toggleSave } = useSaveItem(id, product);
+  const menuIsOpen = currentMenu === id;
+
+  useClickOutside(ref, () => setProductCardMenu(false));
 
   return (
     <div className='relative flex h-full min-h-[200px] w-full max-w-[285px] cursor-pointer flex-col justify-self-center rounded bg-pearl shadow-sm shadow-offblack'>
@@ -34,12 +43,13 @@ function ProductCard({ product, setProductCardMenu, currentMenu }) {
 
       {/* Image */}
       <Link
-        href={`/products/${id}`}
+        href={`/product/${id}`}
         className='relative aspect-5/4 h-[280px] w-full overflow-hidden rounded-t'
       >
         <Image
-          src={product.image}
-          alt={product.name}
+          src={image}
+          alt={name}
+          sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
           fill
           className='object-cover object-center'
         />
