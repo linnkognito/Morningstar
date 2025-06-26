@@ -147,7 +147,7 @@ const productsSlice = createSlice({
   extraReducers: (builder) => {
     builder
       // Fetch all products
-      .addCase(fetchAllProducts.pending, (state, action) => {
+      .addCase(fetchAllProducts.pending, (state) => {
         state.status = 'loading';
       })
       .addCase(fetchAllProducts.fulfilled, (state, action) => {
@@ -155,12 +155,12 @@ const productsSlice = createSlice({
         state.currentCategory = null;
         state.status = 'idle';
       })
-      .addCase(fetchAllProducts.rejected, (state, action) => {
+      .addCase(fetchAllProducts.rejected, (state) => {
         state.status = 'error';
       })
 
       // Fetch by category
-      .addCase(fetchProductsByCategory.pending, (state, action) => {
+      .addCase(fetchProductsByCategory.pending, (state) => {
         state.status = 'loading';
       })
       .addCase(fetchProductsByCategory.fulfilled, (state, action) => {
@@ -168,19 +168,19 @@ const productsSlice = createSlice({
         state.currentCategory = action.meta.arg;
         state.status = 'idle';
       })
-      .addCase(fetchProductsByCategory.rejected, (state, action) => {
+      .addCase(fetchProductsByCategory.rejected, (state) => {
         state.status = 'error';
       })
 
       // Fetch by product ID
-      .addCase(fetchProductById.pending, (state, action) => {
+      .addCase(fetchProductById.pending, (state) => {
         state.status = 'loading';
       })
       .addCase(fetchProductById.fulfilled, (state, action) => {
         state.currentProduct = action.payload;
         state.status = 'idle';
       })
-      .addCase(fetchProductById.rejected, (state, action) => {
+      .addCase(fetchProductById.rejected, (state) => {
         state.status = 'error';
       });
   },

@@ -1,18 +1,12 @@
-'use client';
-
-import { useParams } from 'next/navigation';
 import Banner from '@/app/_components/ui/Banner';
 import RefineMenu from '@/app/_components/products/menus/RefineMenu';
 
 function ProductsLayout({ children }) {
-  const { categoryName } = useParams();
-  const { id } = useParams();
-
   return (
     <article className='flex w-full justify-center pb-[75px] sm:pb-4'>
       <section className='flex w-full max-w-[1284px] flex-col gap-3 px-2'>
         {/* Banner */}
-        <Banner heading={categoryName || 'All products'} />
+        <Banner />
 
         {/* Content */}
         <section className='mx-auto flex w-full min-w-fit max-w-[1284px] flex-col space-y-3'>
