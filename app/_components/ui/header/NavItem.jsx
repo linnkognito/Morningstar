@@ -1,18 +1,31 @@
+import Link from 'next/link';
+
 function NavItem({
   children,
-  id,
   path,
-  onToggle = null,
+  alt,
+  isActive = false,
+  onToggle = () => {},
   onClick = () => {},
   className = '',
 }) {
   return (
     <li
       className={`${className} flex h-full items-center p-4 text-offblack transition duration-200 ease-in hover:bg-aura/30`}
-      onToggle={() => onToggle(id)}
+      onToggle={onToggle}
       onClick={onClick}
     >
-      {children}
+      {path ? (
+        <Link
+          href={path}
+          aria-label={alt}
+          aria-current={isActive ? 'page' : undefined}
+        >
+          {children}
+        </Link>
+      ) : (
+        children
+      )}
     </li>
   );
 }

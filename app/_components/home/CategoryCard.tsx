@@ -8,6 +8,7 @@ function CategoryCard({
   title,
   color,
   image,
+  priority = false,
   hoverColor,
   className,
 }: Category) {
@@ -22,6 +23,7 @@ function CategoryCard({
         src={image.src}
         alt={image.alt}
         fill
+        priority={priority}
         className='object-cover object-[50%_40%]'
       />
 

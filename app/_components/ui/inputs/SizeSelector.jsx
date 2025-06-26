@@ -60,7 +60,7 @@ function SizeSelector({
 
   return (
     <div
-      className={`${className} grid-cols-auto-fit grid w-full max-w-full items-center justify-start gap-2 xl:grid-cols-6 ${
+      className={`${className} grid-cols-auto-fit grid w-full max-w-full items-center justify-start gap-2 xl:grid-cols-6 cursor-pointer ${
         sizes.length === 1 ? 'grid-cols-1' : 'grid-cols-3'
       }`}
     >

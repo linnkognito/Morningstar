@@ -3,6 +3,7 @@ export type Category = {
   title: string;
   image: { src: string; alt: string };
   color: string;
+  priority: boolean;
   hoverColor: string;
   className: string;
 };
@@ -16,6 +17,7 @@ export const categories: Category[] = [
       alt: 'Image of a woman laying down in the sun with her eyes closed, wearing an orange hoodie and orange eyeshadow.',
     },
     color: 'bg-ember',
+    priority: true,
     hoverColor: 'bg-aura/50',
     className: 'rounded-t-xl md:rounded-xl md:rounded-r-none',
   },
@@ -27,6 +29,7 @@ export const categories: Category[] = [
       alt: 'Image of a man wearing a beige bucket hat.',
     },
     color: 'bg-aura',
+    priority: false,
     hoverColor: 'bg-ember/50',
     className: '',
   },
@@ -38,6 +41,7 @@ export const categories: Category[] = [
       alt: 'Image of a man and a woman wearing sunglasses.',
     },
     color: 'bg-zest',
+    priority: false,
     hoverColor: 'bg-moss/50',
     className: 'object-[60%_30%]',
   },
@@ -49,6 +53,7 @@ export const categories: Category[] = [
       alt: 'Image of a woman wearing a bikini.',
     },
     color: 'bg-pearl',
+    priority: false,
     hoverColor: 'bg-zest/50',
     className: 'rounded-b-xl md:rounded-xl md:rounded-l-none',
   },

@@ -11,7 +11,6 @@ import {
 import Container from '@/app/_components/common/Container';
 import Spinner from '@/app/_components/common/Spinner';
 import AddProductButtonSet from '@/app/_components/products/AddProductButtonSet';
-import ProductPageNav from '@/app/_components/products/menus/ProductPageNav';
 import BackButton from '@/app/_components/ui/buttons/BackButton';
 import ProductSelections from '@/app/_components/product/ProductSelections';
 import ProductImage from '@/app/_components/product/ProductImage';
@@ -36,11 +35,13 @@ function ProductPage() {
   return (
     <article className='flex max-sm:flex-col h-full w-full justify-center bg-gradient-to-l from-aura/50 via-mint/40 to-zest/30 px-6 py-6'>
       <BackButton className='max-sm:hidden' />
-      <Container tag='section' className=' w-full max-w-[1000px] px-4 py-4'>
-        {/* <ProductPageNav /> */}
 
+      <Container tag='section' className=' w-full max-w-[1000px] px-4 py-4'>
         {product && (
-          <section className='relative grid grid-cols-1 gap-3 sm:grid-cols-2'>
+          <section
+            role='main'
+            className='relative grid grid-cols-1 gap-3 sm:grid-cols-2'
+          >
             <BackButton className='absolute top-2 right-0 z-50 sm:hidden' />
 
             <ProductImage image={product.image} name={product.name} />

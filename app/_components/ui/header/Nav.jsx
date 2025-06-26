@@ -5,8 +5,7 @@ import { useRef, useState } from 'react';
 import { ArrowRightIcon, Bars3Icon } from '@heroicons/react/24/outline';
 import useDismissDropdown from '@/app/_hooks/useDismissDropdown';
 import NavItem from './NavItem';
-import Icon from '../../common/Icon';
-import Link from 'next/link';
+import NavDropdownButton from '../buttons/NavDropdownButton';
 
 function Nav({ onToggle, activeItem }) {
   const dropdownRef = useRef();
@@ -15,20 +14,17 @@ function Nav({ onToggle, activeItem }) {
   useDismissDropdown(dropdownRef, setShowDropdownNav);
 
   return (
-    <nav className='relative h-full cursor-pointer'>
+    <nav role='Primary navigation' className='relative h-full cursor-pointer'>
       {/* Smaller screens (dropdown menu) */}
-      <NavItem
+      <NavDropdownButton
         id='dropdown'
-        className={`xl:hidden ${showDropdownNav && 'bg-zest text-offblack'}`}
+        alt='Main navigation menu'
         isActive={activeItem === 'dropdown'}
         onToggle={onToggle}
-        onClick={(e) => {
-          e.stopPropagation();
-          setShowDropdownNav((show) => !show);
-        }}
+        onClick={() => setShowDropdownNav((show) => !show)}
       >
         <Bars3Icon className='w-6' />
-      </NavItem>
+      </NavDropdownButton>
 
       {/* Dropdown menu */}
       {showDropdownNav && (
@@ -37,20 +33,18 @@ function Nav({ onToggle, activeItem }) {
           className='absolute z-[9999] w-[250px] rounded rounded-tl-none border-2 border-zest bg-pearl/70 text-offblack backdrop-blur-sm xl:hidden'
         >
           {dropdownNavItems.map((li) => (
-            <Link href={li.path} key={li.id}>
-              <NavItem
-                key={li.id}
-                id={li.id}
-                onToggle={onToggle}
-                isActive={activeItem === li.id}
-                path={li.path}
-                onClick={() => setShowDropdownNav(false)}
-                className='will-change group flex w-full items-center justify-between text-[1.4em] tracking-wider transition-all duration-300 ease-out hover:pl-6 group-hover:inline'
-              >
-                <span>{li.text}</span>
-                <ArrowRightIcon className='hidden w-10 pl-2 group-hover:inline' />
-              </NavItem>
-            </Link>
+            <NavItem
+              key={li.id}
+              path={li.path}
+              alt={li.alt}
+              onToggle={() => onToggle(li.id)}
+              isActive={activeItem === li.id}
+              onClick={() => setShowDropdownNav(false)}
+              className='will-change group flex w-full items-center justify-between text-[1.4em] tracking-wider transition-all duration-300 ease-out hover:pl-6 group-hover:inline'
+            >
+              <span>{li.text}</span>
+              <ArrowRightIcon className='hidden w-10 pl-2 group-hover:inline' />
+            </NavItem>
           ))}
         </nav>
       )}
@@ -60,10 +54,10 @@ function Nav({ onToggle, activeItem }) {
         {navItems.map((li) => (
           <NavItem
             key={li.id}
-            id={li.id}
-            onToggle={onToggle}
-            isActive={activeItem === li.id}
             path={li.path}
+            alt={li.alt}
+            onToggle={() => onToggle(li.id)}
+            isActive={activeItem === li.id}
           >
             {li.text}
           </NavItem>

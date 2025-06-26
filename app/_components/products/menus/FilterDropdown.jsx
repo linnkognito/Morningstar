@@ -9,7 +9,6 @@ import {
   fetchProductsByCategory,
   setMaxPriceFilter,
 } from '@/app/_redux/slices/productSlice';
-
 import SizeSelector from '@/app/_components/ui/inputs/SizeSelector';
 import RangeSelector from '@/app/_components/ui/inputs/RangeSelector';
 import ColorSelector from '@/app/_components/ui/inputs/ColorSelector';
@@ -20,7 +19,6 @@ function FilterDropdown({ setIsOpen }) {
   const dispatch = useDispatch();
 
   const { maxPrice } = useSelector((state) => state.products.filters);
-
   const { products, currentCategory } = useSelector((state) => state.products);
   const availableColors = useAvailableColors(products);
 

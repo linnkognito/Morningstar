@@ -52,7 +52,7 @@ function ColorSelector({
       {colors.map((color) => (
         <button
           key={color}
-          className={`${color} ${height} ${className} rounded shadow-sm shadow-offblack transition-transform duration-300 ease-out will-change-transform ${applyStyles(
+          className={`${color} ${height} ${className} rounded shadow-sm shadow-offblack transition-transform duration-300 ease-out will-change-transform cursor-pointer ${applyStyles(
             color
           )}`}
           onClick={() => toggleColorSelection(color)}

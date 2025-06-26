@@ -70,4 +70,9 @@ input[type='range'] {
       background-position: 0% 50%;
     }
   }
+  @media (prefers-reduced-motion: reduce) {
+    .animate-[gradient-animation_2s_ease_infinite] {
+      animation: none !important;
+    }
+  }
 }

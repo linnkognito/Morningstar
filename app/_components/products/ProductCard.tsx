@@ -32,7 +32,7 @@ function ProductCard({
   useClickOutside(ref, () => setProductCardMenu(false));
 
   return (
-    <div className='relative flex h-full min-h-[200px] w-full max-w-[285px] cursor-pointer flex-col justify-self-center rounded bg-pearl shadow-sm shadow-offblack'>
+    <div className='relative flex h-full min-h-[200px] w-full max-w-[285px] cursor-pointer flex-col justify-self-center rounded bg-pearl shadow-sm shadow-offblack  text-offblack'>
       {/* Add to wishlist */}
       <HeartButton
         isSaved={isSavedItem}

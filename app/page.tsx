@@ -12,6 +12,7 @@ function Page() {
           title={category.title}
           image={category.image}
           color={category.color}
+          priority={category.priority}
           hoverColor={category.hoverColor}
           className={category.className}
         />
