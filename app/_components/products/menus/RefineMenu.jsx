@@ -30,7 +30,7 @@ function RefineMenu() {
         {/* Sort dropdown */}
         {isOpen === 'sort' && (
           <div className='absolute z-[100] w-full'>
-            <SortDropdown setIsOpen={setIsOpen} />
+            <SortDropdown isOpen={isOpen} setIsOpen={setIsOpen} />
           </div>
         )}
       </div>
@@ -50,7 +50,11 @@ function RefineMenu() {
         {/* Filter dropdown */}
         {isOpen === 'filter' && (
           <div className='absolute z-[100] w-full'>
-            <FilterDropdown setIsOpen={setIsOpen} handleClick={handleClick} />
+            <FilterDropdown
+              isOpen={isOpen}
+              setIsOpen={setIsOpen}
+              handleClick={handleClick}
+            />
           </div>
         )}
       </div>

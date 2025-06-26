@@ -1,7 +1,9 @@
 'use client';
 
+import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAvailableColors } from '@/app/_hooks/useAvailableColors';
+import useDismiss from '@/app/_hooks/useDismiss';
 import {
   applyFilters,
   clearFilters,
@@ -15,8 +17,9 @@ import ColorSelector from '@/app/_components/ui/inputs/ColorSelector';
 import Button from '@/app/_components/ui/buttons/Button';
 import RefineDropdown from './RefineDropdown';
 
-function FilterDropdown({ setIsOpen }) {
+function FilterDropdown({ isOpen, setIsOpen }) {
   const dispatch = useDispatch();
+  const dropdownRef = useRef(null);
 
   const { maxPrice } = useSelector((state) => state.products.filters);
   const { products, currentCategory } = useSelector((state) => state.products);
@@ -34,8 +37,10 @@ function FilterDropdown({ setIsOpen }) {
     setIsOpen(false);
   }
 
+  useDismiss(dropdownRef, isOpen, () => setIsOpen(false));
+
   return (
-    <RefineDropdown setIsOpen={setIsOpen} className='flex'>
+    <RefineDropdown ref={dropdownRef} setIsOpen={setIsOpen} className='flex'>
       <SizeSelector
         type='filters'
         multiSelect={true}

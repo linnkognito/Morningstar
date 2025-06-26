@@ -5,12 +5,14 @@ import {
   sortLowestPriceFirst,
 } from '@/app/_redux/slices/productSlice';
 import { useDispatch } from 'react-redux';
-
+import { useRef } from 'react';
+import useDismiss from '@/app/_hooks/useDismiss';
 import RefineDropdown from './RefineDropdown';
-import NavItem from '@/app/_components/ui/header/NavItem';
+import { sortDropdownItems } from '@/app/_data/sort-dropdown';
 
-function SortDropdown({ setIsOpen }) {
+function SortDropdown({ isOpen, setIsOpen }) {
   const dispatch = useDispatch();
+  const dropdownRef = useRef(null);
 
   function handleSort(selection) {
     selection === 'low'
@@ -20,24 +22,21 @@ function SortDropdown({ setIsOpen }) {
     setIsOpen(null);
   }
 
-  return (
-    <RefineDropdown setIsOpen={setIsOpen} padding='py-2'>
-      <ul>
-        <NavItem
-          key='lowestPrice'
-          onClick={() => handleSort('low')}
-          className='will-change group flex w-full items-center text-[1.4rem] tracking-wider text-offblack transition-all duration-300 ease-out hover:bg-zest/65 hover:pl-6 group-hover:inline'
-        >
-          <span>Price: Lowest first</span>
-        </NavItem>
+  useDismiss(dropdownRef, isOpen, () => setIsOpen(null));
 
-        <NavItem
-          key='highestPrice'
-          onClick={() => handleSort('high')}
-          className='will-change group flex w-full items-center text-[1.4rem] tracking-wider text-offblack transition-all duration-300 ease-out hover:bg-zest/65 hover:pl-6 group-hover:inline'
-        >
-          <span>Price: Highest first</span>
-        </NavItem>
+  return (
+    <RefineDropdown setIsOpen={setIsOpen} padding='py-2 text-offblack'>
+      <ul>
+        {sortDropdownItems.map((item) => (
+          <li
+            key={item.value}
+            onClick={() => handleSort(item.value)}
+            className='flex gap-4 h-full items-center p-4 text-lg text-offblack transition duration-200 ease-in hover:bg-aura/30'
+          >
+            {item.icon}
+            {item.label}
+          </li>
+        ))}
       </ul>
     </RefineDropdown>
   );

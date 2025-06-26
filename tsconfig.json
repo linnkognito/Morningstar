@@ -28,7 +28,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "app/page.jsx"
+    "app/page.jsx",
+    "app/_hooks/useDismissDropdown.js"
   ],
   "exclude": ["node_modules", ".next"]
 }

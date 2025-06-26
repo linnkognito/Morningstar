@@ -1,15 +1,16 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import toast from 'react-hot-toast';
+import { XMarkIcon } from '@heroicons/react/24/outline';
 import {
   decQuantity,
   deleteItem,
   incQuantity,
 } from '@/app/_redux/slices/cartSlice';
-import Icon from '../common/Icon';
 import QuantitySelector from '../ui/inputs/QuantitySelector';
 import ColorSelector from '../ui/inputs/ColorSelector';
 import Link from 'next/link';
+import Image from 'next/image';
 
 function CartItem({ item }) {
   const dispatch = useDispatch();
@@ -17,11 +18,6 @@ function CartItem({ item }) {
     state.cart.cart.find((cartItem) => cartItem.id === item.id)
   );
   const maxQuantity = cartItem?.maxQuantity || 0;
-  const [deleteIsHovered, setDeleteIsHovered] = useState(false);
-  const optimizedImage = item.image.replace(
-    '/upload/',
-    '/upload/w_150,f_auto,q_auto/'
-  );
 
   function handleIncQuantity() {
     if (item.quantity >= maxQuantity)
@@ -31,29 +27,24 @@ function CartItem({ item }) {
 
   return (
     <div
-      className={`relative flex h-fit rounded-md bg-pearl/60 text-offblack shadow-sm shadow-offblack backdrop-blur-md duration-300 ease-out will-change-[scale] ${
-        deleteIsHovered ? 'scale-[1.005]' : ''
-      }`}
+      className={`relative flex h-fit rounded-md bg-pearl/60 text-offblack shadow-sm shadow-offblack backdrop-blur-md duration-300 ease-out will-change-[scale] overflow-hidden`}
     >
-      {deleteIsHovered && (
-        <div className='z-100 absolute h-full w-full bg-ember/30'></div>
-      )}
-
-      <Icon
-        name='close'
-        al='Close button'
-        onMouseEnter={() => setDeleteIsHovered(true)}
-        onMouseLeave={() => setDeleteIsHovered(false)}
+      <button
+        type='button'
+        aria-label='Delete item'
+        className='group flex items-center absolute right-3 top-2 cursor-pointer duration-300 ease-out will-change-[scale,color] hover:scale-[1.2]'
         onClick={() => dispatch(deleteItem(item))}
-        className='absolute right-2 top-2 h-fit origin-center cursor-pointer duration-300 ease-out will-change-[scale,color] hover:scale-[1.2] hover:text-ember'
-      />
+      >
+        <XMarkIcon className='w-8 h-8 stroke-offblack group-hover:stroke-ember' />
+      </button>
 
       {/* Image */}
-      <div className='min-w-[30%] max-w-[30%] lg:min-w-[20%] lg:max-w-[20%]'>
-        <img
-          src={optimizedImage}
-          alt=''
-          className='max-h-full min-h-full w-full cursor-pointer rounded-l object-cover'
+      <div className='relative aspect-4/5 w-full max-w-[30%] lg:max-w-[25%]'>
+        <Image
+          src={item.image}
+          alt={item.name}
+          fill
+          className='rounded-l object-center object-cover'
         />
       </div>
 

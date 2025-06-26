@@ -2,7 +2,7 @@
 
 import { useParams } from 'next/navigation';
 
-function Banner() {
+function Banner({ heading = null }) {
   const { categoryName } = useParams();
 
   return (
@@ -11,7 +11,7 @@ function Banner() {
         className='ml-auto w-full pr-10 font-bebas text-6xl uppercase tracking-widest sm:pl-16'
         style={{ textShadow: '2px 2px 3px rgba(0, 0, 0, 0.5)' }}
       >
-        {categoryName || 'All products'}
+        {heading || categoryName || 'All products'}
       </h2>
     </div>
   );
