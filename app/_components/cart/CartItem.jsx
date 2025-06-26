@@ -9,6 +9,7 @@ import {
 import Icon from '../common/Icon';
 import QuantitySelector from '../ui/inputs/QuantitySelector';
 import ColorSelector from '../ui/inputs/ColorSelector';
+import Link from 'next/link';
 
 function CartItem({ item }) {
   const dispatch = useDispatch();

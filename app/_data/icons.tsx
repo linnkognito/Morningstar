@@ -29,7 +29,7 @@ export const icons: Icon[] = [
   },
   {
     id: 'icon-cart',
-    name: 'shopping_cart',
+    name: 'cart',
     alt: 'Shopping cart',
     path: '/cart',
     icon: <ShoppingCartIcon className='w-6' />,

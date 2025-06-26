@@ -35,7 +35,6 @@ export default function RootLayout({
         <div className='flex h-screen w-screen flex-col items-center overflow-x-hidden bg-pearl'>
           <PromotionBar />
           <Header />
-
           <main className='w-full grow bg-pearl pb-[64px] sm:pb-0'>
             <ReduxProvider>{children}</ReduxProvider>
           </main>

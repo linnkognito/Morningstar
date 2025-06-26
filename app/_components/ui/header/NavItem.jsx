@@ -10,16 +10,13 @@ function NavItem({
   className = '',
 }) {
   return (
-    <li
-      className={`${className} flex h-full items-center p-4 text-offblack transition duration-200 ease-in hover:bg-aura/30`}
-      onToggle={onToggle}
-      onClick={onClick}
-    >
+    <li className={`h-full ${className}`} onToggle={onToggle} onClick={onClick}>
       {path ? (
         <Link
           href={path}
           aria-label={alt}
           aria-current={isActive ? 'page' : undefined}
+          className='flex h-full items-center p-4 text-offblack transition duration-200 ease-in hover:bg-aura/30'
         >
           {children}
         </Link>
