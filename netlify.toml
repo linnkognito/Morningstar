@@ -1,3 +1,8 @@
 [build]
-  command = "npx @netlify/cli@latest build"
-  publish = "netlify/output"
+command = "next build"
+publish = ".next"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
