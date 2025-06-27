@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Nav from './Nav';
 import UserAction from './UserAction';
-import H1 from '../H1';
+import H1 from './H1';
 
 export default function Header() {
   const [activeItem, setActiveItem] = useState(null);
