@@ -2,6 +2,7 @@
 
 import { useDispatch, useSelector } from 'react-redux';
 import { addItem } from '@/app/_redux/slices/cartSlice';
+import { findItem } from '@/app/_utils/findCartItem';
 import { clearSelections } from '@/app/_redux/slices/productSlice';
 import { ShoppingCartIcon } from '@heroicons/react/24/outline';
 import toast from 'react-hot-toast';
@@ -9,16 +10,14 @@ import ActionButton from '@/app/_components/ui/buttons/ActionButton';
 import Link from 'next/link';
 
 function AddToCartButton({ product, width = 'w-[90%]', bgColor = 'bg-pearl' }) {
+  const dispatch = useDispatch();
   const { name, image, price, id } = product;
   const { size, color, quantity } = useSelector(
     (state) => state.products.selections
   );
   const cartItem = useSelector((state) =>
-    state.cart.cart.find((cartItem) => cartItem.id === id)
+    findItem(state.cart.cartItems, product)
   );
-
-  const dispatch = useDispatch();
-
   const maxQuantity = cartItem?.maxQuantity;
 
   function addToCart() {

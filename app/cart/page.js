@@ -59,7 +59,7 @@ function Page() {
               cart.length === 0 ? 'opacity-50' : 'opacity-100'
             }`}
           >
-            <div className='flex flex-col justify-between rounded-xl bg-white/70 p-4 shadow-sm shadow-offblack backdrop-blur-md'>
+            <div className='flex flex-col justify-between rounded-xl bg-aura/20 p-4 shadow-sm shadow-offblack backdrop-blur-md'>
               {/* Promo code */}
               <div className='flex h-fit w-full flex-col'>
                 <label
@@ -72,7 +72,7 @@ function Page() {
                   type='text'
                   placeholder='123PROMO'
                   disabled={!cart.length}
-                  className='h-7 max-w-[400px] rounded-md px-2 font-primary text-base tracking-wide shadow-sm shadow-offblack'
+                  className='h-7 max-w-[400px] rounded-md px-2 font-primary text-base tracking-wide shadow-xs shadow-offblack bg-white'
                 />
               </div>
 

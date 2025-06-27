@@ -18,7 +18,7 @@ function BackButton({ children, className = '' }) {
       text-offblack bg-aura/60
       shadow-sm shadow-offblack 
       will-change duration-300 ease-out 
-      hover:-left-14 
+      sm:hover:-left-14 
       hover:bg-gradient-to-r hover:from-mint via-zest  hover:to-aura
       hover:bg-[length:300%]
       hover:animate-[gradient-animation_3s_ease_infinite]

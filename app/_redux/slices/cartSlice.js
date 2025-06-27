@@ -1,22 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { findItem } from '@/app/_utils/findCartItem';
 
 const initialState = {
-  cart: [],
+  cartItems: [],
   price: 0,
   discount: 0,
   totalPrice: 0,
 };
-
-function findItem(state, product) {
-  return (
-    state.cart.find(
-      (item) =>
-        item.id === product.id &&
-        item.color === product.color &&
-        item.size === product.size
-    ) || null
-  );
-}
 
 const cartSlice = createSlice({
   name: 'cart',
@@ -24,46 +14,40 @@ const cartSlice = createSlice({
   reducers: {
     addItem(state, action) {
       const newCartItem = action.payload;
-      const existingItem = findItem(state, newCartItem);
-
+      const existingItem = findItem(state.cartItems, newCartItem);
       const { productData } = newCartItem;
+
       const sizeData = productData.sizes.find(
         (sz) => sz.size === newCartItem.size
       );
-
-      if (!sizeData || sizeData.quantity === 0) return; // No stock
+      if (!sizeData || sizeData.quantity === 0) return;
 
       if (existingItem) {
         if (existingItem.maxQuantity === 0) return;
-
         existingItem.quantity += 1;
         existingItem.maxQuantity -= 1;
       } else {
         const maxQuantity = sizeData.quantity - newCartItem.quantity;
-        state.cart.push({ ...newCartItem, maxQuantity });
+        state.cartItems.push({ ...newCartItem, maxQuantity });
       }
 
-      // Update price
       state.price += newCartItem.price;
       state.totalPrice = state.price - state.discount;
     },
-
     deleteItem(state, action) {
-      const itemToDelete = findItem(state, action.payload);
+      const itemToDelete = findItem(state.cartItems, action.payload);
       if (!itemToDelete) return;
 
-      state.cart = state.cart.filter((item) => item !== itemToDelete);
+      state.cartItems = state.cartItems.filter((item) => item !== itemToDelete);
 
-      state.price = state.cart.reduce(
+      state.price = state.cartItems.reduce(
         (sum, item) => sum + item.quantity * item.price,
         0
       );
       state.totalPrice = state.price - state.discount;
     },
-
     incQuantity(state, action) {
-      const item = findItem(state, action.payload);
-
+      const item = findItem(state.cartItems, action.payload);
       if (!item || item.maxQuantity === 0) return;
 
       item.quantity++;
@@ -72,7 +56,8 @@ const cartSlice = createSlice({
       state.totalPrice = state.price - state.discount;
     },
     decQuantity(state, action) {
-      const item = findItem(state, action.payload);
+      const item = findItem(state.cartItems, action.payload);
+      if (!item) return;
 
       item.quantity--;
       item.maxQuantity++;
@@ -82,15 +67,14 @@ const cartSlice = createSlice({
       if (item.quantity === 0) cartSlice.caseReducers.deleteItem(state, action);
     },
     clearCart(state) {
-      state.cart = [];
+      state.cartItems = [];
     },
   },
 });
 
-export const getCartItems = (state) => state.cart.cart;
-export const getCartItemById = (id) => (state) => {
-  state.cart.cart.find((item) => item.id === id);
-};
+export const getCartItems = (state) => state.cart.cartItems;
+export const getCartItemById = (id) => (state) =>
+  state.cart.cartItems.find((item) => item.id === id);
 export const getTotalPrice = (state) => state.cart.totalPrice;
 
 export const { addItem, deleteItem, incQuantity, decQuantity, clearCart } =

@@ -17,18 +17,18 @@ function QuantitySelector({
       <p>{text}</p>
       <div className='flex gap-2'>
         <ButtonTiny
-          width='w-6'
+          aria-label='Decrease quantity'
           height='h-6'
-          className='bg-pearl cursor-pointer'
+          className='pt-1 text-center bg-pearl cursor-pointer aspect-square'
           onClick={decrease}
         >
           -
         </ButtonTiny>
         <span>{quantity}</span>
         <ButtonTiny
-          width='w-6'
+          aria-label='Increase quantity'
           height='h-6'
-          className='bg-pearl cursor-pointer'
+          className='pt-1 text-center bg-pearl cursor-pointer aspect-square'
           onClick={increase}
         >
           +
