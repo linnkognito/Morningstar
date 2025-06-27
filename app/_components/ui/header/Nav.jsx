@@ -7,6 +7,7 @@ import { ArrowRightIcon, Bars3Icon } from '@heroicons/react/24/outline';
 import useDismiss from '@/app/_hooks/useDismiss';
 import NavItem from './NavItem';
 import NavDropdownButton from '../buttons/NavDropdownButton';
+import NavItemDropdown from './NavItemDropdown';
 
 function Nav({ onToggle, activeItem }) {
   const dropdownRef = useRef(null);
@@ -51,18 +52,15 @@ function Nav({ onToggle, activeItem }) {
           className='absolute z-[9999] w-[250px] rounded rounded-tl-none border-2 border-zest bg-pearl/70 text-offblack backdrop-blur-sm xl:hidden origin-top-left'
         >
           {dropdownNavItems.map((li) => (
-            <NavItem
+            <NavItemDropdown
               key={li.id}
               path={li.path}
               alt={li.alt}
+              label={li.text}
               onToggle={() => onToggle(li.id)}
               isActive={activeItem === li.id}
               onClick={() => setShowDropdownNav(false)}
-              className='will-change group flex w-full items-center justify-between text-[1.4em] tracking-wider transition-all duration-300 ease-out hover:pl-6 group-hover:inline'
-            >
-              <span>{li.text}</span>
-              <ArrowRightIcon className='hidden w-10 pl-2 group-hover:inline' />
-            </NavItem>
+            />
           ))}
         </motion.ul>
       )}

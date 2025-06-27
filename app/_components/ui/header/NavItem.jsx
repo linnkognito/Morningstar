@@ -11,7 +11,7 @@ function NavItem({
 }) {
   return (
     <li
-      className={`group h-full list-none`}
+      className={`group w-full h-full list-none ${className}`}
       onToggle={onToggle}
       onClick={onClick}
     >
@@ -20,7 +20,7 @@ function NavItem({
           href={path}
           aria-label={alt}
           aria-current={isActive ? 'page' : undefined}
-          className={`flex h-full items-center p-4 text-offblack transition-colors duration-200 ease-in hover:bg-aura/30 ${className}`}
+          className={`flex w-full h-full items-center p-4 text-offblack transition-colors duration-200 ease-in hover:bg-aura/30`}
         >
           {children}
         </Link>
