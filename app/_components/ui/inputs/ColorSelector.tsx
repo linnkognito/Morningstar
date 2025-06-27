@@ -11,9 +11,9 @@ type ColorSelectorProps = {
   colors: string[];
   height: string;
   className?: string;
-  multiSelect: boolean;
-  disabled: boolean;
-  type: 'selections' | 'filters';
+  multiSelect?: boolean;
+  disabled?: boolean;
+  type?: 'selections' | 'filters';
 };
 
 function ColorSelector({

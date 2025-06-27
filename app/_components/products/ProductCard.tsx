@@ -30,7 +30,7 @@ function ProductCard({
   const { isSavedItem, toggleSave } = useSaveItem(id, product);
   const menuIsOpen = currentMenu === id;
 
-  useClickOutside(ref, () => setProductCardMenu(false));
+  useClickOutside(ref, () => setProductCardMenu(null));
 
   return (
     <motion.div

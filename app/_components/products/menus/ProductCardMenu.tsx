@@ -10,7 +10,7 @@ import AddToCartButton from '@/app/_components/cart/AddToCartButton';
 type ProductCardMenuProps = {
   product: Product;
   productBarHeight: number;
-  setIsOpen: (isOpen: boolean) => void;
+  setIsOpen: (id: string | null) => void;
 };
 
 const ProductCardMenu = forwardRef<HTMLDivElement, ProductCardMenuProps>(
