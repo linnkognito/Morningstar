@@ -42,7 +42,6 @@ const ProductCardBar = forwardRef<HTMLDivElement, ProductCardBarProps>(
 
         {/* Open menu button */}
         <ProductCardMenuButton
-          id={id}
           isOpen={isOpen}
           onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
             e.stopPropagation();
