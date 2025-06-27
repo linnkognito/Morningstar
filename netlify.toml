@@ -1,6 +1,3 @@
 [build]
-  command = "next build"
-  publish = ".next"
-
-[[plugins]]
-  package = "@netlify/next"
+  command = "npx @netlify/cli@latest build"
+  publish = "netlify/output"
