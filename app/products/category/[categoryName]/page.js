@@ -21,6 +21,7 @@ function Page() {
   return (
     <>
       {status === 'loading' && <Spinner />}
+
       {status === 'idle' &&
         products.map((product) => (
           <ProductCard

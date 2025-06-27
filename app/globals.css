@@ -47,7 +47,7 @@ h6 {
 }
 
 ::selection {
-  background-color: rgb(var(--color-pri) / 0.4);
+  background-color: rgb(var(--color-zest) / 0.4);
 }
 
 input[type='range'] {

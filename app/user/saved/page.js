@@ -9,6 +9,7 @@ import WrapperScreenGradient from '../../_components/ui/containers/WrapperScreen
 import ProductCard from '../../_components/products/ProductCard';
 import Banner from '../../_components/ui/Banner';
 import ActionButton from '../../_components/ui/buttons/ActionButton';
+import Message from '../../_components/ui/Message';
 
 function SavedProducts() {
   const router = useRouter();
@@ -67,15 +68,11 @@ function SavedProducts() {
           )}
 
           {!hasSavedProducts && (
-            <div className='mx-auto space-y-4 rounded-xl p-4 text-center md:w-1/2'>
-              <h2 className='text-2xl text-offblack'>Your wishlist is empty</h2>
-              <Link href='/products'>
-                <ActionButton>
-                  <ArrowLeftIcon className='w-6 stroke-2' />
-                  <span>Continue shopping</span>
-                </ActionButton>
-              </Link>
-            </div>
+            <Message
+              heading='Your wishlist is empty'
+              buttonText='Continue shopping'
+              buttonLink='/products'
+            />
           )}
         </div>
       </div>

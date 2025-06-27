@@ -1,6 +1,7 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import { Bebas_Neue, Questrial } from 'next/font/google';
+import { Toaster } from 'react-hot-toast';
 import PromotionBar from './_components/ui/header/PromotionBar';
 import Header from './_components/ui/header/Header';
 import ReduxProvider from './_redux/ReduxProvider';
@@ -32,13 +33,16 @@ export default function RootLayout({
       <body
         className={`${bebasNeue.className} ${questrial.className} antialiased`}
       >
-        <div className='flex h-screen w-screen flex-col items-center overflow-x-hidden bg-pearl'>
-          <PromotionBar />
-          <Header />
-          <main className='w-full grow bg-pearl pb-[64px] sm:pb-0'>
-            <ReduxProvider>{children}</ReduxProvider>
-          </main>
-        </div>
+        <ReduxProvider>
+          <div className='flex h-screen w-screen flex-col items-center overflow-x-hidden bg-pearl'>
+            <PromotionBar />
+            <Header />
+            <main className='w-full grow bg-pearl pb-[64px] sm:pb-0'>
+              {children}
+            </main>
+          </div>
+        </ReduxProvider>
+        <Toaster />
       </body>
     </html>
   );

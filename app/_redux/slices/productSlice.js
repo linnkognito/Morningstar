@@ -51,6 +51,25 @@ export const fetchProductById = createAsyncThunk(
     }
   }
 );
+export const queryProductsByName = createAsyncThunk(
+  'products/queryByName',
+  async (string, { rejectWithValue }) => {
+    try {
+      const res = await fetch(`${API_BASE_URL}/products`);
+
+      if (!res.ok) throw new Error('Search query failed');
+
+      const products = await res.json();
+
+      const filteredProducts = products.data.filter((product) =>
+        product.name.toLowerCase().includes(string.toLowerCase())
+      );
+      return filteredProducts;
+    } catch (err) {
+      return rejectWithValue(err.message);
+    }
+  }
+);
 
 const initialState = {
   products: [],
@@ -180,6 +199,18 @@ const productsSlice = createSlice({
         state.status = 'idle';
       })
       .addCase(fetchProductById.rejected, (state) => {
+        state.status = 'error';
+      })
+
+      // Fetch search results
+      .addCase(queryProductsByName.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(queryProductsByName.fulfilled, (state, action) => {
+        state.products = action.payload;
+        state.status = 'idle';
+      })
+      .addCase(queryProductsByName.rejected, (state) => {
         state.status = 'error';
       });
   },
