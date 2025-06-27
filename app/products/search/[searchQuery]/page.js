@@ -7,8 +7,6 @@ import { queryProductsByName } from '@/app/_redux/slices/productSlice';
 import { FaceFrownIcon } from '@heroicons/react/24/outline';
 import ProductCard from '@/app/_components/products/ProductCard';
 import Spinner from '@/app/_components/common/Spinner';
-import WrapperScreenGradient from '../../../_components/ui/containers/WrapperScreenGradient';
-import Container from '../../../_components/common/Container';
 import Message from '../../../_components/ui/Message';
 
 function Page() {
