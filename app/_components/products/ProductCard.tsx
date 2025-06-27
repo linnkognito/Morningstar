@@ -5,6 +5,7 @@ import { useSaveItem } from '@/app/_utils/useSaveItem';
 import { useClickOutside } from '@/app/_hooks/useClickOutside';
 import { useResizeObserver } from '@/app/_hooks/useResizeObserver';
 import { Product } from '@/app/_types/product';
+import { motion } from 'motion/react';
 import HeartButton from './HeartButton';
 import ProductCardBar from './ProductCardBar';
 import ProductCardMenu from './menus/ProductCardMenu';
@@ -32,7 +33,14 @@ function ProductCard({
   useClickOutside(ref, () => setProductCardMenu(false));
 
   return (
-    <div className='relative flex h-full min-h-[200px] w-full max-w-[285px] cursor-pointer flex-col justify-self-center rounded bg-pearl shadow-sm shadow-offblack  text-offblack'>
+    <motion.div
+      layout={false}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: 'easeOut' }}
+      viewport={{ once: true, amount: 0.2 }}
+      className='relative flex h-full min-h-[200px] w-full max-w-[285px] cursor-pointer flex-col justify-self-center rounded bg-pearl shadow-sm shadow-offblack  text-offblack'
+    >
       {/* Add to wishlist */}
       <HeartButton
         isSaved={isSavedItem}
@@ -73,7 +81,7 @@ function ProductCard({
           setIsOpen={setProductCardMenu}
         />
       )}
-    </div>
+    </motion.div>
   );
 }
 

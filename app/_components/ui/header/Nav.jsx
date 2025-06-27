@@ -1,5 +1,6 @@
 'use client';
 
+import { motion } from 'motion/react';
 import { navItems, dropdownNavItems } from '@/app/_data/nav';
 import { useRef, useState } from 'react';
 import { ArrowRightIcon, Bars3Icon } from '@heroicons/react/24/outline';
@@ -39,10 +40,15 @@ function Nav({ onToggle, activeItem }) {
 
       {/* Dropdown menu */}
       {showDropdownNav && (
-        <ul
+        <motion.ul
+          layout={false}
+          initial={{ scale: 0 }}
+          whileInView={{ scale: 1 }}
+          transition={{ duration: 0.2, ease: 'easeOut' }}
+          viewport={{ once: true, amount: 0.2 }}
           ref={dropdownRef}
           role='navigation'
-          className='absolute z-[9999] w-[250px] rounded rounded-tl-none border-2 border-zest bg-pearl/70 text-offblack backdrop-blur-sm xl:hidden'
+          className='absolute z-[9999] w-[250px] rounded rounded-tl-none border-2 border-zest bg-pearl/70 text-offblack backdrop-blur-sm xl:hidden origin-top-left'
         >
           {dropdownNavItems.map((li) => (
             <NavItem
@@ -58,7 +64,7 @@ function Nav({ onToggle, activeItem }) {
               <ArrowRightIcon className='hidden w-10 pl-2 group-hover:inline' />
             </NavItem>
           ))}
-        </ul>
+        </motion.ul>
       )}
 
       {/* Larger screens (individual buttons) */}

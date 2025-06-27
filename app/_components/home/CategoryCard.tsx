@@ -1,3 +1,6 @@
+'use client';
+
+import { motion } from 'motion/react';
 import { Category } from '@/app/_data/categories';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -28,15 +31,20 @@ function CategoryCard({
         className='object-cover object-[50%_40%]'
       />
 
-      <div className='relative flex h-full min-w-full cursor-pointer items-end justify-start'>
+      <div className='group relative flex h-full min-w-full cursor-pointer items-end justify-start'>
         <ArrowButton hoverColor={hoverColor} />
 
-        <h2
+        <motion.h2
+          layout={false}
+          initial={{ opacity: 0, x: 50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
+          viewport={{ once: true, amount: 0.2 }}
           className='text-shadow-sm ml-2 h-fit p-0 font-bebas text-[10vw] uppercase leading-none text-pearl'
           style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.3)' }}
         >
           {title}
-        </h2>
+        </motion.h2>
       </div>
     </Link>
   );
