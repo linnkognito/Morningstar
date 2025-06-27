@@ -11,11 +11,9 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     addToSavedItems: (state, action) => {
-      // action.payload = product object
       state.saved = [...state.saved, action.payload];
     },
     removeFromSavedItems: (state, action) => {
-      // action.payload = product id
       state.saved = state.saved.filter((item) => item.id !== action.payload);
     },
   },

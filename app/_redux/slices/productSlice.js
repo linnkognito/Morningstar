@@ -8,8 +8,6 @@ import {
   getProductsByName,
 } from '@/app/_services/productService';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
-
 export const fetchAllProducts = createAsyncThunk(
   'products/fetchAll',
   async (_, { rejectWithValue }) => {
