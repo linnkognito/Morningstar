@@ -43,7 +43,9 @@ function UserAction({ activeItem, onToggle }) {
               isActive={activeItem === icon.id}
               onToggle={() => onToggle(icon.id)}
             >
-              {icon.icon}
+              <span className='group-hover:scale-115 group-hover:stroke-2 transition-transform duration-400 ease-in-out'>
+                {icon.icon}
+              </span>
             </NavItem>
           ))}
         </ul>

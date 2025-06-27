@@ -58,7 +58,7 @@ function SavedProducts() {
             <div className='grid grid-cols-2 gap-3 px-2 pt-2 sm:grid-cols-3 lg:grid-cols-4'>
               {savedProducts.map((product) => (
                 <ProductCard
-                  key={product._id}
+                  key={product.id}
                   currentMenu={productCardMenu}
                   setProductCardMenu={setProductCardMenu}
                   product={product}

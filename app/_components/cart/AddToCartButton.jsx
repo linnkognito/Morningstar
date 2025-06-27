@@ -9,7 +9,7 @@ import ActionButton from '@/app/_components/ui/buttons/ActionButton';
 import Link from 'next/link';
 
 function AddToCartButton({ product, width = 'w-[90%]', bgColor = 'bg-pearl' }) {
-  const { name, image, price, _id: id } = product;
+  const { name, image, price, id } = product;
   const { size, color, quantity } = useSelector(
     (state) => state.products.selections
   );

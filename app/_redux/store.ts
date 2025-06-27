@@ -3,7 +3,7 @@ import cartReducer from './slices/cartSlice';
 import productReducer from './slices/productSlice';
 import userReducer from './slices/userSlice';
 
-const store = configureStore({
+export const store = configureStore({
   reducer: {
     cart: cartReducer,
     products: productReducer,
@@ -11,4 +11,5 @@ const store = configureStore({
   },
 });
 
-export default store;
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;

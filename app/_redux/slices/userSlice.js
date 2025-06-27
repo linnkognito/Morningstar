@@ -1,13 +1,13 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   saved: [],
-  name: "Guest",
+  name: 'Guest',
   loggedIn: false,
 };
 
 const userSlice = createSlice({
-  name: "user",
+  name: 'user',
   initialState,
   reducers: {
     addToSavedItems: (state, action) => {
@@ -16,7 +16,7 @@ const userSlice = createSlice({
     },
     removeFromSavedItems: (state, action) => {
       // action.payload = product id
-      state.saved = state.saved.filter((item) => item._id !== action.payload);
+      state.saved = state.saved.filter((item) => item.id !== action.payload);
     },
   },
 });

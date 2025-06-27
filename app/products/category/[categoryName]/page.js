@@ -25,7 +25,7 @@ function Page() {
       {status === 'idle' &&
         products.map((product) => (
           <ProductCard
-            key={product._id}
+            key={product.id}
             currentMenu={productCardMenu}
             setProductCardMenu={setProductCardMenu}
             product={product}

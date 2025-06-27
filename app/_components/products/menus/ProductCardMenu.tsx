@@ -1,11 +1,19 @@
-import { forwardRef } from 'react';
+'use client';
 
+import { forwardRef } from 'react';
+import { Product } from '@/app/_types/product';
 import RefineDropdown from './RefineDropdown';
 import SizeSelector from '@/app/_components/ui/inputs/SizeSelector';
 import ColorSelector from '@/app/_components/ui/inputs/ColorSelector';
 import AddToCartButton from '@/app/_components/cart/AddToCartButton';
 
-const ProductCardMenu = forwardRef(
+type ProductCardMenuProps = {
+  product: Product;
+  productBarHeight: number;
+  setIsOpen: (isOpen: boolean) => void;
+};
+
+const ProductCardMenu = forwardRef<HTMLDivElement, ProductCardMenuProps>(
   ({ product, productBarHeight, setIsOpen }, ref) => {
     const { sizes, colors } = product;
 
@@ -24,5 +32,7 @@ const ProductCardMenu = forwardRef(
     );
   }
 );
+
+ProductCardMenu.displayName = 'ProductCardMenu';
 
 export default ProductCardMenu;

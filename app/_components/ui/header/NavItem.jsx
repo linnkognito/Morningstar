@@ -20,7 +20,7 @@ function NavItem({
           href={path}
           aria-label={alt}
           aria-current={isActive ? 'page' : undefined}
-          className={`flex w-full h-full items-center p-4 text-offblack transition-colors duration-200 ease-in hover:bg-aura/30`}
+          className={`flex w-full h-full justify-center items-center p-4 text-offblack transition-colors duration-200 ease-in hover:bg-aura/30`}
         >
           {children}
         </Link>

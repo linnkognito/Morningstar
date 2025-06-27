@@ -10,7 +10,7 @@ import Link from 'next/link';
 export function useSaveItem(id, product) {
   const dispatch = useDispatch();
   const savedItems = useSelector(getSavedItems);
-  const isSavedItem = savedItems?.some((item) => item._id === id);
+  const isSavedItem = savedItems?.some((item) => item.id === id);
 
   function toggleSave() {
     if (isSavedItem) {

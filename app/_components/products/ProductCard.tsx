@@ -21,7 +21,7 @@ function ProductCard({
   setProductCardMenu: (menu: string | boolean) => void;
   currentMenu: string;
 }) {
-  const { _id: id, image, name } = product;
+  const { id, image, name } = product;
   const productBar = useRef(null);
   const productBarHeight = useResizeObserver(productBar);
   const ref = useRef(null);

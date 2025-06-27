@@ -1,7 +1,7 @@
 'use client';
 
 import { Provider } from 'react-redux';
-import store from '../_redux/store';
+import { store } from '../_redux/store';
 import { useRouter } from 'next/navigation';
 import { useSelector } from 'react-redux';
 import { getCartItems, getTotalPrice } from '../_redux/slices/cartSlice';
@@ -23,7 +23,7 @@ function Page() {
         <Banner heading='Checkout' />
 
         {/* Product list */}
-        <div className='mx-auto mt-4 grid min-w-[290px] max-w-[1284px] gap-6 rounded-md bg-/70 p-6 shadow-sm shadow-offblack backdrop-blur-md sm:grid-cols-1 md:grid-cols-[2fr_1fr] text-offblack'>
+        <div className='mx-auto mt-4 grid min-w-[290px] max-w-[1284px] gap-6 rounded-md bg-pearl/70 p-6 shadow-sm shadow-offblack backdrop-blur-md sm:grid-cols-1 md:grid-cols-[2fr_1fr] text-offblack'>
           <p className='w-full font-bebas text-xl tracking-wider md:col-span-2'>
             {cart.length} items
           </p>
@@ -59,7 +59,7 @@ function Page() {
               cart.length === 0 ? 'opacity-50' : 'opacity-100'
             }`}
           >
-            <div className='flex flex-col justify-between rounded bg-aura/15 p-4 shadow-sm shadow-offblack backdrop-blur-md'>
+            <div className='flex flex-col justify-between rounded-xl bg-white/70 p-4 shadow-sm shadow-offblack backdrop-blur-md'>
               {/* Promo code */}
               <div className='flex h-fit w-full flex-col'>
                 <label

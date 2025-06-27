@@ -23,7 +23,7 @@
     }
   },
   "include": [
-    "app/_redux/ReduxProvider.jsx",
+    "app/_redux/ReduxProvider.tsx",
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",

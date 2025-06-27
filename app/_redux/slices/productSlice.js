@@ -1,6 +1,12 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { handleSelection } from '@/app/_utils/handleSelections';
 import { applyProductFilters } from '@/app/_utils/applyProductFilters';
+import {
+  getAllProducts,
+  getProductsByCategory,
+  getProductById,
+  getProductsByName,
+} from '@/app/_services/productService';
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
@@ -8,29 +14,20 @@ export const fetchAllProducts = createAsyncThunk(
   'products/fetchAll',
   async (_, { rejectWithValue }) => {
     try {
-      const res = await fetch(`${API_BASE_URL}/products`);
-
-      if (!res.ok) throw new Error('Failed to fetch products');
-
-      const products = await res.json();
-      return products.data;
+      const products = await getAllProducts();
+      return products;
     } catch (err) {
       return rejectWithValue(err.message);
     }
   }
 );
+
 export const fetchProductsByCategory = createAsyncThunk(
   'products/fetchByCategory',
   async (categoryName, { rejectWithValue }) => {
     try {
-      const res = await fetch(
-        `${API_BASE_URL}/products/category/${categoryName}`
-      );
-
-      if (!res.ok) throw new Error('Failed to fetch products');
-
-      const products = await res.json();
-      return products.data;
+      const products = await getProductsByCategory(categoryName);
+      return products;
     } catch (err) {
       return rejectWithValue(err.message);
     }
@@ -40,12 +37,8 @@ export const fetchProductById = createAsyncThunk(
   'products/fetchById',
   async (id, { rejectWithValue }) => {
     try {
-      const res = await fetch(`${API_BASE_URL}/products/${id}`);
-
-      if (!res.ok) throw new Error('Failed to fetch product data');
-
-      const product = await res.json();
-      return product.data;
+      const product = await getProductById(id);
+      return product;
     } catch (err) {
       return rejectWithValue(err.message);
     }
@@ -55,16 +48,8 @@ export const queryProductsByName = createAsyncThunk(
   'products/queryByName',
   async (string, { rejectWithValue }) => {
     try {
-      const res = await fetch(`${API_BASE_URL}/products`);
-
-      if (!res.ok) throw new Error('Search query failed');
-
-      const products = await res.json();
-
-      const filteredProducts = products.data.filter((product) =>
-        product.name.toLowerCase().includes(string.toLowerCase())
-      );
-      return filteredProducts;
+      const products = await getProductsByName(string);
+      return products;
     } catch (err) {
       return rejectWithValue(err.message);
     }
