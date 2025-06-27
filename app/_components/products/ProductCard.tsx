@@ -18,7 +18,7 @@ function ProductCard({
   currentMenu,
 }: {
   product: Product;
-  setProductCardMenu: (menu: string | boolean) => void;
+  setProductCardMenu: (id: string | null) => void;
   currentMenu: string;
 }) {
   const { id, image, name } = product;
