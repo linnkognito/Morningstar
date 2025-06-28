@@ -22,13 +22,13 @@ function ProductCard({
   currentMenu: string;
 }) {
   const { id, image, name } = product;
+
+  const ref = useRef(null);
   const productBar = useRef(null);
   const productBarHeight = useResizeObserver(productBar);
-  const ref = useRef(null);
-
-  const [heartButtonHover, setHeartButtonHover] = useState(false);
-  const { isSavedItem, toggleSave } = useSaveItem(id, product);
   const menuIsOpen = currentMenu === id;
+
+  const { isSavedItem, toggleSave } = useSaveItem(id, product);
 
   useClickOutside(ref, () => setProductCardMenu(null));
 
@@ -41,15 +41,8 @@ function ProductCard({
       viewport={{ once: true, amount: 0.2 }}
       className='relative flex h-full min-h-[200px] w-full max-w-[285px] cursor-pointer flex-col justify-self-center rounded bg-pearl shadow-sm shadow-offblack  text-offblack'
     >
-      {/* Add to wishlist */}
-      <HeartButton
-        isSaved={isSavedItem}
-        heartButtonHover={heartButtonHover}
-        setHeartButtonHover={setHeartButtonHover}
-        onClick={toggleSave}
-      />
+      <HeartButton isSaved={isSavedItem} onClick={toggleSave} />
 
-      {/* Image */}
       <Link
         href={`/product/${id}`}
         className='relative aspect-5/4 h-[280px] w-full overflow-hidden rounded-t'

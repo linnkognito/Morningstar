@@ -5,7 +5,7 @@ import { ArrowLeftIcon } from '@heroicons/react/24/outline';
 function Message({ heading, children, buttonText, buttonLink, className }) {
   return (
     <div
-      className={`mx-auto space-y-4 rounded-xl p-4 text-center md:w-1/2 ${className}`}
+      className={`w-full mx-auto space-y-4 rounded-xl p-4 text-center md:w-1/2 ${className}`}
     >
       <h2 className='text-2xl text-offblack'>{heading}</h2>
 
