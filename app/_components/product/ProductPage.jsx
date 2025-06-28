@@ -53,10 +53,10 @@ function ProductPage() {
               className='flex flex-col items-start justify-start gap-1 px-6 py-6'
             >
               <div className='flex flex-col items-start'>
-                <h2 className='text-2xl sm:text-3xl text-offblack'>
+                <h2 className='text-2xl md:text-3xl text-left text-offblack'>
                   {product.name}
                 </h2>
-                <h3 className='text-xl sm:text-2xl text-grey-600'>
+                <h3 className='text-xl md:text-2xl text-grey-600'>
                   ${product.price}
                 </h3>
               </div>
