@@ -32,7 +32,7 @@ function CategoryCard({
       />
 
       <div className='group relative flex h-full min-w-full cursor-pointer items-end justify-start'>
-        <ArrowButton hoverColor={hoverColor} />
+        <ArrowButton alt={`Browse ${title} products`} hoverColor={hoverColor} />
 
         <motion.h2
           layout={false}

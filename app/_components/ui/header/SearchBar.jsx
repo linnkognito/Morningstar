@@ -28,12 +28,29 @@ function Searchbar({ className = '' }) {
     <form
       role='search'
       onSubmit={handleSubmit}
-      className={`group relative flex items-center justify-end my-auto px-2 h-[34px] ${className}`}
+      className={`
+        group flex items-center justify-end
+        w-full max-w-[300px] h-[34px]
+        my-auto mr-2
+        rounded-md overflow-hidden
+        shadow-[0_0_2px_#0F0F0F] shadow-offblack 
+        transition-transform duration-400 ease-in-out 
+        hover:scale-105 hover:shadow-[0_0_4px_#0F0F0F] 
+        ${className}
+        `}
     >
       <input
         type='text'
         placeholder='Search...'
-        className='will-change w-full h-9 rounded-md py-1 pl-2 pr-8 font-primary tracking-wide text-offblack placeholder-grey-400 placeholder:italic shadow-[0_0_2px_#0F0F0F] shadow-offblack transition-transform duration-400 ease-in-out hover:scale-105 hover:shadow-[0_0_4px_#0F0F0F] focus:ring-0 focus:ring-pearl sm:w-[200px] md:w-64'
+        className='
+        will-change 
+        w-full h-full 
+        py-1 pl-2 pr-8 
+        font-primary tracking-wide text-offblack 
+        rounded-md 
+        placeholder:text-grey-400 placeholder:italic 
+        focus:ring-0 focus:ring-pearl  
+        '
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
       />
@@ -41,10 +58,32 @@ function Searchbar({ className = '' }) {
       <button
         type='submit'
         aria-label='Search'
-        className='absolute top-0 right-[10px] h-[34px] w-[34px] flex items-center justify-center bg-aura/30 rounded-md group-hover:stroke-3 transition-transform duration-400 ease-in-out cursor-pointer'
+        className='
+        h-full aspect-square 
+        flex items-center justify-center 
+        bg-aura/30 
+        group-hover:stroke-3 
+        transition-transform duration-400 ease-in-out 
+        cursor-pointer
+        '
       >
         <MagnifyingGlassIcon className='w-5 stroke-offblack stroke-2' />
       </button>
+      {/* <input
+    type='text'
+    placeholder='Search...'
+    className='will-change w-full h-9 rounded-md py-1 pl-2 pr-8 font-primary tracking-wide text-offblack placeholder-grey-400 placeholder:italic shadow-[0_0_2px_#0F0F0F] shadow-offblack transition-transform duration-400 ease-in-out hover:scale-105 hover:shadow-[0_0_4px_#0F0F0F] focus:ring-0 focus:ring-pearl sm:w-[200px] md:w-64'
+    value={searchQuery}
+    onChange={(e) => setSearchQuery(e.target.value)}
+  />
+
+  <button
+    type='submit'
+    aria-label='Search'
+    className='absolute top-0 right-[10px] h-[34px] w-[34px] flex items-center justify-center bg-aura/30 rounded-md group-hover:stroke-3 transition-transform duration-400 ease-in-out cursor-pointer'
+  >
+    <MagnifyingGlassIcon className='w-5 stroke-offblack stroke-2' />
+  </button> */}
     </form>
   );
 }
