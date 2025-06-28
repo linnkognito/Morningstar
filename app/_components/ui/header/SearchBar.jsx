@@ -26,8 +26,9 @@ function Searchbar({ className = '' }) {
 
   return (
     <form
+      role='search'
       onSubmit={handleSubmit}
-      className={`group relative flex items-center justify-end px-2 h-full ${className}`}
+      className={`group relative flex items-center justify-end my-auto px-2 h-[34px] ${className}`}
     >
       <input
         type='text'
@@ -39,9 +40,10 @@ function Searchbar({ className = '' }) {
 
       <button
         type='submit'
-        className='absolute right-3 group-hover:scale-110 group-hover:stroke-3 transition-transform duration-400 ease-in-out cursor-pointer'
+        aria-label='Search'
+        className='absolute top-0 right-[10px] h-[34px] w-[34px] flex items-center justify-center bg-aura/30 rounded-md group-hover:stroke-3 transition-transform duration-400 ease-in-out cursor-pointer'
       >
-        <MagnifyingGlassIcon className='w-5 mr-1 stroke-offblack stroke-2' />
+        <MagnifyingGlassIcon className='w-5 stroke-offblack stroke-2' />
       </button>
     </form>
   );
