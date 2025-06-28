@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { useSaveItem } from '@/app/_utils/useSaveItem';
 import { useClickOutside } from '@/app/_hooks/useClickOutside';
 import { useResizeObserver } from '@/app/_hooks/useResizeObserver';
